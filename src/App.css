@@ -10,14 +10,11 @@
   color: white;
 }
 
+/* Main */
+
 .addTea{
   padding-right: 2rem;
 }
-
-/* .teaCard{
-  margin-right: 2rem;
-} */
-
 
 @media only screen and (min-width: 600px){
   .teaCard{
@@ -53,4 +50,18 @@
   .mobileSearchBar{
     display: none;
   }
+}
+
+/* Login */
+
+button{
+  max-width: 25em;
+}
+
+#formControlLg{
+  max-width: 25em;
+}
+
+.forgotPW{
+  max-width: 25em;
 }
