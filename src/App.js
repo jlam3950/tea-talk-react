@@ -3,19 +3,24 @@ import './App.css';
 import About from './components/About';
 import Contact from './components/Contact';
 import Main from './components/Main';
-import Navbar from './components/Navbar';
+import NavigationBar from './components/NavigationBar';
 import Search from './components/Search';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import { Routes, Route } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import Container from 'react-bootstrap/Container';
+
 
 function App() {
   return (
-    <div className="App">
-    <Main/>
-      {/* <Routes>
+    <div className="App d-flex flex-column min-vh-100">
+    <NavigationBar />
+      <Routes>
         <Route path = '/' element = {<Main />}></Route>
-      </Routes> */}
+        <Route path = 'login' element = {<Login />}></Route>
+      </Routes>
     </div>
   );
 }
