@@ -1,8 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import React from 'react';
+import { FaPlus } from 'react-icons/fa'
 
-function addTeaModal(props) {
+function AddTeaModal(props) {
   return (
     <Modal
       {...props}
@@ -12,16 +13,13 @@ function addTeaModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          Select a List 
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+        <h5>My Favorite Teas </h5>
+        <p> 0 items - Updated Feb 17th 2023</p>
+        <button className ='btn btn-success'><FaPlus /> Create a New List</button>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
@@ -47,4 +45,4 @@ function App() {
   );
 }
 ;
-export default addTeaModal;
+export default AddTeaModal;

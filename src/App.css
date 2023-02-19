@@ -58,9 +58,12 @@
 
 /* Navbar */
 
-.logo{
+.teaLogo{
   color:white;
-}
+  font-family: sans-serif;
+  font-weight: 1200;
+} 
+/* teaLogo class not applying. look at later */
 
 /* Login */
 
@@ -69,4 +72,11 @@
 .teaPlus{
   font-size: 1.5em;
   cursor: pointer;
+}
+
+/* Footer */
+
+.footerIcon{
+  font-size: 1.75em;
+  margin: .5em;
 }
