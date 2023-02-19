@@ -12,7 +12,7 @@ from 'mdb-react-ui-kit';
 
 function Login() {
   return (
-    <MDBContainer fluid className="p-3 my-5">
+    <MDBContainer fluid className="p-3 my-5 vh-100">
 
       <MDBRow>
 

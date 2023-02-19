@@ -1,16 +1,20 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import TeaCard from './TeaCard';
-import { FaSearch, FaPlus } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import addTeaModal from './AddTeaModal';
+import AddTeaModal from './AddTeaModal';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 
 const Main = () => {
+  const [modalShow, setModalShow] = React.useState(false);
+
   return (
+  
     <div className = 'container-fluid py-2 vh-100 d-flex'>
-    <addTeaModal/>
        <div className="d-flex flex-column">
           <div className ="input-group d-flex flex-row justify-content-center">
             <div className="form-outline py-2 mobileSearchBar">
@@ -32,7 +36,11 @@ const Main = () => {
       <div class ='teaContainer vw-100 border border-danger'>
         <div className="addTeaBtnContainer">
             <div className="addTea d-flex flex-row align-items-center justify-content-center">
-              <button className="btn btn-success"><FaPlus/> Add Tea</button>
+              <button className="btn btn-success" onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
+              <AddTeaModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />
             </div>
           </div>
           <div className = 'teaCardContainer col-sm col-12 border border-danger px-2'> 
