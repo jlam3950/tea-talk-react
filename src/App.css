@@ -67,6 +67,10 @@
 
 /* Login */
 
+.loginContainer{
+  width: 80%;
+}
+
 /* Tea Card  */
 
 .teaCardImg{

@@ -7,6 +7,7 @@ import NavigationBar from './components/NavigationBar';
 import Search from './components/Search';
 import Footer from './components/Footer';
 import Login from './components/Login';
+import UserProfile from './components/UserProfile';
 import { Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path = '/' element = {<Main />}></Route>
         <Route path = 'login' element = {<Login />}></Route>
+        <Route path = 'userProfile' element = {<UserProfile />}></Route>
       </Routes>
     <Footer />
     </div>
