@@ -10,7 +10,7 @@ const NavigationBar = () => {
   return (
     <Navbar bg="light" expand="lg" className = 'py-0'>
       <Container fluid className = 'bg-success py-2'>
-        <Navbar.Brand href="/" className = 'mx-3'>🍵 Tea Talk</Navbar.Brand>
+        <Navbar.Brand href="/" className = 'mx-3 text-white'>🍵 Tea Talk</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
