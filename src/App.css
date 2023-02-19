@@ -69,6 +69,11 @@
 
 /* Tea Card  */
 
+.teaCardImg{
+  height: 6rem; 
+  /* make responsive */
+}
+
 .teaPlus{
   font-size: 1.5em;
   cursor: pointer;
