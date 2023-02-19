@@ -1,4 +1,5 @@
 import React from "react";
+import { FaPlus } from 'react-icons/fa'
 
 const TeaCard = () => {
   return (
@@ -6,7 +7,7 @@ const TeaCard = () => {
       <div className="col-4 d-flex justify-content-center align-items-center">
         Image
       </div>
-      <div className="col-8 border">
+      <div className="col-6 border">
         <div className="mr-2">
           <div className="border"> 
             Tea Name 
@@ -23,6 +24,9 @@ const TeaCard = () => {
             Rating
           </div>
         </div>
+      </div>
+      <div className="teaPlus col-2 border d-flex justify-content-center align-items-center">
+        <FaPlus />
       </div>
     </div>
   );

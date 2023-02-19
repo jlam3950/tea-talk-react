@@ -16,7 +16,7 @@ function Login() {
 
       <MDBRow>
 
-        <MDBCol col='10' md='6'>
+        <MDBCol col='10' md='6' className=''>
           <img src="/images/kermit-login.png" className="img-fluid" alt="placeholder" />
         </MDBCol>
 
@@ -31,22 +31,23 @@ function Login() {
             <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
             <a href="!#">Forgot password?</a>
           </div>
+          <div className = 'd-flex flex-column justify-content-center align-items-center'>
+            <MDBBtn className="mb-4 w-100" size="lg">Sign in</MDBBtn>
 
-          <MDBBtn className="mb-4 w-100" size="lg">Sign in</MDBBtn>
+            <div className="w-100 mx-2 mb-4 divider d-flex justify-content-center my-4">
+              <p className="text-center fw-bold mx-3 mb-0">OR</p>
+            </div>
 
-          <div className="divider d-flex justify-content-center my-4">
-            <p className="text-center fw-bold mx-3 mb-0">OR</p>
+            <MDBBtn className="mb-4 w-100" size="lg" style={{backgroundColor: '#3b5998'}}>
+              <MDBIcon fab icon="facebook-f" className="mx-2"/>
+              Continue with facebook
+            </MDBBtn>
+
+            <MDBBtn className="mb-4 w-100" size="lg" style={{backgroundColor: '#55acee'}}>
+              <MDBIcon fab icon="twitter" className="mx-2"/>
+              Continue with twitter
+            </MDBBtn>
           </div>
-
-          <MDBBtn className="mb-4 w-100" size="lg" style={{backgroundColor: '#3b5998'}}>
-            <MDBIcon fab icon="facebook-f" className="mx-2"/>
-            Continue with facebook
-          </MDBBtn>
-
-          <MDBBtn className="mb-4 w-100" size="lg" style={{backgroundColor: '#55acee'}}>
-            <MDBIcon fab icon="twitter" className="mx-2"/>
-            Continue with twitter
-          </MDBBtn>
 
         </MDBCol>
 
