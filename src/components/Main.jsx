@@ -8,18 +8,17 @@ import AddTeaModal from './AddTeaModal';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-
-const Main = () => {
+const Main = ({ teaArray }) => {
   const [modalShow, setModalShow] = React.useState(false);
-
+  
   return (
   
     <div className = 'container-fluid py-2 vh-100 d-flex'>
        <div className="d-flex flex-column">
           <div className ="input-group d-flex flex-row justify-content-center">
             <div className="form-outline py-2 mobileSearchBar">
-              <input type="search" id="form1" class="form-control" placeholder='Search Tea..' />
-              <label class="form-label" for="form1"></label>
+              <input type="search" id="form1" className="form-control" placeholder='Search Tea..' />
+              <label className="form-label" htmlFor="form1"></label>
             </div>
             <div className="teaDropDown py-2 px-2">
               <DropdownButton id="dropdown-basic-button" title="Tea Styles">
@@ -33,7 +32,7 @@ const Main = () => {
               <i class="fas fa-search"><FaSearch/></i>
             </button> */}
           </div>
-      <div class ='teaContainer vw-100 border border-danger'>
+      <div className ='teaContainer vw-100'>
         <div className="addTeaBtnContainer">
             <div className="addTea d-flex flex-row align-items-center justify-content-center">
               <button className="btn btn-success" onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
@@ -43,9 +42,12 @@ const Main = () => {
               />
             </div>
           </div>
-          <div className = 'teaCardContainer col-sm col-12 border border-danger px-2'> 
-              <TeaCard/>
-              <TeaCard/>
+          <div className = 'teaCardContainer col-sm col-12 px-2'> 
+            {teaArray.map((tea) => {
+                return <TeaCard name={tea.name} brand={tea.brand} type={tea.type} rating={tea.rating} img={tea.image} />;
+              })}
+
+              
           </div>
       </div>
       </div>
