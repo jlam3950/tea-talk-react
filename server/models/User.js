@@ -14,10 +14,13 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     teas: [{
-        tea: mongoose.SchemaTypes.ObjectId,
-        ref: "Tea",
+        tea: {
+            type: mongoose.SchemaTypes.ObjectId,
+            ref: "Tea",
+        },
         userRating: Number
-    }]
+    }],
+    userImageURL: String
 })
 
 const User = mongoose.model("User", userSchema)
