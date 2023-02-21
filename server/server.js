@@ -13,10 +13,11 @@ mongoose.connect(
         useNewUrlParser: true,
         useUnifiedTopology: true,
     },
-    () => {
-        console.log('connected to mongoDB');
-    }
 )
+.then(()=>console.log('connected to mongoDB'))
+.catch(e=>console.error(e))
+
+app.use(express.json())
 
 const userRouter = require("./routes/userRouter.js");
 app.use("/users", userRouter);
