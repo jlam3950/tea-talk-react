@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink } from 'react-router-dom';
+import { FaUserCircle } from 'react-icons/fa'
 
 const NavigationBar = () => {
   return (
@@ -29,6 +30,7 @@ const NavigationBar = () => {
               <NavDropdown.Divider />
             </NavDropdown> */}
           </Nav>
+          <Nav.Link className= 'mx-3 fs-3 text-white' href="UserProfile"><FaUserCircle/></Nav.Link>
           <Form className="d-flex">
             <Form.Control
               type="search"
@@ -36,7 +38,7 @@ const NavigationBar = () => {
               className="me-2"
               aria-label="Search"
             />
-            <Button variant="outline-success">Search</Button>
+            {/* <Button variant="outline-success">Search</Button> */}
           </Form>
         </Navbar.Collapse>
       </Container>

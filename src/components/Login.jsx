@@ -12,12 +12,12 @@ from 'mdb-react-ui-kit';
 
 function Login() {
   return (
-    <MDBContainer fluid className="p-3 my-5 vh-100">
+    <MDBContainer fluid className="w-75 p-3 my-5 py-5 vh-100">
 
       <MDBRow>
 
         <MDBCol col='10' md='6' className=''>
-          <img src="/images/kermit-login.png" className="img-fluid" alt="placeholder" />
+          <img src="/images/kermit-login.png" className="img-fluid " alt="placeholder" />
         </MDBCol>
 
         <MDBCol col='4' md='6' className=''>
