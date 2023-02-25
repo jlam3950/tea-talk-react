@@ -7,9 +7,12 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import AddTeaModal from './AddTeaModal';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { FaSearch } from 'react-icons/fa';
+import { useState } from 'react';
 
-const Main = ({ teaArray }) => {
+const Main = ({ teaArray, addTea }) => {
   const [modalShow, setModalShow] = React.useState(false);
+  const [search, setSearch] = useState('');
   
   return (
   
@@ -17,7 +20,7 @@ const Main = ({ teaArray }) => {
        <div className="d-flex flex-column">
           <div className ="input-group d-flex flex-row justify-content-center">
             <div className="form-outline py-2 mobileSearchBar">
-              <input type="search" id="form1" className="form-control" placeholder='Search Tea..' />
+              <input type="search" id="form1" className="form-control" placeholder='Search Tea..' onChange={(e)=>setSearch(e.target.value)} />
               <label className="form-label" htmlFor="form1"></label>
             </div>
             <div className="teaDropDown py-2 px-2">
@@ -39,15 +42,19 @@ const Main = ({ teaArray }) => {
               <AddTeaModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
+
               />
             </div>
           </div>
           <div className = 'teaCardContainer col-sm col-12 px-2'> 
-            {teaArray.map((tea) => {
+            {teaArray.filter((input) => {
+              if(search === ''){
+                return input; 
+              } else if (input.name.toLowerCase().includes(search.toLowerCase()) || input.brand.toLowerCase().includes(search.toLowerCase())){
+                return input; 
+              }}).map((tea) => {
                 return <TeaCard name={tea.name} brand={tea.brand} type={tea.type} rating={tea.rating} img={tea.image} />;
-              })}
-
-              
+              })}  
           </div>
       </div>
       </div>

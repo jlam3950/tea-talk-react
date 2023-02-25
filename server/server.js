@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const dotenv = require('dotenv').config();
-const port = process.env.port || 5000; 
+const port = process.env.port || 5100; 
 const cors = require('cors');
 const connection_string = process.env.mongo_key; 
 const mongoose = require('mongoose');
@@ -17,7 +17,14 @@ mongoose.connect(
 .then(()=>console.log('connected to mongoDB'))
 .catch(e=>console.error(e))
 
-app.use(express.json())
+app.use(
+    cors({
+      origin: "http://localhost:3000",
+      credentials: true,
+    })
+  );
+
+app.use(express.json());
 
 const userRouter = require("./routes/userRouter.js");
 app.use("/users", userRouter);
