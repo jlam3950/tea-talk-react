@@ -73,6 +73,12 @@
 
 /* Tea Card  */
 
+/* .teaCard{
+  border: .5px solid black;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+} */
+
 .teaCardImg{
   height: 6rem; 
   /* make responsive */

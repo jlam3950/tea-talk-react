@@ -15,6 +15,31 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [favoritedTeas, setFavoritedTeas] = useState([]);
+  const [currentTeas, setCurrentTeas] = useState([]);
+
+  useEffect(() => {
+    getTeas();
+    // why does this render twice 
+  },[]); 
+
+  const getTeas = async () => { 
+    const url = ('http://localhost:5100/teas');
+ 
+    const res = await fetch(url);
+    const data = await res.json();
+    setCurrentTeas(data);
+  }
+
+  // decide on implementation method 
+  const addTea = async (tea) => {
+   await fetch('http://localhost:5100/teas', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify(tea),
+  })
+  }
 
   const teaArray = [
     {
@@ -47,7 +72,7 @@ function App() {
     <div className="App d-flex flex-column min-vh-100">
     <NavigationBar />
       <Routes>
-        <Route path = '/' element = {<Main teaArray = {teaArray}  />}></Route>
+        <Route path = '/' element = {<Main teaArray = {currentTeas} addTea = {addTea} />}></Route>
         <Route path = 'login' element = {<Login />}></Route>
         <Route path = 'userProfile' element = {<UserProfile />}></Route>
       </Routes>
