@@ -1,7 +1,14 @@
 import React from "react";
 import { FaPlus } from 'react-icons/fa';
+import AddTeaModal from './AddTeaModal';
+import { useState } from 'react';
 
 const TeaCard = (props) => {
+  const [modalShow, setModalShow] = React.useState(false);
+  const openModal = (teaInfo) => {
+    setModalShow(true);
+    console.log(teaInfo);
+  }
 
   return (
     <div className="teaCard d-flex my-2 py-3 mx-2 px-4">
@@ -32,7 +39,11 @@ const TeaCard = (props) => {
         </div>
       </div>
       <div className="teaPlus col-2 d-flex justify-content-center align-items-center">
-        <FaPlus onClick = {(e) => console.log(props)}/>
+        <FaPlus onClick = {() => openModal(props)}/>
+        <AddTeaModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />
         {/* need to pass this back up to the parent to store in array */}
       </div>
     </div>
