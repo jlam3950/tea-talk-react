@@ -1,17 +1,14 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
 import TeaCard from './TeaCard';
 import { FaPlus } from 'react-icons/fa';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import AddTeaModal from './AddTeaModal';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { FaSearch } from 'react-icons/fa';
 import { useState } from 'react';
 
 const Main = ({ teaArray, addTea }) => {
   const [modalShow, setModalShow] = React.useState(false);
+  const [listModal, setListModal] = React.useState(false);
   const [search, setSearch] = useState('');
   
   return (
@@ -31,9 +28,6 @@ const Main = ({ teaArray, addTea }) => {
                 <Dropdown.Item href="#/action-3">Herbal</Dropdown.Item>
               </DropdownButton>
             </div>
-            {/* <button type="button" class="btn btn-primary">
-              <i class="fas fa-search"><FaSearch/></i>
-            </button> */}
           </div>
       <div className ='teaContainer vw-100'>
         <div className="addTeaBtnContainer">
@@ -42,7 +36,6 @@ const Main = ({ teaArray, addTea }) => {
               <AddTeaModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-
               />
             </div>
           </div>
