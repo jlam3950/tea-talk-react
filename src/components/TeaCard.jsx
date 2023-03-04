@@ -5,9 +5,11 @@ import { useState } from 'react';
 
 const TeaCard = (props) => {
   const [modalShow, setModalShow] = React.useState(false);
-  const openModal = (teaInfo) => {
+  const [selectedTea, setSelectedTea] = React.useState({});
+
+  const openModal = (props) => {
     setModalShow(true);
-    console.log(teaInfo);
+    setSelectedTea(props);
   }
 
   return (
@@ -40,11 +42,11 @@ const TeaCard = (props) => {
       </div>
       <div className="teaPlus col-2 d-flex justify-content-center align-items-center">
         <FaPlus onClick = {() => openModal(props)}/>
-        <AddTeaModal
+              <AddTeaModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
+                selectedTea = {selectedTea}
               />
-        {/* need to pass this back up to the parent to store in array */}
       </div>
     </div>
   );

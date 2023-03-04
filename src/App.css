@@ -108,6 +108,25 @@
   width: 100%;
 }
 
+/* FavoriteList */
+
+.teaListMsg{
+  font-size: .8em;
+}
+
+.listName{
+  padding: .5em 0;
+  cursor: pointer;
+  /* border: 1px solid black; */
+  max-width: 10em;
+  /* alter max-width later */
+}
+
+.listLength{
+  padding: .25em;
+  font-size: .8em;
+}
+
 /* Footer */
 
 .footerIcon{

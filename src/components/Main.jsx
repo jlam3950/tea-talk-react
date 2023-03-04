@@ -4,12 +4,14 @@ import { FaPlus } from 'react-icons/fa';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import AddTeaModal from './AddTeaModal';
-import { useState } from 'react';
+// import { createContext, useContext } from "react";
 
-const Main = ({ teaArray, addTea }) => {
+
+const Main = ( {teaArray} ) => {
+  // const user = useContext(ListContext);
   const [modalShow, setModalShow] = React.useState(false);
   const [listModal, setListModal] = React.useState(false);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = React.useState('');
   
   return (
   
@@ -33,10 +35,10 @@ const Main = ({ teaArray, addTea }) => {
         <div className="addTeaBtnContainer">
             <div className="addTea d-flex flex-row align-items-center justify-content-center">
               <button className="btn btn-success" onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
-              <AddTeaModal
+              {/* <AddTeaModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-              />
+              /> */}
             </div>
           </div>
           <div className = 'teaCardContainer col-sm col-12 px-2'> 

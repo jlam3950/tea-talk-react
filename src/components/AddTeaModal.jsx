@@ -2,10 +2,17 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import React from 'react';
 import { FaPlus } from 'react-icons/fa';
-// import CreateListModal from './CreateListModal';
+import FavoriteList from './FavoriteList';
+import { useContext, useEffect } from "react";
+import { ListContext } from '../App';
 
-function AddTeaModal(props) {
+function AddTeaModal(props)  {
+  // react question about props ^, why can't I pass props, and tealist but can only access props by passing one parameter 
   const[createModalShow, setCreateModalShow] = React.useState(false);
+  const { list, setList } = useContext(ListContext);
+  const [listName, setListName ] = React.useState('')
+  const [description, setDescription] = React.useState();
+  const [listCreated, setListCreated] = React.useState('')
 
   const hideFavShowCreate = () => {
     setCreateModalShow(true);
@@ -15,6 +22,48 @@ function AddTeaModal(props) {
     setTimeout(() => {
     setCreateModalShow(false);
     }, "1000")
+  }
+
+  const createList = (name, description) => {
+    if(name === ''){
+      setListCreated('Please enter the name of your list');
+
+      setTimeout(() => {
+        setListCreated('')
+        }, 2000)
+    } else {
+            setList((prevState) => {
+              return({
+                ...prevState,
+                [name]: []
+                // why does that work with an array around it?
+                // can't save objects into this with FavoriteList. check this out again 
+              });
+            });
+            
+            console.log(list);
+            setListCreated('List Created...')
+              
+              setTimeout(() => {
+                setListCreated('');
+                setListName('');
+                setCreateModalShow(false);
+                }, 2000)
+    }
+    // if(name === ''){
+    //   setListCreated('Please enter the name of your list');
+
+    //   setTimeout(() => {
+    //     setListCreated('')
+    //     }, 2000)
+    // } else {
+    //   setListCreated('List Created...')
+      
+    //   setTimeout(() => {
+    //     setListCreated('')
+    //     setCreateModalShow(false);
+    //     }, 2000)
+    // }
   }
 
   return (
@@ -32,16 +81,24 @@ function AddTeaModal(props) {
       <Modal.Body>
         <h5>{createModalShow ? 
           <form>
-            <label for='listName'>List Name</label><br></br>
-            <input className = 'w-100 my-2' type ='text'></input><br></br>
+            <label for='listName' > List Name </label><br></br>
+            <input className = 'w-100 my-2' type ='text' onChange ={(e) => setListName(e.target.value)}></input><br></br>
             <label for='listName'>Description</label><br></br>
-            <input className = 'w-100 my-2 py-4' type ='text'></input>
+            <input className = 'w-100 my-2 py-4' type ='text' onChange ={(e) => setDescription(e.target.value)}></input>
           </form>
-         : 'Favorite Teas'}</h5>
-        <p> {createModalShow ? '' : <>0 items - {Date().slice(0,28)}</>}</p>
+         : <FavoriteList selectedTea = {props.selectedTea}/> }</h5>
+
+        <p> {createModalShow ? '' : <> {Date().slice(0,28)}</>}</p>
         <button className ='btn btn-success' onClick = {() => hideFavShowCreate()}><FaPlus /> 
-         {createModalShow ? ' Create list' :  ' Create a new list'}
-        </button>
+         {createModalShow ? 
+           <button className= 'btn btn-success' onClick ={() => createList(listName, description)}>Create List</button>
+         : ' Create a new list'  
+           }
+        </button> 
+        {createModalShow ? '' : <button className= 'btn btn-danger mx-2'>Edit</button>}
+        <span className='teaListMsg mx-2'>
+          {listCreated}
+        </span>
       </Modal.Body>
       <Modal.Footer onClick = {closeModal}>
         <Button onClick={props.onHide}>Close</Button>
