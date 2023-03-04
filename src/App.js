@@ -10,21 +10,44 @@ import UserProfile from './components/UserProfile';
 import { Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
+import FavoriteList from './components/FavoriteList';
+export const ListContext = createContext();
 
 
 function App() {
-  const [favoritedTeas, setFavoritedTeas] = useState([]);
+  const teaList = {
+    'Favorite Teas':[
+        {
+            "name": "British Blend",
+            "brand": "Tetly",
+            "type": "Black",
+            "description": "tea is yum",
+            "rating": 5, 
+        }
+    ],
+    'Least Favorite Teas':[
+        {
+            "name": "British Brown Blend",
+            "brand": "W/C",
+            "type": "Brown",
+            "description": "tea is NOT yum",
+            "rating": 3, 
+        }
+    ]
+  }
+
+  const [list, setList ] = useState(teaList);
   const [currentTeas, setCurrentTeas] = useState([]);
+  const [favoritedTeas, setFavoritedTeas] = useState([]);
+
 
   useEffect(() => {
     getTeas();
-    // why does this render twice 
   },[]); 
 
   const getTeas = async () => { 
     const url = ('http://localhost:5100/teas');
- 
     const res = await fetch(url);
     const data = await res.json();
     setCurrentTeas(data);
@@ -41,43 +64,18 @@ function App() {
   })
   }
 
-  const teaArray = [
-    {
-      name: "Korean Corn Tea(better than it sounds)",
-      image: '/images/doubleSpiceChai.png',
-      brand: "Dong Suh",
-      type: "White",
-      rating: "*****",
-      id: '1'
-    },
-    {
-      name: "Elevated Matcha",
-      image: '/images/doubleSpiceChai.png',
-      brand: "Nikon",
-      type: "Green",
-      rating: "****",
-      id: '2'
-    },
-    {
-      name: "Flower Power",
-      image: '/images/doubleSpiceChai.png',
-      brand: "Bloomingtea",
-      type: "Herbal",
-      rating: "***",
-      id: '3'
-    },
-  ] 
-
   return (
-    <div className="App d-flex flex-column min-vh-100">
-    <NavigationBar />
-      <Routes>
-        <Route path = '/' element = {<Main teaArray = {currentTeas} addTea = {addTea} />}></Route>
-        <Route path = 'login' element = {<Login />}></Route>
-        <Route path = 'userProfile' element = {<UserProfile />}></Route>
-      </Routes>
-    <Footer />
-    </div>
+    <ListContext.Provider value = {{list, setList}} >
+      <div className="App d-flex flex-column min-vh-100">
+        <NavigationBar />
+          <Routes>
+            <Route path = '/' element = {<Main teaArray = {currentTeas} addTea = {addTea}/>}></Route>
+            <Route path = 'login' element = {<Login />}></Route>
+            <Route path = 'userProfile' element = {<UserProfile />}></Route>
+          </Routes>
+        <Footer />
+      </div>
+    </ListContext.Provider>
   );
 }
 
