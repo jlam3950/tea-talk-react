@@ -39,10 +39,8 @@ function AddTeaModal(props)  {
                 // why does that work with an array around it?
                 // can't save objects into this with FavoriteList. check this out again 
               });
-            });
-            
-            console.log(list);
-            setListCreated('List Created...')
+            });   
+            setListCreated('Creating List...')
               
               setTimeout(() => {
                 setListCreated('');
@@ -50,20 +48,7 @@ function AddTeaModal(props)  {
                 setCreateModalShow(false);
                 }, 2000)
     }
-    // if(name === ''){
-    //   setListCreated('Please enter the name of your list');
-
-    //   setTimeout(() => {
-    //     setListCreated('')
-    //     }, 2000)
-    // } else {
-    //   setListCreated('List Created...')
-      
-    //   setTimeout(() => {
-    //     setListCreated('')
-    //     setCreateModalShow(false);
-    //     }, 2000)
-    // }
+    console.log(list);
   }
 
   return (

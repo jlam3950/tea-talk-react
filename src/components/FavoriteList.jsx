@@ -1,12 +1,11 @@
 import React,  { useState } from 'react';
 import { useContext } from "react";
 import { ListContext } from '../App';
-
-
 const FavoriteList = ({selectedTea}) => {
 const { list, setList } = useContext(ListContext);
 const [ render, setRender ] = useState('');
 const [listNames, setListNames] = React.useState(Object.keys(list));
+let updatedList = list; 
 
 // const teaList = {
 //     'Favorite Teas':[
@@ -29,10 +28,21 @@ const [listNames, setListNames] = React.useState(Object.keys(list));
 //     ]
 //   }
 
-const saveTeaToList = (id, selectedTea) => {
-        console.log(selectedTea.name);
-        let updatedList = list; 
 
+const pushTeaToList = (id, selectedTea) => { 
+    updatedList[id].push(selectedTea);
+        setRender(`${selectedTea.name} was added to ${id}!`); 
+        setTimeout(() => {
+            setRender('');
+        },2000);
+    return setList(updatedList);
+}
+
+const saveTeaToList = (id, selectedTea) => {
+    // moved updatedList out of function for global scoping
+    if(list[id].length === 0){
+        pushTeaToList(id,selectedTea);
+    } else{ 
         list[id].map((tea) => {
             if(tea.name === selectedTea.name){
                 setRender('This tea already exists in this list!');
@@ -40,16 +50,12 @@ const saveTeaToList = (id, selectedTea) => {
                     setRender('');
                 },2000);
             } else if (tea.name !== selectedTea.name){
-                updatedList[id].push(selectedTea);
-                setRender(`${selectedTea.name} was added to ${id}!`); 
-                setTimeout(() => {
-                    setRender('');
-                },2000)
-                console.log(list)
-                return setList(updatedList)
+                pushTeaToList(id,selectedTea);
+                // removed setList, added to pushTeaToList; 
             }
             // having a bug where a user can add more than one tea to secondary list 
         })
+    }
         console.log(list);
     };
  
@@ -61,15 +67,13 @@ return (
                         {listName }
                         <div className ='listLength'>
                             {`Saved Teas: ${list[listName].length}`}
-                          
                         </div>
                    </div>
         })
     }
     <div className = 'teaListMsg'>
-    {render}
+        {render}
     </div>
-    {/* make shift to get page to re-render */}
     </>
       
   )
