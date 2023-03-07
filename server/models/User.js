@@ -13,15 +13,23 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    teas: [{
-        tea: {
-            type: mongoose.SchemaTypes.ObjectId,
-            ref: "Tea",
-        },
-        userRating: Number
-    }],
+    teaLists: {
+        type: Map,
+        of: Array,
+        default: {}
+    },
     userImageURL: String
 })
 
 const User = mongoose.model("User", userSchema)
 module.exports = User
+
+
+
+ // teas: [{
+    //     tea: {
+    //         type: mongoose.SchemaTypes.ObjectId,
+    //         ref: "Tea",
+    //     },
+    //     userRating: Number
+    // }],
