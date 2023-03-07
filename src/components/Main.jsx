@@ -1,15 +1,17 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
 import TeaCard from './TeaCard';
 import { FaPlus } from 'react-icons/fa';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import AddTeaModal from './AddTeaModal';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+// import { createContext, useContext } from "react";
 
-const Main = ({ teaArray }) => {
+
+const Main = ( {teaArray} ) => {
+  // const user = useContext(ListContext);
   const [modalShow, setModalShow] = React.useState(false);
+  const [listModal, setListModal] = React.useState(false);
+  const [search, setSearch] = React.useState('');
   
   return (
   
@@ -17,7 +19,7 @@ const Main = ({ teaArray }) => {
        <div className="d-flex flex-column">
           <div className ="input-group d-flex flex-row justify-content-center">
             <div className="form-outline py-2 mobileSearchBar">
-              <input type="search" id="form1" className="form-control" placeholder='Search Tea..' />
+              <input type="search" id="form1" className="form-control" placeholder='Search Tea..' onChange={(e)=>setSearch(e.target.value)} />
               <label className="form-label" htmlFor="form1"></label>
             </div>
             <div className="teaDropDown py-2 px-2">
@@ -28,26 +30,26 @@ const Main = ({ teaArray }) => {
                 <Dropdown.Item href="#/action-3">Herbal</Dropdown.Item>
               </DropdownButton>
             </div>
-            {/* <button type="button" class="btn btn-primary">
-              <i class="fas fa-search"><FaSearch/></i>
-            </button> */}
           </div>
       <div className ='teaContainer vw-100'>
         <div className="addTeaBtnContainer">
             <div className="addTea d-flex flex-row align-items-center justify-content-center">
               <button className="btn btn-success" onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
-              <AddTeaModal
+              {/* <AddTeaModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-              />
+              /> */}
             </div>
           </div>
           <div className = 'teaCardContainer col-sm col-12 px-2'> 
-            {teaArray.map((tea) => {
+            {teaArray.filter((input) => {
+              if(search === ''){
+                return input; 
+              } else if (input.name.toLowerCase().includes(search.toLowerCase()) || input.brand.toLowerCase().includes(search.toLowerCase())){
+                return input; 
+              }}).map((tea) => {
                 return <TeaCard name={tea.name} brand={tea.brand} type={tea.type} rating={tea.rating} img={tea.image} />;
-              })}
-
-              
+              })}  
           </div>
       </div>
       </div>

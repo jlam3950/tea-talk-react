@@ -1,5 +1,5 @@
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -8,6 +8,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+} */
+
+.App{
+  background-color: rgb(243, 240, 240);
 }
 
 /* Main */
@@ -21,9 +25,27 @@
 }
 
 @media only screen and (min-width: 600px){
+  /* Tea Card  */
+
+.cardSubtitleAndType{
+  font-size: 1.2em;
+}
+
+.teaCardImg{
+  height: 8em; 
+}
+
+.cardTitle{
+  font-size: 1.75em; 
+}
+
+.teaPlus{
+  font-size: 2.5em;
+  cursor: pointer;
+}
   .teaCard{
-    width: 75%;
-    min-height: 4em;
+    /* width: 90%; */
+    min-height: 5em;
     
   }
 
@@ -31,7 +53,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 40em;
+    max-width: 43em;
+    border: 1px solid rgb(248, 246, 246);
+    border-radius: .5em; 
+    /* maybe remove border radius? */
+    background-color: rgb(249, 246, 246);
+    margin: 0 2em;
   }
 
   .addTeaBtnContainer{
@@ -74,13 +101,30 @@
 /* Tea Card  */
 
 .teaCardImg{
-  height: 6rem; 
-  /* make responsive */
+  height: 5.5em; 
 }
 
-.teaPlus{
-  font-size: 1.5em;
+.teaCard{
+  width: 100%;
+}
+
+/* FavoriteList */
+
+.teaListMsg{
+  font-size: .8em;
+}
+
+.listName{
+  padding: .5em 0;
   cursor: pointer;
+  /* border: 1px solid black; */
+  max-width: 10em;
+  /* alter max-width later */
+}
+
+.listLength{
+  padding: .25em;
+  font-size: .8em;
 }
 
 /* Footer */

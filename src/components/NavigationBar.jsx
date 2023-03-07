@@ -5,7 +5,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink } from 'react-router-dom';
-import { FaUserCircle } from 'react-icons/fa'
+import { FaUserCircle } from 'react-icons/fa';
+
 
 const NavigationBar = () => {
   return (
@@ -34,10 +35,13 @@ const NavigationBar = () => {
           <Form className="d-flex">
             <Form.Control
               type="search"
-              placeholder="Search"
+              placeholder="Search for Tea..."
               className="me-2"
               aria-label="Search"
-            />
+            />               
+             {/* <button type="button" class="btn btn-primary">
+              <i class="fas fa-search"><FaSearch/></i>
+            </button> */}
             {/* <Button variant="outline-success">Search</Button> */}
           </Form>
         </Navbar.Collapse>
