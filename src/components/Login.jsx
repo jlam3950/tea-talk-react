@@ -16,7 +16,7 @@ function Login() {
 
       <MDBRow>
 
-        <MDBCol col='10' md='6' className=''>
+        <MDBCol col='6' md='5' className='my-5'>
           <img src="/images/kermit-login.png" className="img-fluid " alt="placeholder" />
         </MDBCol>
 
