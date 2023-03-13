@@ -101,6 +101,7 @@ router.patch("/:id/tealists", findUserByID, async (req, res) => {
         switch (action){
             // Add a New List
             case "new list":
+                if (payload.tea == null){payload.tea = []}
                 res.user.teaLists.set(payload.listName, payload.tea)
                 res.user.save()
                 return res.status(201).json({message: `Added New List - ${payload.listName}`})
