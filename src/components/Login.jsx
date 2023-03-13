@@ -1,56 +1,55 @@
 import React from 'react';
 import {
-  MDBContainer,
-  MDBCol,
-  MDBRow,
   MDBBtn,
-  MDBIcon,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
   MDBInput,
+  MDBIcon,
   MDBCheckbox
 }
 from 'mdb-react-ui-kit';
 
 function Login() {
   return (
-    <MDBContainer fluid className="w-75 p-3 my-5 py-5 vh-100">
+    <MDBContainer fluid>
 
-      <MDBRow>
+      <MDBRow className='d-flex justify-content-center align-items-center h-100'>
+        <MDBCol col='12'>
 
-        <MDBCol col='6' md='5' className='my-5'>
-          <img src="/images/kermit-login.png" className="img-fluid " alt="placeholder" />
-        </MDBCol>
+          <MDBCard className='bg-white my-5 mx-auto' style={{borderRadius: '1rem', maxWidth: '500px'}}>
+            <MDBCardBody className='p-5 w-100 d-flex flex-column'>
 
-        <MDBCol col='4' md='6' className=''>
+              <h2 className="fw-bold mb-2 text-center">Sign in</h2>
+              <p className="text-white-50 mb-3">Please enter your login and password!</p>
 
+              <MDBInput wrapperClass='mb-4 w-100' label='Email address' id='formControlLg' type='email' size="lg"/>
+              <MDBInput wrapperClass='mb-4 w-100' label='Password' id='formControlLg' type='password' size="lg"/>
 
-          <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg"/>
-          <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
+              <MDBCheckbox name='flexCheck' id='flexCheckDefault' className='mb-4' label='Remember password' />
 
+              <MDBBtn size='lg'>
+                Login
+              </MDBBtn>
 
-          <div className="forgotPW d-flex justify-content-between mx-2 mb-4">
-            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-            <a href="!#">Forgot password?</a>
-          </div>
-          <div className = 'd-flex flex-column justify-content-center align-items-center'>
-            <MDBBtn className="mb-4 w-100" size="lg">Sign in</MDBBtn>
+              <hr className="my-4" />
 
-            <div className="w-100 mx-2 mb-4 divider d-flex justify-content-center my-4">
-              <p className="text-center fw-bold mx-3 mb-0">OR</p>
-            </div>
+              <MDBBtn className="mb-2 w-100" size="lg" style={{backgroundColor: '#dd4b39'}}>
+                <MDBIcon fab icon="google" className="mx-2"/>
+                Sign in with Google
+              </MDBBtn>
 
-            <MDBBtn className="mb-4 w-100" size="lg" style={{backgroundColor: '#3b5998'}}>
-              <MDBIcon fab icon="facebook-f" className="mx-2"/>
-              Continue with facebook
-            </MDBBtn>
+              <MDBBtn className="mb-4 w-100" size="lg" style={{backgroundColor: '#3b5998'}}>
+                <MDBIcon fab icon="facebook-f" className="mx-2"/>
+                Sign in with Facebook
+              </MDBBtn>
 
-            <MDBBtn className="mb-4 w-100" size="lg" style={{backgroundColor: '#55acee'}}>
-              <MDBIcon fab icon="twitter" className="mx-2"/>
-              Continue with twitter
-            </MDBBtn>
-          </div>
+            </MDBCardBody>
+          </MDBCard>
 
         </MDBCol>
-
       </MDBRow>
 
     </MDBContainer>
