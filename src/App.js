@@ -6,6 +6,7 @@ import NavigationBar from './components/NavigationBar';
 import Search from './components/Search';
 import Footer from './components/Footer';
 import Login from './components/Login';
+import Register from './components/Register';
 import UserProfile from './components/UserProfile';
 import { Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -71,6 +72,7 @@ function App() {
           <Routes>
             <Route path = '/' element = {<Main teaArray = {currentTeas} addTea = {addTea}/>}></Route>
             <Route path = 'login' element = {<Login />}></Route>
+            <Route path = 'register' element = {<Register />}></Route>
             <Route path = 'userProfile' element = {<UserProfile />}></Route>
           </Routes>
         <Footer />
