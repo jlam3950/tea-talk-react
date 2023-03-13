@@ -12,8 +12,17 @@ import {
   MDBCheckbox
 }
 from 'mdb-react-ui-kit';
+import { FaFacebook } from 'react-icons/fa';
+import { FaGoogle } from 'react-icons/fa';
 
 function Login() {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState(''); 
+  
+  const loginAccount = () => {
+    // set up later 
+  }
+ 
   return (
     <MDBContainer fluid>
 
@@ -26,31 +35,29 @@ function Login() {
               <h2 className="fw-bold mb-2 text-center">Sign in</h2>
               <p className="text-white-50 mb-3">Please enter your login and password!</p>
 
-              <MDBInput wrapperClass='mb-4 w-100' label='Email address' id='formControlLg' type='email' size="lg"/>
-              <MDBInput wrapperClass='mb-4 w-100' label='Password' id='formControlLg' type='password' size="lg"/>
+              <MDBInput wrapperClass='mb-4 w-100' label='Email address' id='formControlLg' type='email' size="lg" onChange={(e) => setEmail(e.target.value)}/>
+              <MDBInput wrapperClass='mb-4 w-100' label='Password' id='formControlLg' type='password' size="lg" onChange={(e) => setPassword(e.target.value)}/>
 
-              <MDBCheckbox name='flexCheck' id='flexCheckDefault' className='mb-4' label='Remember password' />
+              {/* <MDBCheckbox name='flexCheck' id='flexCheckDefault' className='mb-4' label='Remember password' /> */}
 
+              <button size='lg' className = 'btn btn-primary text-white py-2 my-2' onClick = {() => loginAccount()}>
+                Login
+              </button>
 
-                <MDBBtn size='lg'>
-                  Login
-                </MDBBtn>
-
-              <MDBBtn size='lg' className = 'my-2' style={{backgroundColor: '#3CB043'}}>
+              <button size='lg' className = 'btn text-white py-2 my-2' style={{backgroundColor: '#3CB043'}}>
                 <Nav.Link href="/register">Sign up for an account</Nav.Link>
-              </MDBBtn>
+              </button>
 
               <hr className="my-4" />
+              <button size='lg' className = 'btn text-white py-2 my-2' style={{backgroundColor: '#dd4b39'}}>
+                <MDBIcon fab icon="google" className=""/>
+                  Log in with <FaGoogle />
+              </button>
 
-              <MDBBtn className="mb-2 w-100" size="lg" style={{backgroundColor: '#dd4b39'}}>
-                <MDBIcon fab icon="google" className="mx-2"/>
-                Sign in with Google
-              </MDBBtn>
-
-              <MDBBtn className="mb-4 w-100" size="lg" style={{backgroundColor: '#3b5998'}}>
-                <MDBIcon fab icon="facebook-f" className="mx-2"/>
-                Sign in with Facebook
-              </MDBBtn>
+              <button size='lg' className = 'btn text-white py-2 my-2'  style={{backgroundColor: '#3b5998'}}>
+                <MDBIcon fab icon="facebook-f" className=""/>
+                  Log in with <FaFacebook/>
+              </button>
 
             </MDBCardBody>
           </MDBCard>
