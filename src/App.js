@@ -41,6 +41,7 @@ function App() {
   const [list, setList ] = useState(teaList);
   const [currentTeas, setCurrentTeas] = useState([]);
   const [favoritedTeas, setFavoritedTeas] = useState([]);
+  const [userProfile, setUserProfile] = useState([]);
 
 
   useEffect(() => {
@@ -52,6 +53,13 @@ function App() {
     const res = await fetch(url);
     const data = await res.json();
     setCurrentTeas(data);
+  }
+
+  const getUser = async () => {
+    const url = ('http://localhost:5100/teas');
+    const res = await fetch(url);
+    const data = await res.json();
+    setUserProfile(data);
   }
 
   // decide on implementation method 
