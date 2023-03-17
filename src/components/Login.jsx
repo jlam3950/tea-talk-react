@@ -1,6 +1,5 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
-import { redirect } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {
   MDBBtn,
@@ -21,6 +20,8 @@ function Login() {
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState(''); 
   const [logFlag, setLogFlag] = React.useState(false);
+  const [failedFlag, setFailedFlag] = React.useState(false);
+  const [emptyFlag, setEmptyFlag] = React.useState(false);
   const history = useNavigate();
   
   const loginAccount = async () => {
@@ -37,13 +38,25 @@ function Login() {
      })
 
      const data = await res.json();
-     console.log(data);
+     console.log(data.username);
+     if(data.username !== undefined){
      setLogFlag(!logFlag);
      setTimeout(() => {
       history(-1);
       setLogFlag(!logFlag);
      },2000)
-    //  return redirect('/');
+    } else if(user || password === '') {
+      setEmptyFlag(true);
+      setTimeout(() => {
+        setEmptyFlag(false);
+      }, 2000)
+    } else {
+      console.log('hi');
+      setFailedFlag(true);
+      setTimeout(() => {
+        setFailedFlag(false);
+      }, 2000)
+    }
   }
  
   return (
@@ -63,6 +76,8 @@ function Login() {
 
               {/* <MDBCheckbox name='flexCheck' id='flexCheckDefault' className='mb-4' label='Remember password' /> */}
               <div className = 'mx-0'>{logFlag ? 'User successfully logged in... ': ''}</div>
+              <div className = 'mx-0' style = {{color: 'red'}}>{failedFlag ? 'Wrong user name or password': ''}</div>
+              <div className = 'mx-0' style = {{color: 'red'}}>{emptyFlag ? 'Please input a username and password': ''}</div>
               <button size='lg' className = 'btn btn-primary text-white py-2 my-2' onClick = {() => loginAccount()}>
                 Login
               </button>
