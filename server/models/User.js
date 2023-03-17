@@ -15,8 +15,8 @@ const userSchema = new mongoose.Schema({
     },
     teaLists: {
         type: Map,
-        of: Array,
-        default: {}
+        of: [{type: mongoose.Schema.Types.ObjectId, ref: "Tea"}],
+        default: {"Favorites":[]}
     },
     userImageURL: String
 })
