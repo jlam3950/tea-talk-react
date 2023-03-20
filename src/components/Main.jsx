@@ -4,11 +4,14 @@ import { FaPlus } from 'react-icons/fa';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import AddTeaModal from './AddTeaModal';
+import { useContext } from "react";
+import { ListContext } from '../App';
 // import { createContext, useContext } from "react";
 
 
 const Main = ( {teaArray} ) => {
   // const user = useContext(ListContext);
+  const { currentTeas } = React.useContext(ListContext);
   const [modalShow, setModalShow] = React.useState(false);
   const [listModal, setListModal] = React.useState(false);
   const [search, setSearch] = React.useState('');
@@ -42,13 +45,13 @@ const Main = ( {teaArray} ) => {
             </div>
           </div>
           <div className = 'teaCardContainer col-sm col-12 px-2'> 
-            {teaArray.filter((input) => {
+            {currentTeas.filter((input) => {
               if(search === ''){
                 return input; 
               } else if (input.name.toLowerCase().includes(search.toLowerCase()) || input.brand.toLowerCase().includes(search.toLowerCase())){
                 return input; 
-              }}).map((tea) => {
-                return <TeaCard name={tea.name} brand={tea.brand} type={tea.type} rating={tea.rating} img={tea.image} />;
+              }}).map((tea, i) => {
+                return <TeaCard name={tea.name} brand={tea.brand} type={tea.type} rating={tea.rating} img={tea.image} id = {tea._id} key ={i} />;
               })}  
           </div>
       </div>
