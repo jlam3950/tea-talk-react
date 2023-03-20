@@ -118,7 +118,14 @@ router.patch("/:id/tealists", findUserByID, async (req, res) => {
             
             // Add One Tea to a list
             case "add tea":
-                const list = [...res.user.teaLists.get(payload.listName)]
+                const list = await res.user.teaLists.get(payload.listName)
+                let included = false
+                list.forEach(item=> {
+                    if (item.toString().includes(payload.tea)) {included = true}
+                })
+                if (included){
+                    return res.status(409).json({message: `Tea is already in selected list`})
+                }
                 list.push(payload.tea)
                 res.user.teaLists.set(payload.listName, list)
                 res.user.save()
@@ -138,7 +145,7 @@ router.patch("/:id/tealists", findUserByID, async (req, res) => {
             
             
             default:
-                break
+                return res.status(401).json({message: `Action '${action}' is not an option`})
         }
 
     } catch (err) {
