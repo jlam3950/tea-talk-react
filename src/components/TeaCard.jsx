@@ -1,15 +1,19 @@
 import React from "react";
-import { FaPlus } from 'react-icons/fa';
 import AddTeaModal from './AddTeaModal';
-import { useState } from 'react';
+import { FaPlus } from 'react-icons/fa';
+import { ListContext } from '../App';
+import { useContext } from 'react';
 
 const TeaCard = (props) => {
+  const { refreshTeaList, loggedIn, userProfile } = React.useContext(ListContext);
   const [modalShow, setModalShow] = React.useState(false);
-  const [selectedTea, setSelectedTea] = React.useState({});
+  const [selectedtea, setselectedtea] = React.useState({});
 
   const openModal = (props) => {
+    console.log(userProfile);
+    refreshTeaList(userProfile._id)
     setModalShow(true);
-    setSelectedTea(props);
+    setselectedtea(props);
   }
 
   return (
@@ -41,12 +45,17 @@ const TeaCard = (props) => {
         </div>
       </div>
       <div className="teaPlus col-2 d-flex justify-content-center align-items-center">
-        <FaPlus onClick = {() => openModal(props)}/>
-              <AddTeaModal
+        { userProfile.length !== 0 ? 
+             <>
+             <FaPlus onClick = {() => openModal(props)}/>
+                <AddTeaModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-                selectedTea = {selectedTea}
-              />
+                selectedtea = {selectedtea}
+                /> 
+            </>: 
+        <FaPlus onClick = {() => alert('Please sign in to save teas')}/> }
+        {/* Change alert to banner to notify user to sign in. Consider not rendering plus if not signed in*/}
       </div>
     </div>
   );

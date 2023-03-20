@@ -97,7 +97,6 @@ router.patch("/:id", findUserByID, async (req, res) => {
 router.patch("/:id/tealists", findUserByID, async (req, res) => {
     const action = req.body.action;
     const payload = req.body.payload;
-
     const user = res.user
 
     try {

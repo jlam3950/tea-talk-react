@@ -1,8 +1,11 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import { useNavigate } from "react-router-dom";
+import { FaFacebook } from 'react-icons/fa';
+import { FaGoogle } from 'react-icons/fa';
+import { ListContext } from '../App';
+import { useContext } from 'react';
 import {
-  MDBBtn,
   MDBContainer,
   MDBRow,
   MDBCol,
@@ -10,13 +13,11 @@ import {
   MDBCardBody,
   MDBInput,
   MDBIcon,
-  MDBCheckbox
 }
 from 'mdb-react-ui-kit';
-import { FaFacebook } from 'react-icons/fa';
-import { FaGoogle } from 'react-icons/fa';
 
 function Login() {
+  const { list, setList, userProfile, setUserProfile, setUserData, setLoggedIn} = useContext(ListContext);
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState(''); 
   const [logFlag, setLogFlag] = React.useState(false);
@@ -37,21 +38,22 @@ function Login() {
        })
      })
 
-     const data = await res.json();
-     console.log(data.username);
-     if(data.username !== undefined){
+    const data = await res.json();
+    let userTeaList = await (data.teaLists);
+    setUserData(data, userTeaList);
+
+    if(data.username !== undefined){
      setLogFlag(!logFlag);
      setTimeout(() => {
-      history(-1);
+      history("/");
       setLogFlag(!logFlag);
-     },2000)
+     }, 2000)
     } else if(user || password === '') {
       setEmptyFlag(true);
       setTimeout(() => {
         setEmptyFlag(false);
       }, 2000)
     } else {
-      console.log('hi');
       setFailedFlag(true);
       setTimeout(() => {
         setFailedFlag(false);
@@ -71,7 +73,7 @@ function Login() {
               <h2 className="fw-bold mb-2 text-center">Sign in</h2>
               <p className="text-white-50 mb-3">Please enter your login and password!</p>
 
-              <MDBInput wrapperClass='mb-4 w-100' label='' placeholder ='Enter username...' id='formControlLg' type='email' size="lg" onChange={(e) => setUser(e.target.value)}/>
+              <MDBInput wrapperClass='mb-4 w-100' label='' placeholder = 'Enter username...' id='formControlLg' type='email' size="lg" onChange={(e) => setUser(e.target.value)}/>
               <MDBInput wrapperClass='mb-4 w-100' label='' placeholder = 'Enter password...' id='formControlLg' type='password' size="lg" onChange={(e) => setPassword(e.target.value)}/>
 
               {/* <MDBCheckbox name='flexCheck' id='flexCheckDefault' className='mb-4' label='Remember password' /> */}

@@ -1,18 +1,18 @@
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import React from 'react';
-import { FaPlus } from 'react-icons/fa';
 import FavoriteList from './FavoriteList';
-import { useContext, useEffect } from "react";
+import { FaPlus } from 'react-icons/fa';
+import { useContext } from "react";
 import { ListContext } from '../App';
 
 function AddTeaModal(props)  {
   // react question about props ^, why can't I pass props, and tealist but can only access props by passing one parameter 
-  const[createModalShow, setCreateModalShow] = React.useState(false);
-  const { list, setList } = useContext(ListContext);
+  const { refreshTeaList, list, setList, editMode, setEditMode, userProfile } = useContext(ListContext);
   const [listName, setListName ] = React.useState('')
   const [description, setDescription] = React.useState();
   const [listCreated, setListCreated] = React.useState('')
+  const[createModalShow, setCreateModalShow] = React.useState(false);
 
   const hideFavShowCreate = () => {
     setCreateModalShow(true);
@@ -24,32 +24,33 @@ function AddTeaModal(props)  {
     }, "1000")
   }
 
-  const createList = (name, description) => {
-    if(name === ''){
-      setListCreated('Please enter the name of your list');
+  const addNewList = async (name, description) =>  {
+    const id = userProfile._id; 
+    const url = `http://localhost:5100/users/${id}/tealists`; 
+    const res = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+         'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+         "action": "new list",
+         "payload":{
+          "listName": name, 
+         }
+        })
+      })
 
-      setTimeout(() => {
-        setListCreated('')
-        }, 2000)
-    } else {
-            setList((prevState) => {
-              return({
-                ...prevState,
-                [name]: []
-                // why does that work with an array around it?
-                // can't save objects into this with FavoriteList. check this out again 
-              });
-            });   
-            setListCreated('Creating List...')
-              
-              setTimeout(() => {
-                setListCreated('');
-                setListName('');
-                setCreateModalShow(false);
-                }, 2000)
+    const data = await res.json(); 
+    console.log(data);
+
+    setListCreated('Creating List...');
+    refreshTeaList(userProfile._id);
+    setTimeout(() => {
+      setListCreated('');
+      setListName('');
+      setCreateModalShow(false);
+      }, 2000) 
     }
-    console.log(list);
-  }
 
   return (
     <Modal
@@ -61,26 +62,27 @@ function AddTeaModal(props)  {
       <Modal.Header closeButton onClick = {closeModal}>
         <Modal.Title id="contained-modal-title-vcenter">
         {createModalShow ? 'Create a List' : 'Select a List'}
+        {/* {createModalShow ? '' : <span className = 'mx-4 my-4' style = {{'font-size': '12px'}}>click a list to save your tea</span> } */}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h5>{createModalShow ? 
           <form>
-            <label for='listName' > List Name </label><br></br>
+            <label htmlFor='listName' > List Name </label><br></br>
             <input className = 'w-100 my-2' type ='text' onChange ={(e) => setListName(e.target.value)}></input><br></br>
-            <label for='listName'>Description</label><br></br>
+            <label htmlFor='listName'>Description</label><br></br>
             <input className = 'w-100 my-2 py-4' type ='text' onChange ={(e) => setDescription(e.target.value)}></input>
           </form>
-         : <FavoriteList selectedTea = {props.selectedTea}/> }</h5>
+         : <FavoriteList selectedtea = {props.selectedtea} /> }</h5>
 
         <p> {createModalShow ? '' : <> {Date().slice(0,28)}</>}</p>
         <button className ='btn btn-success' onClick = {() => hideFavShowCreate()}><FaPlus /> 
          {createModalShow ? 
-           <button className= 'btn btn-success' onClick ={() => createList(listName, description)}>Create List</button>
+           <button className= 'btn btn-success' onClick ={() => addNewList(listName, description)}>Create List</button>
          : ' Create a new list'  
            }
         </button> 
-        {createModalShow ? '' : <button className= 'btn btn-danger mx-2'>Edit</button>}
+        {createModalShow ? '' : <button onClick = {() => (setEditMode(!editMode))} className= 'btn btn-danger mx-2'>Edit</button>}
         <span className='teaListMsg mx-2'>
           {listCreated}
         </span>
@@ -92,21 +94,5 @@ function AddTeaModal(props)  {
   );
 }
 
-// function App() {
-//   const [modalShow, setModalShow] = React.useState(false);
-
-//   return (
-//     <>
-//       <Button variant="primary" onClick={() => setModalShow(true)}>
-//         Launch vertically centered modal
-//       </Button>
-
-//       <addTeaModal
-//         show={modalShow}
-//         onHide={() => setModalShow(false)}
-//       />
-//     </>
-//   );
-// }
 ;
 export default AddTeaModal;

@@ -59,6 +59,7 @@
     /* maybe remove border radius? */
     background-color: rgb(249, 246, 246);
     margin: 0 2em;
+    margin-top: 1rem;
   }
 
   .addTeaBtnContainer{
@@ -114,16 +115,24 @@
   font-size: .8em;
 }
 
+.listNameContainer{
+  margin-bottom: 1.5rem;
+}
+
 .listName{
-  padding: .5em 0;
+  margin: .5em 0;
   cursor: pointer;
-  /* border: 1px solid black; */
-  max-width: 10em;
-  /* alter max-width later */
+  max-width: 15em;
+}
+
+.listName:hover{
+  transform: scale(1.05);
+  transition: all .2s ease-in-out;
+  margin-left: .5rem;
 }
 
 .listLength{
-  padding: .25em;
+  margin-left: 1em;
   font-size: .8em;
 }
 
