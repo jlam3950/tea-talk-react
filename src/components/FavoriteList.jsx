@@ -65,8 +65,7 @@ const addTeaToList = async (name, tea) =>  {
     setTimeout(() => {
         setRender('');
     },2000);
-    refreshTeaList(userProfile._id)
-
+    refreshTeaList(userProfile._id);
 }
 
 return (
