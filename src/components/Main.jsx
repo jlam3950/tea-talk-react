@@ -3,8 +3,6 @@ import TeaCard from './TeaCard';
 import { FaPlus } from 'react-icons/fa';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import AddTeaModal from './AddTeaModal';
-import { useContext } from "react";
 import { ListContext } from '../App';
 // import { createContext, useContext } from "react";
 
@@ -44,7 +42,7 @@ const Main = ( {teaArray} ) => {
               /> */}
             </div>
           </div>
-          <div className = 'teaCardContainer col-sm col-12 px-2'> 
+          <div className = 'teaCardContainer col-sm col-10'> 
             {currentTeas.filter((input) => {
               if(search === ''){
                 return input; 

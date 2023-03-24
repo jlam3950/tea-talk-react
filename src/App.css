@@ -24,74 +24,38 @@
   padding-right: 2rem;
 }
 
-@media only screen and (min-width: 600px){
-  /* Tea Card  */
-
-.cardSubtitleAndType{
-  font-size: 1.2em;
-}
-
 .teaCardImg{
-  height: 8em; 
+  height: 4em;
 }
 
-.cardTitle{
-  font-size: 1.75em; 
+/* UserProfile */
+
+.userProfileLogo{
+  margin-bottom: .8rem;
+  margin-left: .5em;
+  margin-right: .25em;
+  font-size: 4.5em;
 }
 
-.teaPlus{
+.userProfileName{
   font-size: 2.5em;
-  cursor: pointer;
-}
-  .teaCard{
-    /* width: 90%; */
-    min-height: 5em;
-    
-  }
-
-  .teaCardContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 43em;
-    border: 1px solid rgb(248, 246, 246);
-    border-radius: .5em; 
-    /* maybe remove border radius? */
-    background-color: rgb(249, 246, 246);
-    margin: 0 2em;
-    margin-top: 1rem;
-  }
-
-  .addTeaBtnContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-self: center;
-    padding-top: 1em;
-    width: 20%;
-  }
-
-  .teaContainer{
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-  }
 }
 
-@media only screen and (min-width: 991px){
-  .mobileSearchBar{
-    display: none;
-  }
+.userProfileHeader{
+  background-size: cover;
+  background-position: bottom;
+
+  background-image: url('../public/images/userprofile-background3.png');
 }
 
 /* Navbar */
 
-.teaLogo{
-  color:white;
-  font-family: sans-serif;
-  font-weight: 1200;
+.teatalkLogo{
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-left: 2em;
 } 
-/* teaLogo class not applying. look at later */
 
 /* Login */
 
@@ -101,12 +65,24 @@
 
 /* Tea Card  */
 
-.teaCardImg{
-  height: 5.5em; 
+.cardTitle{
+  font-size: 1.25em;
 }
 
 .teaCard{
   width: 100%;
+}
+
+.teaCardImg{
+  height: 4em;
+}
+
+.cardDescription{
+  font-size: .9em;
+}
+
+.teaPlus{
+  font-size: 2em;
 }
 
 /* FavoriteList */
@@ -141,4 +117,74 @@
 .footerIcon{
   font-size: 1.75em;
   margin: .5em;
+}
+
+@media only screen and (min-width: 600px){
+  /* Tea Card  */
+
+.cardSubtitleAndType{
+  font-size: 1.2em;
+}
+
+.teaCardImg{
+  height: 6.5em; 
+}
+
+.cardTitle{
+  font-size: 1.35em;
+  font-weight: 500; 
+}
+
+.cardSubtitle{
+  font-size: .9em;
+  font-weight: 400;
+}
+
+.teaPlus{
+  font-size: 2.5em;
+  cursor: pointer;
+}
+  .teaCard{
+    /* width: 90%; */
+    min-height: 5em;
+  }
+
+  .cardDescription{
+    font-size: .9em;
+  }
+
+  .teaCardContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 43em;
+    border: 1px solid rgb(248, 246, 246);
+    border-radius: .5em; 
+    /* maybe remove border radius? */
+    background-color: rgb(249, 246, 246);
+    margin: 0 2em;
+    margin-top: 1rem;
+  }
+
+  .addTeaBtnContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-self: center;
+    padding-top: 1em;
+    /* width: 20%; */
+    /* check this later */
+  }
+
+  .teaContainer{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+  }
+}
+
+@media only screen and (min-width: 991px){
+  .mobileSearchBar{
+    display: none;
+  }
 }
