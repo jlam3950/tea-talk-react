@@ -1,5 +1,13 @@
 const router = require("express").Router();
 const Tea = require("../models/Tea.js");
+const cloudinary = require("cloudinary").v2
+
+cloudinary.config({ 
+    cloud_name: process.env.cloudinary_cloud_name, 
+    api_key: process.env.cloudinary_api_key, 
+    api_secret: process.env.cloudinary_secret,
+    secure: true
+  });
 
 // Get all Teas in Database
 router.get("/", async (req, res) => {
@@ -22,10 +30,15 @@ router.get("/:id", findTeaByID, async (req, res) => {
 
 // Add Tea to Database
 router.post("/", async (req, res) =>{
-    const newTea = new Tea(req.body);
-
+    const teaInfo = req.body
+    
     try {
-
+        if (req.body.image){
+            const img = await cloudinary.uploader.upload(req.body.image)
+            console.log({img})
+            teaInfo.imageURL = img.secure_url
+        }
+        const newTea = new Tea(teaInfo);
         const addTea = await newTea.save()
         res.status(201).json(addTea)
         console.log({newTea})

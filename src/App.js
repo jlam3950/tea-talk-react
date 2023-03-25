@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import Register from './components/Register';
 import UserProfile from './components/UserProfile';
+import TeaForm from "./components/TeaForm"
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect, createContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -111,6 +112,7 @@ function App() {
             <Route path = 'login' element = {<Login />}></Route>
             <Route path = 'register' element = {<Register />}></Route>
             <Route path = 'userProfile' element = {<UserProfile />}></Route>
+            <Route path = 'teaForm' element = {<TeaForm />}></Route>
           </Routes>
         <Footer />
       </div>
