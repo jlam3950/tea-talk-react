@@ -16,7 +16,17 @@ const userSchema = new mongoose.Schema({
     teaLists: {
         type: Map,
         of: [{type: mongoose.Schema.Types.ObjectId, ref: "Tea"}],
-        default: {"Favorites":[]}
+        default: {
+            "Favorites":[],
+        }
+    },
+    ratedTeas: { 
+        type: Map,
+        of: [{
+            teaID: {type: mongoose.Schema.Types.ObjectId, ref: "Tea"},
+            userRating: {type: Number},
+            rated: {type: Boolean, default: false}
+        }]
     },
     userImageURL: String
 })
