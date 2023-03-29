@@ -112,7 +112,14 @@
   font-size: .8em;
 }
 
+/* Profile Tea List */
+
+.profileTeaListImg{
+  height: 4em;
+}
+
 /* Footer */
+
 
 .footerIcon{
   font-size: 1.75em;

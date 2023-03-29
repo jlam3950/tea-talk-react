@@ -5,13 +5,19 @@ import Navbar from 'react-bootstrap/Navbar';
 import { FaUserCircle } from 'react-icons/fa';
 import { ListContext } from '../App';
 import { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
 
 
 const NavigationBar = () => {
   const { userProfile, setUserProfile, refreshTeaList } = useContext(ListContext);
+  const history = useNavigate();
+
   const signOut = () => {
     localStorage.removeItem('my_user');
     setUserProfile([]);
+    setTimeout(() => {
+      history("/");
+     }, 2000)
   }
 
   const refresh = () => {

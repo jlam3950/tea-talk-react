@@ -104,19 +104,19 @@ function App() {
   }
 
   return (
-    <ListContext.Provider value = {{currentTeas, loggedIn, list, userProfile, editMode, refreshTeaList, setEditMode, setUserProfile, setList, setUserData}} >
-      <div className="App d-flex flex-column min-vh-100">
-        <NavigationBar />
-          <Routes>
-            <Route path = '/' element = {<Main teaArray = {currentTeas} />}></Route>
-            <Route path = 'login' element = {<Login />}></Route>
-            <Route path = 'register' element = {<Register />}></Route>
-            <Route path = 'userProfile' element = {<UserProfile />}></Route>
-            <Route path = 'teaForm' element = {<TeaForm />}></Route>
-          </Routes>
-        <Footer />
-      </div>
-    </ListContext.Provider>
+    <div className="App d-flex flex-column min-vh-100">
+      <ListContext.Provider value = {{currentTeas, loggedIn, list, userProfile, editMode, refreshTeaList, setEditMode, setUserProfile, setList, setUserData}} >
+          <NavigationBar />
+            <Routes>
+              <Route path = '/' element = {<Main teaArray = {currentTeas} />}></Route>
+              <Route path = 'login' element = {<Login />}></Route>
+              <Route path = 'register' element = {<Register />}></Route>
+              <Route path = 'userProfile' element = {<UserProfile />}></Route>
+              <Route path = 'teaForm' element = {<TeaForm />}></Route>
+            </Routes>
+          <Footer />
+      </ListContext.Provider>
+    </div>
   );
 }
 
