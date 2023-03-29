@@ -36,8 +36,8 @@ const Main = ( {teaArray} ) => {
           </div>
       <div className ='teaContainer vw-100'>
         <div className="addTeaBtnContainer">
-            <div className="addTea d-flex flex-row align-items-center justify-content-center">
-              <button className="btn btn-success" onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
+            <div className="addTea">
+              <button className="btn btn-success addTeaBtn" onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
               <TeaForm
                 show={modalShow}
                 onHide={() => setModalShow(false)}
