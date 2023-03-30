@@ -10,6 +10,7 @@ import { Routes, Route } from "react-router-dom";
 import { useState, useEffect, createContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import AlertBar from './components/AlertBar';
 export const ListContext = createContext();
 
 function App() {
@@ -40,6 +41,8 @@ function App() {
   const [currentTeas, setCurrentTeas] = useState([]);
   const [userProfile, setUserProfile] = useState([]);
   const [loggedIn, setLoggedIn ] = useState(false);
+  const [alertFlag, setAlertFlag] = useState(false);
+  const [alertInfo, setAlertInfo] = useState('');
 
   useEffect(() => { 
     const data = JSON.parse(window.localStorage.getItem('my_user'));
@@ -105,15 +108,16 @@ function App() {
 
   return (
     <div className="App d-flex flex-column min-vh-100">
-      <ListContext.Provider value = {{currentTeas, loggedIn, list, userProfile, editMode, refreshTeaList, setEditMode, setUserProfile, setList, setUserData}} >
+      <ListContext.Provider value = {{alertInfo, setAlertInfo, currentTeas, loggedIn, list, userProfile, editMode, alertFlag, setAlertFlag, refreshTeaList, setEditMode, setUserProfile, setList, setUserData}} >
           <NavigationBar />
-            <Routes>
-              <Route path = '/' element = {<Main teaArray = {currentTeas} />}></Route>
-              <Route path = 'login' element = {<Login />}></Route>
-              <Route path = 'register' element = {<Register />}></Route>
-              <Route path = 'userProfile' element = {<UserProfile />}></Route>
-              <Route path = 'teaForm' element = {<TeaForm />}></Route>
-            </Routes>
+            <AlertBar/>
+              <Routes>
+                <Route path = '/' element = {<Main teaArray = {currentTeas} />}></Route>
+                <Route path = 'login' element = {<Login />}></Route>
+                <Route path = 'register' element = {<Register />}></Route>
+                <Route path = 'userProfile' element = {<UserProfile />}></Route>
+                <Route path = 'teaForm' element = {<TeaForm />}></Route>
+              </Routes>
           <Footer />
       </ListContext.Provider>
     </div>

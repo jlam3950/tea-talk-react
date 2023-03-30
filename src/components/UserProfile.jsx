@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext, useState, useEffect } from 'react';
 import { ListContext } from '../App';
-import { FaUser, FaUserCircle, FaMinus, FaPen } from 'react-icons/fa';
+import { FaUser, FaUserCircle, FaMinusCircle, FaPen } from 'react-icons/fa';
 import ProfileList from './ProfileList';
 
 const UserProfile = () => {
@@ -20,8 +20,8 @@ const UserProfile = () => {
   
 
   return (
-   <div className = 'container-fluid py-2 vh-100'>
-    <div className="userProfileHeader h-25 d-flex align-items-end mx-4 ">
+   <div className = 'container-fluid vh-100'>
+    <div className="userProfileHeader h-25 d-flex align-items-end mx-5">
       {/* <img className = 'userProfileBackgroundImg' src='/images/userprofile-tea.png' alt="" /> */}
       <div className="userProfileCard w-50 h-50 d-flex align-items-center">
         <div className="userProfileLogo">
@@ -33,29 +33,29 @@ const UserProfile = () => {
       </div>
     </div>
 
-    <div className="d-flex">
+    <div className="userProfileContainer d-flex">
       <div className="userDescriptionDisplayContainer col-8 ">
         <div className="userProfileDescription p-4 m-4 h5">
           <div className="d-flex justify-content-between"> 
-            <div> 
+            <div style = {{'font-weight': 'bold'}}> 
               Profile Info
             </div>
             <div> 
-              <FaPen onClick = {() => setInfoEdit(!infoEdit)}/>
+              <FaPen style = {{height: '.75em'}} onClick = {() => setInfoEdit(!infoEdit)}/>
             </div>
           </div> 
           <hr></hr>
           <div className="location">
-            { infoEdit ? <><FaMinus/> Location: Bloomington, IN</> : 'Location: Bloomington, IN' }
+            { infoEdit ? <><FaMinusCircle style = {{color: 'red'}}/> Location: Bloomington, IN</> : 'Location: Bloomington, IN' }
           </div>
         </div>
         <div className="userProfileDisplayTeas p-4 m-4 h5">
           <div className="d-flex justify-content-between"> 
-            <div> 
+            <div style = {{'font-weight': 'bold'}}> 
               Tea Info
             </div>
             <div> 
-              <FaPen onClick = {() => setTeaInfoEdit(!teaInfoEdit)}/>
+              <FaPen style = {{height: '.75em'}} onClick = {() => setTeaInfoEdit(!teaInfoEdit)}/>
             </div>
           </div> 
             <hr></hr>
@@ -71,11 +71,11 @@ const UserProfile = () => {
       <div className="userTeaListContainer col-4 ">
         <div className="userProfileList p-4 m-4 h-75 h5">
           <div className="d-flex justify-content-between"> 
-            <div> 
+            <div style = {{'font-weight': 'bold'}}> 
               My Tea List
             </div>
             <div> 
-              <FaPen/>
+              <FaPen style = {{height: '.75em'}}/>
             </div>
           </div> 
           <hr></hr>

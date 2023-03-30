@@ -9,15 +9,26 @@ import { useNavigate } from "react-router-dom";
 
 
 const NavigationBar = () => {
-  const { userProfile, setUserProfile, refreshTeaList } = useContext(ListContext);
+  const { userProfile, setUserProfile, refreshTeaList, setAlertFlag, setAlertInfo } = useContext(ListContext);
   const history = useNavigate();
 
   const signOut = () => {
-    localStorage.removeItem('my_user');
-    setUserProfile([]);
+    setAlert('Signing out...');
     setTimeout(() => {
+      setUserProfile([]);
+      localStorage.removeItem('my_user');
       history("/");
      }, 2000)
+  }
+
+  const setAlert = (alert) => {
+    setAlertFlag(true);
+    setAlertInfo(alert);
+    
+    setTimeout(() => {
+      setAlertFlag(false);
+      setAlertInfo('');
+    }, 2000)
   }
 
   const refresh = () => {
@@ -40,12 +51,12 @@ const NavigationBar = () => {
             {/* not sure if this link is redundant */}
             {/* <Nav.Link href="#action1" style ={{color: 'white'}}>All Teas</Nav.Link> */}
             <Nav.Link href="#action2" style ={{color: 'white'}}>My Teas</Nav.Link>
-            {userProfile.username ? <div className = 'me-auto my-2 px-2' style={{color: 'white', cursor: 'pointer'}} onClick ={()=>signOut()}>Sign out</div> : <Nav.Link href="/login" style ={{color: 'white'}}>Sign in</Nav.Link>}
+            {userProfile.username ? <div className = 'me-auto my-2 navBarSignOut' style={{color: 'white', cursor: 'pointer'}} onClick ={()=>signOut()}>Sign out</div> : <Nav.Link href="/login" style ={{color: 'white'}}>Sign in</Nav.Link>}
           </Nav>
           <div className="" style ={{color: 'white'}}>{userProfile.username ? userProfile.username : ''}</div>
           {userProfile.username ? 
           <Nav.Link className= 'mx-3 fs-3 text-white' href="userProfile" onClick={() => refresh()}><FaUserCircle/></Nav.Link> : 
-          <Nav.Link className= 'mx-3 fs-3 text-white' href="login"><FaUserCircle/></Nav.Link>
+          <Nav.Link className= 'mx-3 fs-3 text-white' onClick = {() => setAlert('Sign in to access the profile page...')}><FaUserCircle/></Nav.Link>
           }
           <Form className="d-flex">
             <Form.Control
