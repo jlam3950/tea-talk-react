@@ -103,12 +103,18 @@ const TeaForm = () => {
                   onChange={inputChange}
                 />
 
+                <br />
+
+                <p>Add an Image:</p>
+                <p>(Images can only be JPEG or PNG format)</p>
+
                 <input 
                   className='mb-4 w-100' 
                   label='Add an Image' 
                   placeholder = 'Image' 
                   id='formControlLg' 
-                  type='file' 
+                  type='file'
+                  accept=".jpg,.jpeg,.png" 
                   size="lg"
                   onChange={onFileChange}
                 />
