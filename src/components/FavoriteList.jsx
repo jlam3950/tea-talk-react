@@ -41,7 +41,7 @@ const addTeaToList = async (name, tea) =>  {
 
     const id = userProfile._id; 
     const url = `http://localhost:5100/users/${id}/tealists`; 
-    const res = fetch(url, {
+    const res = await fetch(url, {
         method: 'PATCH',
         headers: {
             'content-type': 'application/json',
@@ -54,19 +54,17 @@ const addTeaToList = async (name, tea) =>  {
             }
         })
     })
-    // const data = await res.json();
-    // console.log(data);
-    // not sure why this isn't working. need to check to see if there are duplicate tea that already exists in the list.
-    // also need to see list size from backend
+    const data = await res.json();
 
     // getUser(id);
     refreshTeaList(userProfile._id)
-    setRender(`${tea.name} was added to ${name}!`); 
+    if (res.ok){
+        setRender(`${tea.name} was added to ${name}!`); 
+    } else {setRender(`${data.message}`)}
     setTimeout(() => {
         setRender('');
     },2000);
-    refreshTeaList(userProfile._id)
-
+    refreshTeaList(userProfile._id);
 }
 
 return (
