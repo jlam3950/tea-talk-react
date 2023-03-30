@@ -111,15 +111,20 @@ const TeaForm = (props) => {
             onChange={inputChange}
           />
 
-          <input 
-            className='mb-4 w-100' 
-            label='' 
-            name='type' 
-            placeholder = 'Type' 
-            id='formControlLg' 
-            type='text' size="lg" 
-            onChange={inputChange}
-          />
+                <input 
+                  className='mb-4 w-100' 
+                  label='' 
+                  name='type' 
+                  placeholder = 'Type' 
+                  id='formControlLg' 
+                  type='text' size="lg" 
+                  onChange={inputChange}
+                />
+
+                <br />
+
+                <p>Add an Image:</p>
+                <p>(Images can only be JPEG or PNG format)</p>
 
           <input 
             className='mb-4 w-100' 
@@ -127,6 +132,7 @@ const TeaForm = (props) => {
             placeholder = 'Image' 
             id='formControlLg' 
             type='file' 
+            accept=".jpg,.jpeg,.png" 
             size="lg"
             onChange={onFileChange}
           />

@@ -15,7 +15,7 @@ const teaSchema = new mongoose.Schema({
     },
     imageURL: {
         type: String,
-        default: "cloudinary.com/"
+        default: "https://res.cloudinary.com/dl3ncuzpg/image/upload/v1679962610/default_tea_yj99v2.png"
     },
     ratingsTotal: {
         type: Number,
