@@ -1,6 +1,8 @@
 import React from 'react';
 import TeaCard from './TeaCard';
 import { FaPlus } from 'react-icons/fa';
+import TeaForm from './TeaForm';
+import AddTeaModal from './AddTeaModal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { ListContext } from '../App';
@@ -16,7 +18,7 @@ const Main = ( {teaArray} ) => {
   
   return (
   
-    <div className = 'container-fluid py-2 vh-100 d-flex'>
+    <div className = 'container-fluid py-2 d-flex'>
        <div className="d-flex flex-column">
           <div className ="input-group d-flex flex-row justify-content-center">
             <div className="form-outline py-2 mobileSearchBar">
@@ -34,12 +36,12 @@ const Main = ( {teaArray} ) => {
           </div>
       <div className ='teaContainer vw-100'>
         <div className="addTeaBtnContainer">
-            <div className="addTea d-flex flex-row align-items-center justify-content-center">
-              <button className="btn btn-success" onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
-              {/* <AddTeaModal
+            <div className="addTea">
+              <button className="btn btn-success addTeaBtn" onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
+              <TeaForm
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-              /> */}
+              />
             </div>
           </div>
           <div className = 'teaCardContainer col-sm col-10'> 

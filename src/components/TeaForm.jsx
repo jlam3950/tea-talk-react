@@ -1,4 +1,6 @@
 import React from 'react'
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import {
   MDBContainer,
   MDBRow,
@@ -16,8 +18,19 @@ const blankForm = {
   image: ''
 }
 
-const TeaForm = () => {
-  const [formValues, setFormValues] = React.useState(blankForm)
+const TeaForm = (props) => {
+  const [formValues, setFormValues] = React.useState(blankForm);
+  const[createModalShow, setCreateModalShow] = React.useState(false);
+
+  const hideFavShowCreate = () => {
+    setCreateModalShow(true);
+  }
+
+  const closeModal = () => {
+    setTimeout(() => {
+    setCreateModalShow(false);
+    }, "1000")
+  }
 
   const inputChange = e =>{
     setFormValues({...formValues, [e.target.name]: e.target.value})
@@ -60,38 +73,43 @@ const TeaForm = () => {
   }
 
   return (
-    <MDBContainer fluid>
 
-      <MDBRow className='d-flex justify-content-center align-items-center h-100'>
-        <MDBCol col='12'>
+    <Modal
+      {...props}
+      size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >    
+      <Modal.Header closeButton onClick = {closeModal}>
+        <Modal.Title id="contained-modal-title-vcenter" className = 'text-center'>
+         Add A Tea
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+      {/* <h2 className="fw-bold mb-4 text-center">Add A Tea</h2> */}
+        <form onSubmit={submitTea}>
+          <div className ='d-flex flex-column justify-content-center align-items-center'>
+          <input 
+            className='mb-4 w-100' 
+            label='' 
+            name='name' 
+            placeholder = 'Name' 
+            id='formControlLg' 
+            type='text' 
+            size="lg" 
+            onChange={inputChange}
+          />
 
-          <MDBCard className='bg-white my-5 mx-auto' style={{borderRadius: '1rem', maxWidth: '500px'}}>
-            <MDBCardBody className='p-5 w-100 d-flex flex-column'>
-
-              <h2 className="fw-bold mb-2 text-center">Add A Tea</h2>
-
-              <form onSubmit={submitTea}>
-                <input 
-                  className='mb-4 w-100' 
-                  label='' 
-                  name='name' 
-                  placeholder = 'Name' 
-                  id='formControlLg' 
-                  type='text' 
-                  size="lg" 
-                  onChange={inputChange}
-                />
-
-                <input 
-                  className='mb-4 w-100' 
-                  label='' 
-                  name='brand' 
-                  placeholder = 'Brand' 
-                  id='formControlLg' 
-                  type='text' 
-                  size="lg" 
-                  onChange={inputChange}
-                />
+          <input 
+            className='mb-4 w-100' 
+            label='' 
+            name='brand' 
+            placeholder = 'Brand' 
+            id='formControlLg' 
+            type='text' 
+            size="lg" 
+            onChange={inputChange}
+          />
 
                 <input 
                   className='mb-4 w-100' 
@@ -108,30 +126,28 @@ const TeaForm = () => {
                 <p>Add an Image:</p>
                 <p>(Images can only be JPEG or PNG format)</p>
 
-                <input 
-                  className='mb-4 w-100' 
-                  label='Add an Image' 
-                  placeholder = 'Image' 
-                  id='formControlLg' 
-                  type='file'
-                  accept=".jpg,.jpeg,.png" 
-                  size="lg"
-                  onChange={onFileChange}
-                />
-
-                <input size='lg' className = 'btn btn-primary text-white py-2 my-2' type='submit' value='Submit'/>
-              </form>
-
-            </MDBCardBody>
-          </MDBCard>
-
-        </MDBCol>
-      </MDBRow>
+          <input 
+            className='mb-4 w-100' 
+            label='Add an Image' 
+            placeholder = 'Image' 
+            id='formControlLg' 
+            type='file' 
+            accept=".jpg,.jpeg,.png" 
+            size="lg"
+            onChange={onFileChange}
+          />
+          </div>
+        <input size='lg' className = 'btn btn-primary text-white py-2 my-2' type='submit' value='Submit'/>
+      </form>
+      </Modal.Body>
 
       {formValues.image && <img src={formValues.image}/>}
 
-    </MDBContainer>
+      <Modal.Footer onClick = {closeModal}>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>    
   )
 }
 
-export default TeaForm
+export default TeaForm;

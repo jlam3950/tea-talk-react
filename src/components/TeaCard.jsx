@@ -3,9 +3,10 @@ import AddTeaModal from './AddTeaModal';
 import { FaPlusSquare, FaStar } from 'react-icons/fa';
 import { ListContext } from '../App';
 import { useContext, useState } from 'react';
+// import { AlertBar } from './AlertBar';
 
 const TeaCard = (props) => {
-  const { refreshTeaList, loggedIn, userProfile } = useContext(ListContext);
+  const { refreshTeaList, loggedIn, userProfile, setAlertFlag, alertFlag, setAlertInfo } = useContext(ListContext);
   const [modalShow, setModalShow] = useState(false);
   const [selectedtea, setselectedtea] = useState({});
 
@@ -14,6 +15,16 @@ const TeaCard = (props) => {
     refreshTeaList(userProfile._id)
     setModalShow(true);
     setselectedtea(props);
+  }
+
+  const setAlert = (alert) => {
+    setAlertFlag(true);
+    setAlertInfo(alert);
+    
+    setTimeout(() => {
+      setAlertFlag(false);
+      setAlertInfo('');
+    }, 2000)
   }
 
   return (
@@ -55,8 +66,7 @@ const TeaCard = (props) => {
                 selectedtea = {selectedtea}
                 /> 
             </>: 
-        <FaPlusSquare onClick = {() => alert('Please sign in to save teas')}/> }
-        {/* Change alert to banner to notify user to sign in. Consider not rendering plus if not signed in*/}
+        <FaPlusSquare onClick = {() => setAlert('Sign in to save tea...')}/> }
       </div>
     </div>
   );

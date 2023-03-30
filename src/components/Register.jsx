@@ -47,7 +47,7 @@ function Register() {
       <MDBRow className='d-flex justify-content-center align-items-center h-100'>
         <MDBCol col='12'>
 
-          <MDBCard className='bg-white my-5 mx-auto' style={{borderRadius: '1rem', maxWidth: '500px'}}>
+          <MDBCard className='bg-white mx-auto' style={{borderRadius: '1rem', maxWidth: '500px', margin: '8.4em 0'}}>
             <MDBCardBody className='p-5 w-100 d-flex flex-column'>
 
               <h2 className="fw-bold mb-2 text-center">Sign up</h2>

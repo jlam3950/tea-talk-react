@@ -17,13 +17,23 @@ import {
 from 'mdb-react-ui-kit';
 
 function Login() {
-  const { list, setList, userProfile, setUserProfile, setUserData, setLoggedIn} = useContext(ListContext);
+  const { list, setList, userProfile, setUserProfile, setUserData, setLoggedIn, setAlertFlag, setAlertInfo } = useContext(ListContext);
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState(''); 
   const [logFlag, setLogFlag] = React.useState(false);
   const [failedFlag, setFailedFlag] = React.useState(false);
   const [emptyFlag, setEmptyFlag] = React.useState(false);
   const history = useNavigate();
+
+  const setAlert = (alert) => {
+    setAlertFlag(true);
+    setAlertInfo(alert);
+    
+    setTimeout(() => {
+      setAlertFlag(false);
+      setAlertInfo('');
+    }, 2000)
+  }
   
   const loginAccount = async () => {
      const url = 'http://localhost:5100/users/login';
@@ -67,7 +77,7 @@ function Login() {
       <MDBRow className='d-flex justify-content-center align-items-center h-100'>
         <MDBCol col='12'>
 
-          <MDBCard className='bg-white my-5 mx-auto' style={{borderRadius: '1rem', maxWidth: '500px'}}>
+          <MDBCard className='bg-white mx-auto' style={{borderRadius: '1rem', maxWidth: '500px', margin: '7em 0'}}>
             <MDBCardBody className='p-5 w-100 d-flex flex-column'>
 
               <h2 className="fw-bold mb-2 text-center">Sign in</h2>
@@ -77,7 +87,7 @@ function Login() {
               <MDBInput wrapperClass='mb-4 w-100' label='' placeholder = 'Enter password...' id='formControlLg' type='password' size="lg" onChange={(e) => setPassword(e.target.value)}/>
 
               {/* <MDBCheckbox name='flexCheck' id='flexCheckDefault' className='mb-4' label='Remember password' /> */}
-              <div className = 'mx-0'>{logFlag ? 'User successfully logged in... ': ''}</div>
+              <div className = 'mx-0'>{logFlag ? setAlert('User successfully logged in...') : ''}</div>
               <div className = 'mx-0' style = {{color: 'red'}}>{failedFlag ? 'Wrong user name or password': ''}</div>
               <div className = 'mx-0' style = {{color: 'red'}}>{emptyFlag ? 'Please input a username and password': ''}</div>
               <button size='lg' className = 'btn btn-primary text-white py-2 my-2' onClick = {() => loginAccount()}>
