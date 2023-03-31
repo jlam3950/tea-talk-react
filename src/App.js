@@ -74,8 +74,8 @@ function App() {
 
   useEffect(() => {
     getTeas();
-  }, []); 
-  
+  }, [currentTeas]); 
+
   const refreshTeaList = async (id) => {
     const url = `http://localhost:5100/users/${id}`; 
     const res = await fetch(url, {

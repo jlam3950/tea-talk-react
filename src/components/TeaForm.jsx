@@ -1,6 +1,8 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { ListContext } from '../App';
+import { useContext } from 'react';
 
 const blankForm = {
   name: '',
@@ -11,7 +13,9 @@ const blankForm = {
 
 const TeaForm = (props) => {
   const [formValues, setFormValues] = React.useState(blankForm);
-  const[createModalShow, setCreateModalShow] = React.useState(false);
+  const [createModalShow, setCreateModalShow] = React.useState(false);
+  const [submitting, setSubmitting] = React.useState(false);
+  const {getTeas} = useContext(ListContext);
 
   const hideFavShowCreate = () => {
     setCreateModalShow(true);
@@ -50,6 +54,7 @@ const TeaForm = (props) => {
   
   const submitTea = async e => {
     e.preventDefault()
+    setSubmitting(true)
     console.log(formValues)
     console.log("CLICKED!!")
     const url = `http://localhost:5100/teas`; 
@@ -61,6 +66,10 @@ const TeaForm = (props) => {
         body: JSON.stringify(formValues)
     })
     const data = await res.json();
+    setFormValues({...formValues, image:""})
+    setSubmitting(false)
+    closeModal();
+    props.onHide();
   }
 
   return (
@@ -128,7 +137,16 @@ const TeaForm = (props) => {
             onChange={onFileChange}
           />
           </div>
+
+       { submitting ?
+        <button className="btn btn-primary" type="button" disabled>
+          <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Loading...
+        </button>
+        :
         <input size='lg' className = 'btn btn-primary text-white py-2 my-2' type='submit' value='Submit'/>
+       }
+
       </form>
       </Modal.Body>
 
