@@ -1,15 +1,8 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBInput,
-}
-from 'mdb-react-ui-kit';
+import { ListContext } from '../App';
+import { useContext } from 'react';
 
 const blankForm = {
   name: '',
@@ -21,6 +14,7 @@ const blankForm = {
 const TeaForm = (props) => {
   const [formValues, setFormValues] = React.useState(blankForm);
   const[createModalShow, setCreateModalShow] = React.useState(false);
+  const {getTeas} = useContext(ListContext);
 
   const hideFavShowCreate = () => {
     setCreateModalShow(true);
@@ -70,6 +64,9 @@ const TeaForm = (props) => {
         body: JSON.stringify(formValues)
     })
     const data = await res.json();
+    closeModal();
+    props.onHide();
+    getTeas();
   }
 
   return (
