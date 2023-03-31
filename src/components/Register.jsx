@@ -1,6 +1,8 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import { useNavigate } from "react-router-dom";
+import { ListContext } from '../App';
+import { useContext } from 'react';
 import {
   MDBContainer,
   MDBRow,
@@ -12,11 +14,22 @@ import {
 from 'mdb-react-ui-kit';
 
 function Register() {
+  const { setAlertFlag, setAlertInfo } = useContext(ListContext);
   const [email, setEmail] = React.useState('');
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState(''); 
   const [logFlag, setLogFlag] = React.useState(false);
   const history = useNavigate();
+
+  const setAlert = (alert) => {
+    setAlertFlag(true);
+    setAlertInfo(alert);
+    
+    setTimeout(() => {
+      setAlertFlag(false);
+      setAlertInfo('');
+    }, 2000)
+  }
 
   const createAccount = async () => {
     const url = 'http://localhost:5100/users/';
@@ -57,7 +70,7 @@ function Register() {
               <MDBInput wrapperClass='mb-4 w-100' label='' placeholder ='Enter username...' id='formControlLg' type='user' size="lg" onChange={(e) => setUser(e.target.value)}/>
               <MDBInput wrapperClass='mb-4 w-100' label='' placeholder ='Enter password...' id='formControlLg' type= 'password' size="lg" onChange={(e) => setPassword(e.target.value)}/>
 
-              <div className = 'mx-0'>{logFlag ? 'User successfully created... ': ''}</div>
+              <div className = 'mx-0'>{logFlag ? setAlert('User successfully created... '): ''}</div>
               <button size='lg' className = 'btn btn-primary text-white py-2 my-2' onClick = {() => createAccount()}>
                 Create Account
               </button>
