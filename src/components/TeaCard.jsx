@@ -3,10 +3,9 @@ import AddTeaModal from './AddTeaModal';
 import { FaPlusSquare, FaStar } from 'react-icons/fa';
 import { ListContext } from '../App';
 import { useContext, useState } from 'react';
-// import { AlertBar } from './AlertBar';
 
 const TeaCard = (props) => {
-  const { refreshTeaList, loggedIn, userProfile, setAlertFlag, alertFlag, setAlertInfo } = useContext(ListContext);
+  const { refreshTeaList, userProfile, setAlertFlag, setAlertInfo } = useContext(ListContext);
   const [modalShow, setModalShow] = useState(false);
   const [selectedtea, setselectedtea] = useState({});
 
@@ -20,7 +19,6 @@ const TeaCard = (props) => {
   const setAlert = (alert) => {
     setAlertFlag(true);
     setAlertInfo(alert);
-    
     setTimeout(() => {
       setAlertFlag(false);
       setAlertInfo('');
@@ -30,8 +28,6 @@ const TeaCard = (props) => {
   return (
     <div className="teaCard d-flex my-3 py-2 px-2">
       <div className="col-3 d-flex justify-content-center align-items-center">
-        {/* <img className = 'teaCardImg' src={props.img} alt="" /> */}
-        {/* will update ^ teas once images are loaded in db */}
         <img className = 'teaCardImg' src={props.img} alt="" />
       </div>
       <div className="col-7">

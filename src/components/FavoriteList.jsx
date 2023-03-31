@@ -1,13 +1,11 @@
 import React from 'react';
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ListContext } from '../App';
 import { FaMinusCircle } from 'react-icons/fa';
 
 const FavoriteList = ( { selectedtea } ) => {
-const { refreshTeaList, currentTeas, list, setList, editMode, setEditMode, userProfile} = React.useContext(ListContext);
+const { refreshTeaList, currentTeas, list, setList, editMode, setEditMode, userProfile} = useContext(ListContext);
 const [ render, setRender ] = useState('');
-// const [listNames, setListNames] = useState(Object.keys(list));
-// let updatedList = list;  replaced this variable /w list on lines 14,19
 
 const deleteList = async (name) => {
     const id = userProfile._id; 
@@ -27,9 +25,6 @@ const deleteList = async (name) => {
 
     const data = await res.json(); 
     console.log(data);
-    // needs to update list
-    // setList('fun times!');
-    // console.log(list);
     setRender('');
     refreshTeaList(userProfile._id)
 }
@@ -55,9 +50,7 @@ const addTeaToList = async (name, tea) =>  {
         })
     })
     const data = await res.json();
-
-    // getUser(id);
-    refreshTeaList(userProfile._id)
+    refreshTeaList(userProfile._id);
     if (res.ok){
         setRender(`${tea.name} was added to ${name}!`); 
     } else {setRender(`${data.message}`)}

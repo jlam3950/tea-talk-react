@@ -1,20 +1,18 @@
 import React from 'react';
+import { useState, useContext } from 'react';
 import TeaCard from './TeaCard';
 import { FaPlus } from 'react-icons/fa';
 import TeaForm from './TeaForm';
-import AddTeaModal from './AddTeaModal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { ListContext } from '../App';
-// import { createContext, useContext } from "react";
 
 
 const Main = ( {teaArray} ) => {
-  // const user = useContext(ListContext);
-  const { currentTeas } = React.useContext(ListContext);
-  const [modalShow, setModalShow] = React.useState(false);
-  const [listModal, setListModal] = React.useState(false);
-  const [search, setSearch] = React.useState('');
+  const { currentTeas } = useContext(ListContext);
+  const [modalShow, setModalShow] = useState(false);
+  const [listModal, setListModal] = useState(false);
+  const [search, setSearch] = useState('');
   
   return (
   

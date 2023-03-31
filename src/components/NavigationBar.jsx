@@ -24,7 +24,6 @@ const NavigationBar = () => {
   const setAlert = (alert) => {
     setAlertFlag(true);
     setAlertInfo(alert);
-    
     setTimeout(() => {
       setAlertFlag(false);
       setAlertInfo('');
