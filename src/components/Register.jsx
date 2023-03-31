@@ -57,7 +57,6 @@ function Register() {
               <MDBInput wrapperClass='mb-4 w-100' label='' placeholder ='Enter username...' id='formControlLg' type='user' size="lg" onChange={(e) => setUser(e.target.value)}/>
               <MDBInput wrapperClass='mb-4 w-100' label='' placeholder ='Enter password...' id='formControlLg' type= 'password' size="lg" onChange={(e) => setPassword(e.target.value)}/>
 
-              {/* <MDBCheckbox name='flexCheck' id='flexCheckDefault' className='mb-4' label='Remember password' /> */}
               <div className = 'mx-0'>{logFlag ? 'User successfully created... ': ''}</div>
               <button size='lg' className = 'btn btn-primary text-white py-2 my-2' onClick = {() => createAccount()}>
                 Create Account
@@ -68,16 +67,6 @@ function Register() {
               </button>
 
               <hr className="my-4" />
-
-              {/* <MDBBtn className="mb-2 w-100" size="lg" style={{backgroundColor: '#dd4b39'}}>
-                <MDBIcon fab icon="google" className="mx-2"/>
-                Sign in with Google
-              </MDBBtn>
-
-              <MDBBtn className="mb-4 w-100" size="lg" style={{backgroundColor: '#3b5998'}}>
-                <MDBIcon fab icon="facebook-f" className="mx-2"/>
-                Sign in with Facebook
-              </MDBBtn> */}
 
             </MDBCardBody>
           </MDBCard>

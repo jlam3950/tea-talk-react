@@ -1,28 +1,28 @@
 import React from 'react';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { ListContext } from '../App';
-import { FaUser, FaUserCircle, FaMinusCircle, FaPen } from 'react-icons/fa';
+import { FaUserCircle, FaMinusCircle, FaPen } from 'react-icons/fa';
 import ProfileList from './ProfileList';
 
 const UserProfile = () => {
-  const { userProfile, setUserProfile, list, refreshTeaList } = useContext(ListContext);
+  const { userProfile, list, refreshTeaList } = useContext(ListContext);
   const [ listRender, setListRender ] = useState([]);
   const [ infoEdit, setInfoEdit ] = useState(false);
   const [ teaInfoEdit, setTeaInfoEdit ] = useState(false);
   const [flag, setFlag ] = useState(false);
 
+  // check on this, causes console error due to length 
+  refreshTeaList(userProfile._id);
+
   const storeListTeas = (listName) => {
     refreshTeaList(userProfile._id);
     setListRender(list[listName]);
     setFlag(true);
-    console.log(listRender);
   }
   
-
   return (
    <div className = 'container-fluid vh-100'>
     <div className="userProfileHeader h-25 d-flex align-items-end mx-5">
-      {/* <img className = 'userProfileBackgroundImg' src='/images/userprofile-tea.png' alt="" /> */}
       <div className="userProfileCard w-50 h-50 d-flex align-items-center">
         <div className="userProfileLogo">
           <FaUserCircle />
@@ -37,7 +37,7 @@ const UserProfile = () => {
       <div className="userDescriptionDisplayContainer col-8 ">
         <div className="userProfileDescription p-4 m-4 h5">
           <div className="d-flex justify-content-between"> 
-            <div style = {{'font-weight': 'bold'}}> 
+            <div style = {{'fontWeight': 'bold'}}> 
               Profile Info
             </div>
             <div> 
@@ -51,7 +51,7 @@ const UserProfile = () => {
         </div>
         <div className="userProfileDisplayTeas p-4 m-4 h5">
           <div className="d-flex justify-content-between"> 
-            <div style = {{'font-weight': 'bold'}}> 
+            <div style = {{'fontWeight': 'bold'}}> 
               Tea Info
             </div>
             <div> 
@@ -71,7 +71,7 @@ const UserProfile = () => {
       <div className="userTeaListContainer col-4 ">
         <div className="userProfileList p-4 m-4 h-75 h5">
           <div className="d-flex justify-content-between"> 
-            <div style = {{'font-weight': 'bold'}}> 
+            <div style = {{'fontWeight': 'bold'}}> 
               My Tea List
             </div>
             <div> 

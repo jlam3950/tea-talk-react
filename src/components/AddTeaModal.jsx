@@ -7,8 +7,7 @@ import { useContext } from "react";
 import { ListContext } from '../App';
 
 function AddTeaModal(props)  {
-  // react question about props ^, why can't I pass props, and tealist but can only access props by passing one parameter 
-  const { refreshTeaList, list, setList, editMode, setEditMode, userProfile } = useContext(ListContext);
+  const { refreshTeaList, editMode, setEditMode, userProfile } = useContext(ListContext);
   const [listName, setListName ] = React.useState('')
   const [description, setDescription] = React.useState();
   const [listCreated, setListCreated] = React.useState('')
@@ -44,7 +43,7 @@ function AddTeaModal(props)  {
     console.log(data);
 
     setListCreated('Creating List...');
-    refreshTeaList(userProfile._id);
+    refreshTeaList(id);
     setTimeout(() => {
       setListCreated('');
       setListName('');

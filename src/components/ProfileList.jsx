@@ -18,8 +18,6 @@ const ProfileList = (props) => {
   return (
     <div className="teaCard d-flex my-3 py-2 px-2">
       <div className="col-3 d-flex justify-content-center align-items-center">
-        {/* <img className = 'teaCardImg' src={props.img} alt="" /> */}
-        {/* will update ^ teas once images are loaded in db */}
         <img className = 'profileTeaListImg' src='/images/doubleSpiceChai.png' alt="" />
       </div>
       <div className="col-8">

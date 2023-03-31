@@ -49,7 +49,6 @@ function App() {
     if ( data !== null ) setUserProfile((data))
   }, [])
 
-  // is this firing? 
   useEffect(() => { 
     const data = JSON.parse(window.localStorage.getItem('my_user'))
     if( data !== null ){
@@ -85,14 +84,10 @@ function App() {
     const data = await res.json();
     const refreshedList = data.teaLists; 
     setList(refreshedList);
-    if(!list.length){
+    if(list.length < 0){
       setEditMode(false);
     }
 }
-  // useEffect(() => {
-  //   refreshTeaList()
-  // }, [list])
-
 
   const setUserData = (data, userTeaList) => {
     setUserProfile(data);
