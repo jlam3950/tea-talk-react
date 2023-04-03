@@ -52,6 +52,8 @@ function App() {
   useEffect(() => { 
     const data = JSON.parse(window.localStorage.getItem('my_user'))
     if( data !== null ){
+      // 4/3/23 added refreshTeaList to fix userProfile list render error, recheck
+      refreshTeaList(userProfile._id);
       const userTeaLists = data.TeaLists;
       if ( userTeaLists !== null ){
         setList(userTeaLists); 
