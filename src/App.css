@@ -51,6 +51,10 @@
 
 /* UserProfile */
 
+.userProfileContainer{
+  max-width: 76rem;
+}
+
 .userProfileLogo{
   margin-bottom: .8rem;
   margin-left: .5em;
@@ -65,8 +69,21 @@
 .userProfileHeader{
   background-size: cover;
   background-position: bottom;
-
   background-image: url('../public/images/userprofile-background3.png');
+}
+
+.userProfileDescription{
+  margin-right: 1.5rem;
+  border-radius: 5px;
+}
+
+.userProfileDisplayTeas{
+  margin-right: 1.5rem;
+  border-radius: 5px;
+}
+
+.userTeaListContainer{
+  border-radius: 5px;
 }
 
 /* Navbar */
@@ -147,8 +164,13 @@
 
 /* fix responsiveness for userProfile */
 
+
 .userProfileContainer{
   margin: 0 .5em;
+}
+
+.userProfileEditBtn{
+  cursor: pointer;
 }
 
 
@@ -167,9 +189,9 @@
   font-size: 4.5em;
 }
 
-.userTeaListContainer{
+/* .userTeaListContainer{
   width: 33.3%
-}
+} */
 
   /* Tea Card  */
 
@@ -178,7 +200,7 @@
 }
 
 .teaCardImg{
-  height: 6.5em; 
+  height: 5.5em; 
 }
 
 .cardTitle{

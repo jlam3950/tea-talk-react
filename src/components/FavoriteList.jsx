@@ -26,7 +26,7 @@ const deleteList = async (name) => {
     const data = await res.json(); 
     console.log(data);
     setRender('');
-    refreshTeaList(userProfile._id)
+    refreshTeaList(userProfile._id);
 }
 
 const addTeaToList = async (name, tea) =>  {
