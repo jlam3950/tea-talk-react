@@ -22,11 +22,7 @@ const userSchema = new mongoose.Schema({
     },
     ratedTeas: { 
         type: Map,
-        of: [{
-            teaID: {type: mongoose.Schema.Types.ObjectId, ref: "Tea"},
-            userRating: {type: Number},
-            rated: {type: Boolean, default: false}
-        }]
+        of: number
     },
     userImageURL: String
 })
