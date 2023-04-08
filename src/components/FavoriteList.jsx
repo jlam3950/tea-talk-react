@@ -1,74 +1,78 @@
-import React,  { useState } from 'react';
-import { useContext } from "react";
+import React from 'react';
+import { useState, useContext } from "react";
 import { ListContext } from '../App';
-const FavoriteList = ({selectedTea}) => {
-const { list, setList } = useContext(ListContext);
+import { FaMinusCircle } from 'react-icons/fa';
+
+const FavoriteList = ( { selectedtea } ) => {
+const { refreshTeaList, currentTeas, list, setList, editMode, setEditMode, userProfile} = useContext(ListContext);
 const [ render, setRender ] = useState('');
-const [listNames, setListNames] = React.useState(Object.keys(list));
-let updatedList = list; 
 
-// const teaList = {
-//     'Favorite Teas':[
-//         {
-//             "name": "British Blend",
-//             "brand": "Tetly",
-//             "type": "Black",
-//             "description": "tea is yum",
-//             "rating": 5, 
-//         }
-//     ],
-//     'Least Favorite Teas':[
-//         { 
-//             "name": "British Brown Blend",
-//             "brand": "W/C",
-//             "type": "Brown",
-//             "description": "tea is NOT yum",
-//             "rating": 3, 
-//         }
-//     ]
-//   }
+const deleteList = async (name) => {
+    const id = userProfile._id; 
+    const url = `http://localhost:5100/users/${id}/tealists`; 
+    const res = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+         'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+         "action": "delete list",
+         "payload":{
+            "listName": name, 
+         }
+        })
+      })
 
-
-const pushTeaToList = (id, selectedTea) => { 
-    updatedList[id].push(selectedTea);
-        setRender(`${selectedTea.name} was added to ${id}!`); 
-        setTimeout(() => {
-            setRender('');
-        },2000);
-    return setList(updatedList);
+    const data = await res.json(); 
+    console.log(data);
+    setRender('');
+    refreshTeaList(userProfile._id);
 }
 
-const saveTeaToList = (id, selectedTea) => {
-    // moved updatedList out of function for global scoping
-    if(list[id].length === 0){
-        pushTeaToList(id,selectedTea);
-    } else{ 
-        list[id].map((tea) => {
-            if(tea.name === selectedTea.name){
-                setRender('This tea already exists in this list!');
-                setTimeout(() => {
-                    setRender('');
-                },2000);
-            } else if (tea.name !== selectedTea.name){
-                pushTeaToList(id,selectedTea);
-                // removed setList, added to pushTeaToList; 
-            }
-            // having a bug where a user can add more than one tea to secondary list 
-        })
+const addTeaToList = async (name, tea) =>  {
+    if(editMode){
+        return;
     }
-        console.log(list);
-    };
- 
+
+    const id = userProfile._id; 
+    const url = `http://localhost:5100/users/${id}/tealists`; 
+    const res = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            "action": "add tea",
+            "payload":{
+            "listName": name,
+            "tea": tea.id
+            }
+        })
+    })
+    const data = await res.json();
+    refreshTeaList(userProfile._id);
+    if (res.ok){
+        setRender(`${tea.name} was added to ${name}!`); 
+    } else {setRender(`${data.message}`)}
+    setTimeout(() => {
+        setRender('');
+    },2000);
+    refreshTeaList(userProfile._id);
+}
+
 return (
     <>
     {
-        listNames.map((listName) => {
-            return <div className ='listName' id={listName } onClick = {(e) => saveTeaToList(e.target.id, selectedTea)}>
-                        {listName }
+        Object.keys(list).map((listName, i) => {
+            return <div key = {i} className ='listNameContainer'>
+                        <div className ='listName' id={listName} onClick = {(e) => addTeaToList(e.target.id, selectedtea)}>
+                            {editMode ? <FaMinusCircle style = {{color : 'red'}} onClick = {() => deleteList(listName)}/> : ''} {listName}
+                        </div>
                         <div className ='listLength'>
                             {`Saved Teas: ${list[listName].length}`}
-                        </div>
+                         </div>
                    </div>
+                        
         })
     }
     <div className = 'teaListMsg'>

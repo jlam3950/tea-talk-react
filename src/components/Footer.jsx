@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <div className='d-flex flex-column align-items-center justify-content-center'>
+    <div className='footer d-flex flex-column align-items-center justify-content-center'>
       <div className = 'd-flex justify-content-center '>
         <div className=''>
           <FaFacebook className = 'footerIcon'/>

@@ -14,7 +14,28 @@
   background-color: rgb(243, 240, 240);
 }
 
+/* fix alert bar positioning when user scrolls down */
+.alertBar{
+  position: absolute;
+  margin-top: 3em;
+  height: 3em;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+}
+
+#dropdown-basic-button{
+  z-index: 1;
+}
+
 /* Main */
+
+.addTeaBtn{
+  position: sticky;
+  top: 4em;
+}
 
 /* .teaDropDown{
   margin: 2rem;
@@ -24,7 +45,154 @@
   padding-right: 2rem;
 }
 
+.teaCardImg{
+  height: 4em;
+}
+
+/* UserProfile */
+
+.userProfileContainer{
+  max-width: 76rem;
+}
+
+.userProfileLogo{
+  margin-bottom: .8rem;
+  margin-left: .5em;
+  margin-right: .25em;
+  font-size: 2.5em;
+}
+
+.userProfileName{
+  font-size: 2.5em;
+}
+
+.userProfileHeader{
+  background-size: cover;
+  background-position: bottom;
+  background-image: url('../public/images/userprofile-background3.png');
+}
+
+.userProfileDescription{
+  margin-right: 1.5rem;
+  border-radius: 5px;
+}
+
+.userProfileDisplayTeas{
+  margin-right: 1.5rem;
+  border-radius: 5px;
+}
+
+.userTeaListContainer{
+  border-radius: 5px;
+}
+
+/* Navbar */
+
+.teatalkLogo{
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-left: .5em;
+} 
+
+/* Login */
+
+.loginContainer{
+  width: 80%;
+}
+
+/* Tea Card  */
+
+.cardTitle{
+  font-size: 1.25em;
+}
+
+.teaCard{
+  width: 100%;
+}
+
+.teaCardImg{
+  height: 4em;
+}
+
+.cardDescription{
+  font-size: .9em;
+}
+
+.teaPlus{
+  font-size: 2em;
+}
+
+/* FavoriteList */
+
+.teaListMsg{
+  font-size: .8em;
+}
+
+.listNameContainer{
+  margin-bottom: 1.5rem;
+}
+
+.listName{
+  margin: .5em 0;
+  cursor: pointer;
+  max-width: 15em;
+}
+
+.listName:hover{
+  transform: scale(1.02);
+  transition: all .2s ease-in-out;
+  margin-left: .5rem;
+}
+
+.listLength{
+  margin-left: 1em;
+  font-size: .75em;
+}
+
+/* Profile Tea List */
+
+.profileTeaListImg{
+  height: 4em;
+}
+
+/* Footer */
+
+.footerIcon{
+  font-size: 1.75em;
+  margin: .5em;
+}
+
+/* fix responsiveness for userProfile */
+
+
+.userProfileContainer{
+  margin: 0 .5em;
+}
+
+.userProfileEditBtn{
+  cursor: pointer;
+}
+
+
+@media only screen and (max-width: 599px){
+  .addTeaBtnContainer{
+    display: flex;
+    justify-content: center;
+  }
+}
+
 @media only screen and (min-width: 600px){
+
+  /* User Profile */
+
+.userProfileLogo{
+  font-size: 4.5em;
+}
+
+/* .userTeaListContainer{
+  width: 33.3%
+} */
+
   /* Tea Card  */
 
 .cardSubtitleAndType{
@@ -32,11 +200,17 @@
 }
 
 .teaCardImg{
-  height: 8em; 
+  height: 5.5em; 
 }
 
 .cardTitle{
-  font-size: 1.75em; 
+  font-size: 1.35em;
+  font-weight: 500; 
+}
+
+.cardSubtitle{
+  font-size: .9em;
+  font-weight: 400;
 }
 
 .teaPlus{
@@ -46,7 +220,10 @@
   .teaCard{
     /* width: 90%; */
     min-height: 5em;
-    
+  }
+
+  .cardDescription{
+    font-size: .9em;
   }
 
   .teaCardContainer{
@@ -59,6 +236,11 @@
     /* maybe remove border radius? */
     background-color: rgb(249, 246, 246);
     margin: 0 2em;
+    margin-top: 1rem;
+  }
+
+  .addTea{
+    height: 100%;
   }
 
   .addTeaBtnContainer{
@@ -67,7 +249,8 @@
     align-items: start;
     justify-self: center;
     padding-top: 1em;
-    width: 20%;
+    /* width: 20%; */
+    /* check this later */
   }
 
   .teaContainer{
@@ -75,61 +258,17 @@
     flex-direction: row-reverse;
     justify-content: center;
   }
+
+  /* Navigation Bar */
 }
 
 @media only screen and (min-width: 991px){
+
   .mobileSearchBar{
     display: none;
   }
-}
 
-/* Navbar */
-
-.teaLogo{
-  color:white;
-  font-family: sans-serif;
-  font-weight: 1200;
-} 
-/* teaLogo class not applying. look at later */
-
-/* Login */
-
-.loginContainer{
-  width: 80%;
-}
-
-/* Tea Card  */
-
-.teaCardImg{
-  height: 5.5em; 
-}
-
-.teaCard{
-  width: 100%;
-}
-
-/* FavoriteList */
-
-.teaListMsg{
-  font-size: .8em;
-}
-
-.listName{
-  padding: .5em 0;
-  cursor: pointer;
-  /* border: 1px solid black; */
-  max-width: 10em;
-  /* alter max-width later */
-}
-
-.listLength{
-  padding: .25em;
-  font-size: .8em;
-}
-
-/* Footer */
-
-.footerIcon{
-  font-size: 1.75em;
-  margin: .5em;
+  .navBarSignOut{
+    margin-left: .5em;
+  }
 }
