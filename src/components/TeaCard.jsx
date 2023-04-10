@@ -3,6 +3,7 @@ import AddTeaModal from './AddTeaModal';
 import { FaPlusSquare, FaStar } from 'react-icons/fa';
 import { ListContext } from '../App';
 import { useContext, useState } from 'react';
+import Nav from 'react-bootstrap/Nav';
 import { Rating } from 'react-simple-star-rating';
 
 const TeaCard = (props) => {
@@ -11,7 +12,7 @@ const TeaCard = (props) => {
   const [selectedtea, setselectedtea] = useState({});
 
   const openModal = (props) => {
-    console.log(userProfile);
+    console.log(selectedtea);
     refreshTeaList(userProfile._id)
     setModalShow(true);
     setselectedtea(props);
@@ -27,7 +28,6 @@ const TeaCard = (props) => {
   }
 
   const handleRating = async (rating) => {
-    console.log(`(From Frontend) Rated ${props.brand} ${props.name} ${rating} Stars`)
     const userID = userProfile._id;
     const teaID = props.id 
     const url = `http://localhost:5100/users/${userID}/ratings`; 
@@ -47,19 +47,9 @@ const TeaCard = (props) => {
       ratedTeas:{...(userProfile.ratedTeas), [teaID]: rating}
     }
     setUserProfile(newProfile)
-    console.log("New Profile:\n", newProfile)
-    console.log(data)
   }
 
-  const checkRating = () => {
-    if (props.id in userProfile.ratedTeas){
-      return userProfile.ratedTeas[props.id]
-    } else {
-      return 0
-    }
-  }
-
-
+  <Nav.Link href="#action2" style ={{color: 'white'}}>My Teas</Nav.Link>
   return (
     <div className="teaCard d-flex my-3 py-2 px-2">
       <div className="col-3 d-flex justify-content-center align-items-center">
@@ -68,7 +58,7 @@ const TeaCard = (props) => {
       <div className="col-7">
         <div className="mr-2">
           <div className="cardTitle my-0 py-0"> 
-            {props.name}
+            <Nav.Link href={`/teaPage/${props.id}}`} style ={{color: 'black'}}>{props.name}</Nav.Link>
           </div>
           <div className="d-flex cardSubtitleAndType">
             <div className=" cardSubtitle col-4">
@@ -89,7 +79,7 @@ const TeaCard = (props) => {
                       allowFraction={true}
                       onClick={handleRating}
                       initialValue={props.rating}
-                      fillColor="#000000"
+                      // fillColor="#000000"
                     />
       </div>
       <div className="teaPlus col-2 d-flex justify-content-center align-items-center">

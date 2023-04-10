@@ -84,7 +84,7 @@ function Login() {
               <p className="text-white-50 mb-3">Please enter your login and password!</p>
 
               <MDBInput wrapperClass='mb-4 w-100' label='' placeholder = 'Enter username...' id='formControlLg' type='email' size="lg" onChange={(e) => setUser(e.target.value)}/>
-              <MDBInput wrapperClass='mb-4 w-100' label='' placeholder = 'Enter password...' id='formControlLg' type='password' size="lg" onChange={(e) => setPassword(e.target.value)}/>
+              <MDBInput wrapperClass='mb-4 w-100' label='' placeholder = 'Enter password...'  type='password' size="lg" onChange={(e) => setPassword(e.target.value)}/>
 
               {/* <MDBCheckbox name='flexCheck' id='flexCheckDefault' className='mb-4' label='Remember password' /> */}
               <div className = 'mx-0'>{logFlag ? setAlert('User successfully logged in...') : ''}</div>

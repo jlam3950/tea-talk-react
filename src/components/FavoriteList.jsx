@@ -4,7 +4,7 @@ import { ListContext } from '../App';
 import { FaMinusCircle } from 'react-icons/fa';
 
 const FavoriteList = ( { selectedtea } ) => {
-const { refreshTeaList, currentTeas, list, setList, editMode, setEditMode, userProfile} = useContext(ListContext);
+const { refreshTeaList, list, editMode, userProfile} = useContext(ListContext);
 const [ render, setRender ] = useState('');
 
 const deleteList = async (name) => {
@@ -65,12 +65,16 @@ return (
     {
         Object.keys(list).map((listName, i) => {
             return <div key = {i} className ='listNameContainer'>
-                        <div className ='listName' id={listName} onClick = {(e) => addTeaToList(e.target.id, selectedtea)}>
-                            {editMode ? <FaMinusCircle style = {{color : 'red'}} onClick = {() => deleteList(listName)}/> : ''} {listName}
-                        </div>
-                        <div className ='listLength'>
-                            {`Saved Teas: ${list[listName].length}`}
-                         </div>
+                        <div className ='listName d-flex justify-content-between'>
+                            <div className = 'd-flex flex-column col-12' id={listName} onClick = {(e) => addTeaToList(e.target.id, selectedtea)}>
+                                {listName} 
+                                <div className ='listLength mt-1'>
+                                    {`Saved Teas: ${list[listName].length}`}
+                                </div>
+                            </div>
+                            { editMode ? <><div className ='mx-2'></div> <button className ='btn btn-danger' style = {{'fontSize': '.5em'}}> Delete </button></> : '' }
+                            {/* {editMode ? <FaMinusCircle style = {{color : 'red'}} onClick = {() => deleteList(listName)}/> : ''} {listName} */}
+                       </div>
                    </div>
                         
         })

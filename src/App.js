@@ -6,12 +6,14 @@ import Login from './components/Login';
 import Register from './components/Register';
 import UserProfile from './components/UserProfile';
 import TeaForm from "./components/TeaForm"
+import TeaPage from "./components/TeaPage"
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect, createContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AlertBar from './components/AlertBar';
 export const ListContext = createContext();
+
 
 function App() {
   
@@ -43,28 +45,28 @@ function App() {
   const [loggedIn, setLoggedIn ] = useState(false);
   const [alertFlag, setAlertFlag] = useState(false);
   const [alertInfo, setAlertInfo] = useState('');
+  const [ currentList, setCurrentList ] = useState([]);
+  const [ listRender, setListRender ] = useState([]);
+
 
   useEffect(() => { 
     const data = JSON.parse(window.localStorage.getItem('my_user'));
     if ( data !== null ) setUserProfile((data))
-    console.log("FIRST")
-    console.log({userProfile})
-    console.log("Local Storage:\n", window.localStorage.getItem('my_user'))
   }, [])
 
   useEffect(() => { 
-    console.log("SECOND")
     const data = JSON.parse(window.localStorage.getItem('my_user'))
     if( data !== null ){
       // 4/3/23 added refreshTeaList to fix userProfile list render error, recheck
-      refreshTeaList(userProfile._id);
+      if(userProfile._id !== undefined){
+        refreshTeaList(userProfile._id);
+      }
       const userTeaLists = data.TeaLists;
       if ( userTeaLists !== null ){
         setList(userTeaLists); 
         setLoggedIn(true);
       }      
     }
-    console.log("Local Storage:\n", window.localStorage.getItem('my_user'))
   }, [loggedIn])
  
   useEffect(() => {
@@ -74,16 +76,15 @@ function App() {
   }, [loggedIn, userProfile])
 
   useEffect(() => {
-    console.log("THIRD")
     if(userProfile.length !== 0){
       window.localStorage.setItem('my_user', JSON.stringify(userProfile))
     }
-    console.log("Local Storage:\n", window.localStorage.getItem('my_user'))
   }, [userProfile])
 
+  // limit requests 
   useEffect(() => {
     getTeas();
-  }, [currentTeas]); 
+  }, []); 
 
   const refreshTeaList = async (id) => {
     const url = `http://localhost:5100/users/${id}`; 
@@ -93,15 +94,17 @@ function App() {
     const data = await res.json();
     const refreshedList = data.teaLists; 
     setList(refreshedList);
-    if(list.length < 0){
-      setEditMode(false);
+    if(list){
+      if(list.length < 0){
+        console.log(list.length)
+        setEditMode(false);
+      }
     }
 }
 
   const setUserData = (data, userTeaList) => {
     setUserProfile(data);
     setList(userTeaList);
-    console.log(data)
     };
 
   const getTeas = async () => { 
@@ -113,7 +116,9 @@ function App() {
 
   return (
     <div className="App d-flex flex-column min-vh-100">
-      <ListContext.Provider value = {{alertInfo, setAlertInfo, currentTeas, loggedIn, list, userProfile, editMode, alertFlag, setAlertFlag, refreshTeaList, setEditMode, setUserProfile, setList, setUserData}} >
+      <ListContext.Provider value = {{alertInfo, currentList, currentTeas, loggedIn, list, userProfile, editMode, alertFlag, listRender,
+                                     setListRender, setCurrentList, setAlertInfo, setAlertFlag, refreshTeaList, setEditMode, setUserProfile, 
+                                     setList, setUserData}}>
           <NavigationBar />
             <AlertBar/>
               <Routes>
@@ -122,6 +127,7 @@ function App() {
                 <Route path = 'register' element = {<Register />}></Route>
                 <Route path = 'userProfile' element = {<UserProfile />}></Route>
                 <Route path = 'teaForm' element = {<TeaForm />}></Route>
+                <Route path = 'teaPage/:id' element = {<TeaPage />}></Route>
               </Routes>
           <Footer />
       </ListContext.Provider>
