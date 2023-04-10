@@ -3,6 +3,7 @@ import AddTeaModal from './AddTeaModal';
 import { FaPlusSquare, FaStar } from 'react-icons/fa';
 import { ListContext } from '../App';
 import { useContext, useState } from 'react';
+import Nav from 'react-bootstrap/Nav';
 
 const TeaCard = (props) => {
   const { refreshTeaList, userProfile, setAlertFlag, setAlertInfo } = useContext(ListContext);
@@ -10,7 +11,7 @@ const TeaCard = (props) => {
   const [selectedtea, setselectedtea] = useState({});
 
   const openModal = (props) => {
-    console.log(userProfile);
+    console.log(selectedtea);
     refreshTeaList(userProfile._id)
     setModalShow(true);
     setselectedtea(props);
@@ -24,7 +25,7 @@ const TeaCard = (props) => {
       setAlertInfo('');
     }, 2000)
   }
-
+  <Nav.Link href="#action2" style ={{color: 'white'}}>My Teas</Nav.Link>
   return (
     <div className="teaCard d-flex my-3 py-2 px-2">
       <div className="col-3 d-flex justify-content-center align-items-center">
@@ -33,7 +34,7 @@ const TeaCard = (props) => {
       <div className="col-7">
         <div className="mr-2">
           <div className="cardTitle my-0 py-0"> 
-            {props.name}
+            <Nav.Link href={`/teaPage/${props.id}}`} style ={{color: 'black'}}>{props.name}</Nav.Link>
           </div>
           <div className="d-flex cardSubtitleAndType">
             <div className=" cardSubtitle col-4">

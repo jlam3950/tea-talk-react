@@ -104,6 +104,7 @@
 
 .cardTitle{
   font-size: 1.25em;
+  cursor: pointer;
 }
 
 .teaCard{
@@ -122,6 +123,13 @@
   font-size: 2em;
 }
 
+/* Comment Form */
+
+.comment_container{
+  background: white;
+  border-radius: 10px;
+}
+
 /* FavoriteList */
 
 .teaListMsg{
@@ -135,14 +143,15 @@
 .listName{
   margin: .5em 0;
   cursor: pointer;
-  max-width: 15em;
+  max-width: 19em;  
+  
 }
 
-.listName:hover{
-  transform: scale(1.02);
-  transition: all .2s ease-in-out;
-  margin-left: .5rem;
-}
+/* .listName:hover{
+  transform: scale(1.01); 
+  transition: all .2s ease-in-out; 
+  margin-left: .5rem; 
+} */
 
 .listLength{
   margin-left: 1em;
@@ -206,6 +215,7 @@
 .cardTitle{
   font-size: 1.35em;
   font-weight: 500; 
+  cursor: pointer;
 }
 
 .cardSubtitle{

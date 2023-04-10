@@ -54,7 +54,7 @@ const NavigationBar = () => {
           </Nav>
           <div className="" style ={{color: 'white'}}>{userProfile.username ? userProfile.username : ''}</div>
           {userProfile.username ? 
-          <Nav.Link className= 'mx-3 fs-3 text-white' href="userProfile" onClick={() => refresh()}><FaUserCircle/></Nav.Link> : 
+          <Nav.Link className= 'mx-3 fs-3 text-white' href="/userProfile" onClick={() => refresh()}><FaUserCircle/></Nav.Link> : 
           <Nav.Link className= 'mx-3 fs-3 text-white' onClick = {() => setAlert('Sign in to access the profile page...')}><FaUserCircle/></Nav.Link>
           }
           <Form className="d-flex">

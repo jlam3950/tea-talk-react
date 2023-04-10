@@ -3,43 +3,39 @@ import { useContext, useState, useEffect } from 'react';
 import { ListContext } from '../App';
 import { FaUserCircle, FaMinusCircle, FaPen } from 'react-icons/fa';
 import ProfileList from './ProfileList';
+import Nav from 'react-bootstrap/Nav';
 
 const UserProfile = () => {
-  const { userProfile, list, refreshTeaList, editMode, setEditMode } = useContext(ListContext);
+  const { listRender, setListRender, currentList, setCurrentList, userProfile, list, refreshTeaList, editMode, setEditMode } = useContext(ListContext);
   const [ teaEdit, setTeaEdit ] = useState(false)
-  const [ listRender, setListRender ] = useState([]);
   const [ infoEdit, setInfoEdit ] = useState(false);
-  const [ currentList, setCurrentList ] = useState([]);
   const [flag, setFlag ] = useState(false);
-  const [render, setRender] = useState(true);
-
+  // const [render, setRender] = useState(true);
   // everything is working, except tea list isn't refreshing with delete
-
-  const deleteTea = async (teaID, selectedList) => {
-    // setFlag(false);
-    const id = userProfile._id; 
-    const url = `http://localhost:5100/users/${id}/tealists`; 
-    const res = await fetch(url, {
-        method: 'PATCH',
-        headers: {
-         'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-         "action": "remove tea",
-         "payload":{
-            "listName": selectedList, 
-            "tea": teaID
-         }
-        })
-      })
-    setListRender(list[selectedList]);
-    const data = await res.json(); 
-    console.log(data);
-    refreshTeaList(userProfile._id);
-    if(list[currentList].length === 0){
-      setTeaEdit(false);
-    }
-}
+  // moved deleteTea to ProfileList 
+  
+//   const deleteTea = async (teaID, selectedList) => {
+//     setFlag(false);
+//     const id = userProfile._id; 
+//     const url = `http://localhost:5100/users/${id}/tealists`; 
+//     const res = await fetch(url, {
+//         method: 'PATCH',
+//         headers: {
+//          'content-type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//          "action": "remove tea",
+//          "payload":{
+//             "listName": selectedList, 
+//             "tea": teaID
+//          }
+//         })
+//       })
+//     setListRender(list[selectedList]);
+//     const data = await res.json(); 
+//     console.log(data);
+//     refreshTeaList(userProfile._id);
+// }
 
 const deleteList = async (name) => {
   const id = userProfile._id; 
@@ -100,8 +96,8 @@ const deleteList = async (name) => {
             </div>
           </div> 
           <hr></hr>
-          <div className="location">
-            { infoEdit ? <><FaMinusCircle style = {{color: 'red'}}/> Location: Bloomington, IN</> : 'Location: Bloomington, IN' }
+          <div className="location d-flex justify-content-between">
+            { infoEdit ? <><div className ='mx-2'> Location: Bloomington, IN  </div> <button className ='btn btn-danger p-2' style = {{'fontSize': '.5em'}}> Delete </button></> : 'Location: Bloomington, IN' }
           </div>
         </div>
         <div className="userProfileDisplayTeas p-4 my-4 h5" style ={{'backgroundColor': 'rgba(250,246,246)'}}>
@@ -117,8 +113,8 @@ const deleteList = async (name) => {
             { flag ? 
              listRender?.map((tea, i) => {
                 return  <div id = {tea.name} key = {i}>
-                          <span>{teaEdit ? <FaMinusCircle style = {{color : 'red'}} onClick = {() => {deleteTea(tea._id, currentList )}}/> : ''}</span>
-                          <ProfileList name={tea.name} brand={tea.brand} type={tea.type} rating={tea.rating} img={tea.imageURL} id={tea._id} key={i} />
+                          {/* <span>{teaEdit ? <FaMinusCircle style = {{color : 'red'}} onClick = {() => {deleteTea(tea._id, currentList )}}/> : ''}</span> */}
+                          <ProfileList name={<Nav.Link href={`/teaPage/${tea._id}}`} style ={{color: 'black'}}>{tea.name}</Nav.Link>} brand={tea.brand} type={tea.type} rating={tea.rating} img={tea.imageURL} id={tea._id} key={i} edit = {teaEdit}/>
                         </div>
               })
             : "Click on a tea list to display saved teas"
@@ -143,13 +139,21 @@ const deleteList = async (name) => {
   
         Object.keys(list).map((listName, i) => {
             return <div key = {i} className ='listNameContainer'>
-                        <div className ='listName' id={listName} onClick= {(e) => storeListTeas(e.target.id)}>
-                        <span>{editMode ? <FaMinusCircle className ='mx-1' style = {{color : 'red'}} onClick = {() => {deleteList(listName)}}/> : ''}</span>
-                            {listName}
+                        <div className ='listName location d-flex justify-content-between' id={listName} onClick= {(e) => storeListTeas(e.target.id)}>
+                        {/* <div className="location d-flex justify-content-between"> */}
+                          {listName}
+                           
+                          { editMode ? <><div className ='mx-2'> </div> <button className ='btn btn-danger p-2' onClick = {() => {deleteList(listName)}} style = {{'fontSize': '.5em'}}> Delete </button></> :  
+                            <div className ='listLength my-1'>
+                                {`Saved Teas: ${list[listName].length}`}
+                            </div>}
                         </div>
-                        <div className ='listLength'>
-                            {`Saved Teas: ${list[listName].length}`}
-                         </div>
+                        {/* <span>{editMode ? <FaMinusCircle className ='mx-1' style = {{color : 'red'}} onClick = {() => {deleteList(listName)}}/> : ''}</span>
+                            {listName}
+                            <div className ='listLength my-1'>
+                                {`Saved Teas: ${list[listName].length}`}
+                            </div> */}
+                        {/* </div> */}
                    </div>         
         })
         
