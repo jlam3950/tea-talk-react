@@ -47,9 +47,13 @@ function App() {
   useEffect(() => { 
     const data = JSON.parse(window.localStorage.getItem('my_user'));
     if ( data !== null ) setUserProfile((data))
+    console.log("FIRST")
+    console.log({userProfile})
+    console.log("Local Storage:\n", window.localStorage.getItem('my_user'))
   }, [])
 
   useEffect(() => { 
+    console.log("SECOND")
     const data = JSON.parse(window.localStorage.getItem('my_user'))
     if( data !== null ){
       // 4/3/23 added refreshTeaList to fix userProfile list render error, recheck
@@ -60,6 +64,7 @@ function App() {
         setLoggedIn(true);
       }      
     }
+    console.log("Local Storage:\n", window.localStorage.getItem('my_user'))
   }, [loggedIn])
  
   useEffect(() => {
@@ -69,9 +74,11 @@ function App() {
   }, [loggedIn, userProfile])
 
   useEffect(() => {
+    console.log("THIRD")
     if(userProfile.length !== 0){
       window.localStorage.setItem('my_user', JSON.stringify(userProfile))
     }
+    console.log("Local Storage:\n", window.localStorage.getItem('my_user'))
   }, [userProfile])
 
   useEffect(() => {
@@ -94,6 +101,7 @@ function App() {
   const setUserData = (data, userTeaList) => {
     setUserProfile(data);
     setList(userTeaList);
+    console.log(data)
     };
 
   const getTeas = async () => { 

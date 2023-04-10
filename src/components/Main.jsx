@@ -9,7 +9,7 @@ import { ListContext } from '../App';
 
 
 const Main = ( {teaArray} ) => {
-  const { currentTeas } = useContext(ListContext);
+  const { currentTeas, userProfile } = useContext(ListContext);
   const [modalShow, setModalShow] = useState(false);
   const [listModal, setListModal] = useState(false);
   const [search, setSearch] = useState('');
@@ -49,6 +49,11 @@ const Main = ( {teaArray} ) => {
               } else if (input.name.toLowerCase().includes(search.toLowerCase()) || input.brand.toLowerCase().includes(search.toLowerCase())){
                 return input; 
               }}).map((tea, i) => {
+                if (userProfile.ratedTeas && userProfile.ratedTeas[tea._id]){
+                  tea.rating = userProfile.ratedTeas[tea._id]
+                } else {
+                  tea.rating = 0
+                }
                 return <TeaCard name={tea.name} brand={tea.brand} type={tea.type} rating={tea.rating} img={tea.imageURL} id = {tea._id} key ={i} />;
               })}  
           </div>

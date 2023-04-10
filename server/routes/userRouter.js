@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const User = require("../models/User.js");
+const Tea = require("../models/Tea.js");
 const bcrypt = require("bcryptjs");
 
 
@@ -150,6 +151,20 @@ router.patch("/:id/tealists", findUserByID, async (req, res) => {
     } catch (err) {
         console.error(err)
         res.status(400).json({ message: err.message })
+    }
+})
+
+
+// Update a User's Tea Ratings
+router.patch("/:id/ratings", findUserByID, async (req, res) => {
+    const tea = await Tea.findById(req.body.tea)
+    try {
+        res.user.ratedTeas.set(req.body.tea, req.body.rating)
+        res.user.save()
+        return res.status(200).json({user: res.user, message: `Updated User Rating for ${tea.brand} ${tea.name} to ${req.body.rating} Stars`})
+    } catch (err) {
+        console.error(err)
+        return res.status(500).json({user: res.user, message: "Something went wrong"})
     }
 })
 

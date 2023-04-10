@@ -22,7 +22,8 @@ const userSchema = new mongoose.Schema({
     },
     ratedTeas: { 
         type: Map,
-        of: number
+        of: Number,
+        default: {}
     },
     userImageURL: String
 })

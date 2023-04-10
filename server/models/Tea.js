@@ -27,7 +27,8 @@ const teaSchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model("Tea", teaSchema)
+const Tea = mongoose.model("Tea", teaSchema)
+module.exports = Tea
 
 // Average Rating = ratingsTotal / numberOfRatings
 
