@@ -10,6 +10,10 @@ const TeaCard = (props) => {
   const { refreshTeaList, userProfile, setUserProfile, setAlertFlag, setAlertInfo } = useContext(ListContext);
   const [modalShow, setModalShow] = useState(false);
   const [selectedtea, setselectedtea] = useState({});
+  const [teaRating, setTeaRating] = useState(props.rating)
+  const [averageTeaRating, setAverageTeaRating] = useState((props.ratingsTotal/props.numberOfRatings)||0)
+  const [totalTeaRatings, setTotalTeaRatings] = useState(props.numberOfRatings)
+  const [ratingFillColor, setRatingFillColor] = useState(props.ratingColor)
 
   const openModal = (props) => {
     console.log(selectedtea);
@@ -27,7 +31,20 @@ const TeaCard = (props) => {
     }, 2000)
   }
 
+  const onPointerEnter = () => {
+    if (ratingFillColor === "#000002"){
+      setRatingFillColor("#ffd300")
+    }
+  }
+
+  const onPointerLeave = () => {
+    if (userProfile.ratedTeas[props.id] == null){
+      setRatingFillColor("#000002")
+    }
+  }
+
   const handleRating = async (rating) => {
+    setRatingFillColor("#ffd300")
     const userID = userProfile._id;
     const teaID = props.id 
     const url = `http://localhost:5100/users/${userID}/ratings`; 
@@ -42,6 +59,9 @@ const TeaCard = (props) => {
       })
     })
     const data = await res.json()
+    console.log(data)
+    setAverageTeaRating(data.ratingsTotal/data.numberOfRatings)
+    setTotalTeaRatings(data.numberOfRatings)
     const newProfile = {
       ...userProfile,
       ratedTeas:{...(userProfile.ratedTeas), [teaID]: rating}
@@ -75,13 +95,19 @@ const TeaCard = (props) => {
             "Black tea is a kind of tea made from leaves of Camellia sinensis. Often, it is stronger in taste than other varieties of tea, like green tea or oolong."
           </div>
         </div>
-        Tea Rating: <Rating 
-                      allowFraction={true}
-                      onClick={handleRating}
-                      initialValue={props.rating}
-                      // fillColor="#000000"
-                    />
-      </div>
+          Rating: <Rating 
+                    allowFraction={true}
+                    onClick={handleRating}
+                    onPointerEnter={onPointerEnter}
+                    onPointerLeave={onPointerLeave}
+                    SVGstyle={{width: "25px", height: "25px"}}
+                    initialValue={teaRating}
+                    fillColor={ratingFillColor}
+                  />
+          <div>
+            Average Rating: {averageTeaRating.toFixed(1)} | Total Ratings: {totalTeaRatings}
+          </div>
+        </div>
       <div className="teaPlus col-2 d-flex justify-content-center align-items-center">
         { userProfile.length !== 0 ? 
              <>

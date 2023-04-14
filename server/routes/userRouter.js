@@ -159,9 +159,17 @@ router.patch("/:id/tealists", findUserByID, async (req, res) => {
 router.patch("/:id/ratings", findUserByID, async (req, res) => {
     const tea = await Tea.findById(req.body.tea)
     try {
+        if (res.user.ratedTeas.has(req.body.tea) === false){
+            tea.numberOfRatings += 1
+            tea.ratingsTotal += req.body.rating
+        } else {
+            const oldRating = res.user.ratedTeas.get(req.body.tea)
+            tea.ratingsTotal += (req.body.rating - oldRating)
+        }
         res.user.ratedTeas.set(req.body.tea, req.body.rating)
+        const updatedTea = await tea.save()
         res.user.save()
-        return res.status(200).json({user: res.user, message: `Updated User Rating for ${tea.brand} ${tea.name} to ${req.body.rating} Stars`})
+        return res.status(200).json(updatedTea)
     } catch (err) {
         console.error(err)
         return res.status(500).json({user: res.user, message: "Something went wrong"})

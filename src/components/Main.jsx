@@ -49,12 +49,16 @@ const Main = ( {teaArray} ) => {
               } else if (input.name.toLowerCase().includes(search.toLowerCase()) || input.brand.toLowerCase().includes(search.toLowerCase())){
                 return input; 
               }}).map((tea, i) => {
+                tea.ratingColor = "#000002"
                 if (userProfile.ratedTeas && userProfile.ratedTeas[tea._id]){
                   tea.rating = userProfile.ratedTeas[tea._id]
+                  tea.ratingColor = "#ffd300"
+                } else if (tea.numberOfRatings === 0){
+                  tea.rating = "0.0"
                 } else {
-                  tea.rating = 0
+                  tea.rating = (tea.ratingsTotal/tea.numberOfRatings)
                 }
-                return <TeaCard name={tea.name} brand={tea.brand} type={tea.type} rating={tea.rating} img={tea.imageURL} id = {tea._id} key ={i} />;
+                return <TeaCard name={tea.name} brand={tea.brand} type={tea.type} img={tea.imageURL} rating={tea.rating} ratingColor={tea.ratingColor} ratingsTotal={tea.ratingsTotal} numberOfRatings={tea.numberOfRatings} id = {tea._id} key ={i} />;
               })}  
           </div>
       </div>
