@@ -27,7 +27,8 @@ const TeaCard = (props) => {
   }
   <Nav.Link href="#action2" style ={{color: 'white'}}>My Teas</Nav.Link>
   return (
-    <div className="teaCard d-flex my-3 py-2 px-2">
+  <div className = 'my-3'>
+    <div className="teaCard d-flex py-1 px-2">
       <div className="col-3 d-flex justify-content-center align-items-center">
         <img className = 'teaCardImg' src={props.img} alt="" />
       </div>
@@ -51,7 +52,7 @@ const TeaCard = (props) => {
             "Black tea is a kind of tea made from leaves of Camellia sinensis. Often, it is stronger in taste than other varieties of tea, like green tea or oolong."
           </div>
         </div>
-        Tea Rating: <FaStar/><FaStar/><FaStar/><FaStar/>(4.6) | <span>200 ratings</span>
+        {/* Tea Rating: <FaStar/><FaStar/><FaStar/><FaStar/>(4.6) | <span>200 ratings</span> */}
       </div>
       <div className="teaPlus col-2 d-flex justify-content-center align-items-center">
         { userProfile.length !== 0 ? 
@@ -64,6 +65,21 @@ const TeaCard = (props) => {
                 /> 
             </>: 
         <FaPlusSquare onClick = {() => setAlert('Sign in to save tea...')}/> }
+        </div>
+      </div>
+      <div className = ' d-flex justify-content-center align-items-start py-1'>
+        <div className = 'border-top border-bottom border-right px-3 py-1'>
+          Rating: <FaStar/><FaStar/><FaStar/><FaStar/>
+        </div>
+        <div className = 'border px-3 py-1'>
+          Average Rating: 4.6 
+        </div>
+        <div className = 'border px-3 py-1'>
+          Total Ratings: 200
+        </div>
+        <div className = 'border-top border-bottom border-left px-3 py-1'>
+          Date Added: 10/22/23
+        </div>
       </div>
     </div>
   );

@@ -4,13 +4,14 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { FaUserCircle } from 'react-icons/fa';
 import { ListContext } from '../App';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 
 const NavigationBar = () => {
-  const { userProfile, setUserProfile, refreshTeaList, setAlertFlag, setAlertInfo } = useContext(ListContext);
+  const { currentTeas, userProfile, setUserProfile, refreshTeaList, setAlertFlag, setAlertInfo } = useContext(ListContext);
   const history = useNavigate();
+  const [search, setSearch] = useState('');
 
   const signOut = () => {
     setAlert('Signing out...');
@@ -35,6 +36,7 @@ const NavigationBar = () => {
   }
 
   return (
+    <div className = 'd-flex flex-column'>
     <Navbar bg="light" expand="lg" className = 'py-0'>
       <Container fluid className = 'bg-success py-2'>
         <Navbar.Brand href="/" className = 'text-white'><div className="teatalkLogo">
@@ -55,7 +57,7 @@ const NavigationBar = () => {
           <div className="" style ={{color: 'white'}}>{userProfile.username ? userProfile.username : ''}</div>
           {userProfile.username ? 
           <Nav.Link className= 'mx-3 fs-3 text-white' href="/userProfile" onClick={() => refresh()}><FaUserCircle/></Nav.Link> : 
-          <Nav.Link className= 'mx-3 fs-3 text-white' onClick = {() => setAlert('Sign in to access the profile page...')}><FaUserCircle/></Nav.Link>
+          <Nav.Link className= 'mx-3 fs-3 text-white' onClick = {() => setAlert('Please, sign in...')}><FaUserCircle/></Nav.Link>
           }
           <Form className="d-flex">
             <Form.Control
@@ -63,11 +65,29 @@ const NavigationBar = () => {
               placeholder="Search for Tea..."
               className="me-2"
               aria-label="Search"
+              onChange={(e)=>setSearch(e.target.value)}
             />               
           </Form>
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    <div className = 'search-results-container'>
+      <div className = 'search-results-box'>
+      {currentTeas.filter((input) => {
+                if(search === ''){
+                  input = '';
+                } else if (input.name.toLowerCase().includes(search.toLowerCase()) || input.brand.toLowerCase().includes(search.toLowerCase())){
+                  return input; 
+                }}).map((tea, i) => {
+                  return  <Nav.Link href={`/teaPage/${tea._id}`} className = 'search-item'>
+                                <img className = 'search-img' src={tea.imageURL} alt="" />
+                                {tea.name.slice(0,21)}
+                              </Nav.Link>
+                  // return <TeaCard name={tea.name} brand={tea.brand} type={tea.type} rating={tea.rating} img={tea.imageURL} id = {tea._id} key ={i} />;
+                })}
+                </div>
+    </div>
+    </div>
   );
 }
 
