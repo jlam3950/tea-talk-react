@@ -49,9 +49,10 @@
   top: 4em;
 }
 
-/* .teaDropDown{
-  margin: 2rem;
-} */
+.rating_div{
+  padding: .18em;
+}
+
 
 .addTea{
   padding-right: 2rem;
