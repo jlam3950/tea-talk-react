@@ -87,7 +87,7 @@ function Login() {
               <MDBInput wrapperClass='mb-4 w-100' label='' placeholder = 'Enter password...'  type='password' size="lg" onChange={(e) => setPassword(e.target.value)}/>
 
               {/* <MDBCheckbox name='flexCheck' id='flexCheckDefault' className='mb-4' label='Remember password' /> */}
-              <div className = 'mx-0'>{logFlag ? setAlert('User successfully logged in...') : ''}</div>
+              <div className = 'mx-0'>{logFlag ? setAlert('Logging in...') : ''}</div>
               <div className = 'mx-0' style = {{color: 'red'}}>{failedFlag ? 'Wrong user name or password': ''}</div>
               <div className = 'mx-0' style = {{color: 'red'}}>{emptyFlag ? 'Please input a username and password': ''}</div>
               <button size='lg' className = 'btn btn-primary text-white py-2 my-2' onClick = {() => loginAccount()}>

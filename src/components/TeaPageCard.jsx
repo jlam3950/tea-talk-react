@@ -12,7 +12,7 @@ const TeaCard = () => {
     const { id } = useParams();
     const [modalShow, setModalShow] = useState(false);
     const [selectedtea, setselectedtea] = useState({});  
-    const { refreshTeaList, userProfile } = useContext(ListContext);  
+    const { refreshTeaList, userProfile, setAlertFlag, setAlertInfo } = useContext(ListContext);  
 
     const openModal = () => {
       setTea({...tea, id: tea._id });
@@ -31,6 +31,15 @@ const TeaCard = () => {
     useEffect(() => {
         getTea() 
     }, []);
+
+    const signInToSave = () => {
+      setAlertFlag(true);
+      setAlertInfo('Please Sign In...');
+      setTimeout(() => {
+        setAlertFlag(false);
+        setAlertInfo('');
+      }, 2000)
+    }
 
   return (
     <div className = 'd-flex flex-column'>
@@ -63,12 +72,20 @@ const TeaCard = () => {
             Tea Rating: <FaStar/><FaStar/><FaStar/><FaStar/>(4.6) | <span>200 ratings</span>
         </div>
         <div className = 'my-4'>
-            <button className = 'btn btn-primary w-50' onClick={() => openModal()}><FaPlus className ='mb-1'/> Add Tea</button>
+          { userProfile.username ? 
+          <>
+            <button className = 'btn btn-primary' style = {{"width": "90%"}} onClick={() => openModal()}> Save Tea</button>
                 <AddTeaModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 selectedtea = {tea}
                 /> 
+          </>
+            :  
+            <>
+            <button className = 'btn btn-danger' style = {{"width": "90%"}} onClick={() => signInToSave()}> Sign In To Save Tea...</button>
+            </>
+          }
         </div>
       </div>
     </div>

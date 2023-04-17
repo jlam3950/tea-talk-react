@@ -156,8 +156,6 @@ const deleteList = async (name) => {
                         {/* </div> */}
                    </div>         
         })
-        
-
         : ''
     }
         </div>
