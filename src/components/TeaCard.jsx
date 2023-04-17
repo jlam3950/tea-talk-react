@@ -5,15 +5,13 @@ import { ListContext } from '../App';
 import { useContext, useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import { Rating } from 'react-simple-star-rating';
+import { TeaRating } from "./TeaRating";
 
 const TeaCard = (props) => {
   const { refreshTeaList, userProfile, setUserProfile, setAlertFlag, setAlertInfo } = useContext(ListContext);
+  const { tea } = props
   const [modalShow, setModalShow] = useState(false);
   const [selectedtea, setselectedtea] = useState({});
-  const [teaRating, setTeaRating] = useState(props.rating)
-  const [averageTeaRating, setAverageTeaRating] = useState((props.ratingsTotal/props.numberOfRatings)||0)
-  const [totalTeaRatings, setTotalTeaRatings] = useState(props.numberOfRatings)
-  const [ratingFillColor, setRatingFillColor] = useState(props.ratingColor)
 
   const openModal = (props) => {
     console.log(selectedtea);
@@ -31,82 +29,30 @@ const TeaCard = (props) => {
     }, 2000)
   }
 
-  const onPointerEnter = () => {
-    if (ratingFillColor === "#000002"){
-      setRatingFillColor("#ffd300")
-    }
-  }
-
-  const onPointerLeave = () => {
-    if (userProfile.ratedTeas[props.id] == null){
-      setRatingFillColor("#000002")
-    }
-  }
-
-  const handleRating = async (rating) => {
-    setRatingFillColor("#ffd300")
-    const userID = userProfile._id;
-    const teaID = props.id 
-    const url = `http://localhost:5100/users/${userID}/ratings`; 
-    const res = await fetch(url, {
-      method: 'PATCH',
-      headers: {
-       'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-       "tea": props.id,
-       "rating": rating
-      })
-    })
-    const data = await res.json()
-    console.log(data)
-    setAverageTeaRating(data.ratingsTotal/data.numberOfRatings)
-    setTotalTeaRatings(data.numberOfRatings)
-    const newProfile = {
-      ...userProfile,
-      ratedTeas:{...(userProfile.ratedTeas), [teaID]: rating}
-    }
-    setUserProfile(newProfile)
-  }
-
   <Nav.Link href="#action2" style ={{color: 'white'}}>My Teas</Nav.Link>
   return (
     <div className="teaCard d-flex my-3 py-2 px-2">
       <div className="col-3 d-flex justify-content-center align-items-center">
-        <img className = 'teaCardImg' src={props.img} alt="" />
+        <img className = 'teaCardImg' src={tea.imageURL} alt="" />
       </div>
       <div className="col-7">
         <div className="mr-2">
           <div className="cardTitle my-0 py-0"> 
-            <Nav.Link href={`/teaPage/${props.id}}`} style ={{color: 'black'}}>{props.name}</Nav.Link>
+            <Nav.Link href={`/teaPage/${tea._id}}`} style ={{color: 'black'}}>{tea.name}</Nav.Link>
           </div>
           <div className="d-flex cardSubtitleAndType">
             <div className=" cardSubtitle col-4">
-              {props.brand}
+              {tea.brand}
             </div>
             <div className="cardSubtitle col-2">
-              {props.type}
+              {tea.type}
             </div>
-          </div>
-          <div className="">
-            {props.rating}
           </div>
           <div className="cardDescription">
             "Black tea is a kind of tea made from leaves of Camellia sinensis. Often, it is stronger in taste than other varieties of tea, like green tea or oolong."
           </div>
         </div>
-          Rating: <Rating 
-                    allowFraction={true}
-                    onClick={handleRating}
-                    onPointerEnter={onPointerEnter}
-                    onPointerLeave={onPointerLeave}
-                    SVGstyle={{width: "25px", height: "25px"}}
-                    initialValue={teaRating}
-                    fillColor={ratingFillColor}
-                  />
-          <div>
-            Average Rating: {averageTeaRating.toFixed(1)} | Total Ratings: {totalTeaRatings}
-          </div>
+          <TeaRating tea={tea}/>
         </div>
       <div className="teaPlus col-2 d-flex justify-content-center align-items-center">
         { userProfile.length !== 0 ? 

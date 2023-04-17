@@ -58,7 +58,7 @@ const Main = ( {teaArray} ) => {
                 } else {
                   tea.rating = (tea.ratingsTotal/tea.numberOfRatings)
                 }
-                return <TeaCard name={tea.name} brand={tea.brand} type={tea.type} img={tea.imageURL} rating={tea.rating} ratingColor={tea.ratingColor} ratingsTotal={tea.ratingsTotal} numberOfRatings={tea.numberOfRatings} id = {tea._id} key ={i} />;
+                return <TeaCard tea={tea} key ={i} />;
               })}  
           </div>
       </div>

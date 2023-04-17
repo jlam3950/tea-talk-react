@@ -29,13 +29,16 @@ router.post("/", async (req, res) =>{
     const newUser = new User(userInfo);
 
     try {
+        // === CHECK IF USERNAME EXITS USING REGEX (ignore uppercase/lowercase)===
+        // const regex = new RegExp(username, "i")
+        // const checkUsername = await User.findOne({username: regex})
         const checkUsername = await User.findOne({username: username})
         if (checkUsername != null){
             return res.status(409).json({message: `Username "${username}" has already been taken.`})
         }
         const addUser = await newUser.save()
-        res.status(201).json(addUser)
-        console.log({newUser})
+        const addUserInfo = await User.findById(addUser._id, {password: false})
+        res.status(201).json(addUserInfo)
 
     } catch (err) {
         res.status(400).json({ message: err.message})
