@@ -86,7 +86,7 @@ router.patch("/:id", findUserByID, async (req, res) => {
         const updatedUser = await User.findByIdAndUpdate(
             `${req.params.id}`,
             userInfo,
-            {returnDocument: "after"},
+            {returnDocument: "after", select: {password: false}},
         )
         // const updatedUser = await res.user.save()
         res.status(200).json(updatedUser)
@@ -102,6 +102,7 @@ router.patch("/:id/tealists", findUserByID, async (req, res) => {
     const action = req.body.action;
     const payload = req.body.payload;
     const user = res.user
+    let updatedUser = null
 
     try {
         switch (action){
@@ -109,14 +110,16 @@ router.patch("/:id/tealists", findUserByID, async (req, res) => {
             case "new list":
                 if (payload.tea == null){payload.tea = []}
                 res.user.teaLists.set(payload.listName, payload.tea)
-                res.user.save()
-                return res.status(201).json({message: `Added New List - ${payload.listName}`})
+                await res.user.save()
+                updatedUser = await User.findById(req.params.id, {password: false}).populate("teaLists.$*");
+                return res.status(201).json({message: `Added New List - ${payload.listName}`, teaLists: updatedUser.teaLists})
 
             // Delete a List
             case "delete list":
                 res.user.teaLists.delete(payload.listName)
-                res.user.save()
-                return res.status(200).json({message: `Deleted List - ${payload.listName}`})
+                await res.user.save()
+                updatedUser = await User.findById(req.params.id, {password: false}).populate("teaLists.$*");
+                return res.status(200).json({message: `Deleted List - ${payload.listName}`, teaLists: updatedUser.teaLists})
 
             
             // Add One Tea to a list
@@ -131,8 +134,9 @@ router.patch("/:id/tealists", findUserByID, async (req, res) => {
                 }
                 list.push(payload.tea)
                 res.user.teaLists.set(payload.listName, list)
-                res.user.save()
-                return res.status(200).json({message: `Added ${payload.tea} to ${payload.listName}`})
+                await res.user.save()
+                updatedUser = await User.findById(req.params.id, {password: false}).populate("teaLists.$*");
+                return res.status(200).json({message: `Added ${payload.tea} to ${payload.listName}`, teaLists: updatedUser.teaLists})
 
             
             // Delete One Tea from a list
@@ -140,8 +144,9 @@ router.patch("/:id/tealists", findUserByID, async (req, res) => {
                 const oldList = [...res.user.teaLists.get(payload.listName)]
                 const newList = oldList.filter(tea => tea != payload.tea)
                 res.user.teaLists.set(payload.listName, newList)
-                res.user.save()
-                return res.status(200).json({message: `Removed ${payload.tea} from ${payload.listName}`})
+                await res.user.save()
+                updatedUser = await User.findById(req.params.id, {password: false}).populate("teaLists.$*");
+                return res.status(200).json({message: `Removed ${payload.tea} from ${payload.listName}`, teaLists: updatedUser.teaLists})
             
             // Update a Tea in a list
             // case "update tea":
