@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const User = require("../models/User.js");
+const Tea = require("../models/Tea.js");
 const bcrypt = require("bcryptjs");
 
 
@@ -28,13 +29,16 @@ router.post("/", async (req, res) =>{
     const newUser = new User(userInfo);
 
     try {
+        // === CHECK IF USERNAME EXITS USING REGEX (ignore uppercase/lowercase)===
+        // const regex = new RegExp(username, "i")
+        // const checkUsername = await User.findOne({username: regex})
         const checkUsername = await User.findOne({username: username})
         if (checkUsername != null){
             return res.status(409).json({message: `Username "${username}" has already been taken.`})
         }
         const addUser = await newUser.save()
-        res.status(201).json(addUser)
-        console.log({newUser})
+        const addUserInfo = await User.findById(addUser._id, {password: false})
+        res.status(201).json(addUserInfo)
 
     } catch (err) {
         res.status(400).json({ message: err.message})
@@ -150,6 +154,28 @@ router.patch("/:id/tealists", findUserByID, async (req, res) => {
     } catch (err) {
         console.error(err)
         res.status(400).json({ message: err.message })
+    }
+})
+
+
+// Update a User's Tea Ratings
+router.patch("/:id/ratings", findUserByID, async (req, res) => {
+    const tea = await Tea.findById(req.body.tea)
+    try {
+        if (res.user.ratedTeas.has(req.body.tea) === false){
+            tea.numberOfRatings += 1
+            tea.ratingsTotal += req.body.rating
+        } else {
+            const oldRating = res.user.ratedTeas.get(req.body.tea)
+            tea.ratingsTotal += (req.body.rating - oldRating)
+        }
+        res.user.ratedTeas.set(req.body.tea, req.body.rating)
+        const updatedTea = await tea.save()
+        res.user.save()
+        return res.status(200).json(updatedTea)
+    } catch (err) {
+        console.error(err)
+        return res.status(500).json({user: res.user, message: "Something went wrong"})
     }
 })
 

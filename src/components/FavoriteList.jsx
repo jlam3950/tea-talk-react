@@ -45,7 +45,7 @@ const addTeaToList = async (name, tea) =>  {
             "action": "add tea",
             "payload":{
             "listName": name,
-            "tea": tea.id
+            "tea": tea._id
             }
         })
     })
