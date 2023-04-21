@@ -74,7 +74,7 @@ const NavigationBar = () => {
       {currentTeas.filter((input) => {
                 if(search === ''){
                   input = '';
-                } else if (input.name.toLowerCase().includes(search.toLowerCase()) || input.brand.toLowerCase().includes(search.toLowerCase())){
+                } else if ((input.name.toLowerCase().includes(search.toLowerCase()) || input.brand.toLowerCase().includes(search.toLowerCase())) && (search.length > 2) ){
                   return input; 
                 }}).map((tea, i) => {
                   return  <Nav.Link href={`/teaPage/${tea._id}`} className = 'search-item'>
@@ -83,7 +83,7 @@ const NavigationBar = () => {
                               </Nav.Link>
                 })}
                 </div>
-    </div>
+      </div>
     </div>
   );
 }
