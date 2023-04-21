@@ -89,33 +89,34 @@ const TeaForm = (props) => {
       {/* <h2 className="fw-bold mb-4 text-center">Add A Tea</h2> */}
         <form onSubmit={submitTea}>
           <div className ='d-flex flex-column justify-content-center align-items-center'>
+          <label className ='w-100 m-0 p-0'>Name</label>
           <input 
-            className='mb-4 w-100' 
+            className='mb-3 w-100' 
             label='' 
             name='name' 
-            placeholder = 'Name' 
+            placeholder = '' 
             id='formControlLg' 
             type='text' 
             size="lg" 
             onChange={inputChange}
           />
-
+          <label className ='w-100 m-0 p-0'>Brand</label>
           <input 
-            className='mb-4 w-100' 
+            className='mb-3 w-100' 
             label='' 
             name='brand' 
-            placeholder = 'Brand' 
+            placeholder = '' 
             id='formControlLg' 
             type='text' 
             size="lg" 
             onChange={inputChange}
           />
-
+          <label className ='w-100 m-0 p-0'>Type</label>
                 <input 
-                  className='mb-4 w-100' 
+                  className='mb-3 w-100' 
                   label='' 
                   name='type' 
-                  placeholder = 'Type' 
+                  placeholder = '' 
                   id='formControlLg' 
                   type='text' size="lg" 
                   onChange={inputChange}
@@ -123,11 +124,13 @@ const TeaForm = (props) => {
 
                 <br />
 
-                <p>Add an Image:</p>
+                <p style = {{'font-weight': 'bold'}} 
+                  >Add an Image:
+                </p>
                 <p>(Images can only be JPEG or PNG format)</p>
 
           <input 
-            className='mb-4 w-100' 
+            className='mb-4 w-100'
             label='Add an Image' 
             placeholder = 'Image' 
             id='formControlLg' 

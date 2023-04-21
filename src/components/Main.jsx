@@ -5,11 +5,12 @@ import { FaPlus } from 'react-icons/fa';
 import TeaForm from './TeaForm';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import Pagination from 'react-bootstrap/Pagination';
 import { ListContext } from '../App';
 
 
 const Main = ( {teaArray} ) => {
-  const { currentTeas } = useContext(ListContext);
+  const { currentTeas, setCurrentTeas } = useContext(ListContext);
   const [modalShow, setModalShow] = useState(false);
   const [listModal, setListModal] = useState(false);
   const [search, setSearch] = useState('');
@@ -20,16 +21,19 @@ const Main = ( {teaArray} ) => {
        <div className="d-flex flex-column">
           <div className ="input-group d-flex flex-row justify-content-center">
             <div className="form-outline py-2 mobileSearchBar">
-              <input type="search" id="form1" className="form-control" placeholder='Search Tea..' onChange={(e)=>setSearch(e.target.value)} />
+            {/* disabled search bar for now */}
+              {/* <input type="search" id="form1" className="form-control" placeholder='Search Tea..' onChange={(e)=>setSearch(e.target.value)} /> */}
               <label className="form-label" htmlFor="form1"></label>
             </div>
             <div className="teaDropDown py-2 px-2">
-              <DropdownButton id="dropdown-basic-button" title="Tea Styles">
-                <Dropdown.Item href="#/action-1">Green</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Black</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">White</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Herbal</Dropdown.Item>
-              </DropdownButton>
+             <Pagination>  
+                <Pagination.Item>Popular</Pagination.Item>  
+                {/* <Pagination.Item active>Black</Pagination.Item>   */}
+                <Pagination.Item>Black</Pagination.Item>  
+                <Pagination.Item>Green</Pagination.Item>  
+                <Pagination.Item>Herbal</Pagination.Item>  
+                <Pagination.Item>Decaf</Pagination.Item>  
+              </Pagination>
             </div>
           </div>
       <div className ='teaContainer vw-100'>
