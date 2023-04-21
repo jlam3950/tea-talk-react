@@ -1,4 +1,8 @@
 import './App.css';
+import { Routes, Route } from "react-router-dom";
+import { useState, useEffect, createContext } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Main from './components/Main';
 import NavigationBar from './components/NavigationBar';
 import Footer from './components/Footer';
@@ -7,10 +11,6 @@ import Register from './components/Register';
 import UserProfile from './components/UserProfile';
 import TeaForm from "./components/TeaForm"
 import TeaPage from "./components/TeaPage"
-import { Routes, Route } from "react-router-dom";
-import { useState, useEffect, createContext } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AlertBar from './components/AlertBar';
 export const ListContext = createContext();
 
@@ -46,8 +46,6 @@ function App() {
   const [alertFlag, setAlertFlag] = useState(false);
   const [alertInfo, setAlertInfo] = useState('');
   const [ currentList, setCurrentList ] = useState([]);
-  const [ listRender, setListRender ] = useState([]);
-
 
   useEffect(() => { 
     const data = JSON.parse(window.localStorage.getItem('my_user'));
@@ -57,7 +55,6 @@ function App() {
   useEffect(() => { 
     const data = JSON.parse(window.localStorage.getItem('my_user'))
     if( data !== null ){
-      // 4/3/23 added refreshTeaList to fix userProfile list render error, recheck
       if(userProfile._id !== undefined){
         refreshTeaList(userProfile._id);
       }
@@ -94,6 +91,7 @@ function App() {
     const data = await res.json();
     const refreshedList = data.teaLists; 
     setList(refreshedList);
+
     if(list){
       if(list.length < 0){
         console.log(list.length)
@@ -116,9 +114,12 @@ function App() {
 
   return (
     <div className="App d-flex flex-column min-vh-100">
-      <ListContext.Provider value = {{alertInfo, currentList, currentTeas, loggedIn, list, userProfile, editMode, alertFlag, listRender,
-                                     setListRender, setCurrentList, setAlertInfo, setAlertFlag, refreshTeaList, setEditMode, setUserProfile, 
-                                     setList, setUserData}}>
+      <ListContext.Provider value = {{alertInfo, currentList, currentTeas, 
+                                      loggedIn, list, userProfile, 
+                                      editMode, alertFlag, 
+                                      setCurrentList, setAlertInfo, setAlertFlag, 
+                                      refreshTeaList, setEditMode, setUserProfile, 
+                                      setList, setUserData}}>
           <NavigationBar />
             <AlertBar/>
               <Routes>
