@@ -57,7 +57,6 @@ export const TeaRating = (props) => {
                   onClick={handleRating}
                   onPointerEnter={onPointerEnter}
                   onPointerLeave={onPointerLeave}
-                  // style={{height: "1.3em"}}
                   SVGstyle={{width: "23px", height: "23px"}}
                   initialValue={teaRating}
                   fillColor={ratingFillColor}
@@ -70,9 +69,6 @@ export const TeaRating = (props) => {
       <div className = 'border-top border-bottom px-3 py-1'>
         Total Ratings:  {totalTeaRatings}
       </div>
-      {/* <div className = 'border-top border-bottom border-left px-3 py-1'>
-        Date Added: 10/22/23
-      </div> */}
     </div>
   )
 }
