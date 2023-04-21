@@ -4,17 +4,8 @@ import { ListContext } from '../App';
 import { useContext, useState } from 'react';
 
 const ProfileList = (props) => {
-  const { list, currentList, setCurrentList,refreshTeaList, loggedIn, userProfile, listRender, setListRender } = useContext(ListContext);
+  const { currentList, setCurrentList,refreshTeaList, userProfile} = useContext(ListContext);
   const [flag, setFlag ] = useState(false);
-  // const [modalShow, setModalShow] = useState(false);
-  // const [selectedtea, setselectedtea] = useState({});
-
-  // const openModal = (props) => {
-  //   console.log(userProfile);
-  //   refreshTeaList(userProfile._id)
-  //   setModalShow(true);
-  //   setselectedtea(props);
-  // }
 
   const deleteTea = async (teaID, selectedList) => {
     setFlag(false);
@@ -35,8 +26,8 @@ const ProfileList = (props) => {
       })
       const data = await res.json(); 
       console.log(data);
-      setListRender(list[selectedList]);
       refreshTeaList(userProfile._id);
+      setCurrentList(selectedList);
 }
 
   return (

@@ -1,41 +1,15 @@
 import React from 'react';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { ListContext } from '../App';
-import { FaUserCircle, FaMinusCircle, FaPen } from 'react-icons/fa';
+import { FaUserCircle, FaPen } from 'react-icons/fa';
 import ProfileList from './ProfileList';
 import Nav from 'react-bootstrap/Nav';
 
 const UserProfile = () => {
-  const { listRender, setListRender, currentList, setCurrentList, userProfile, list, refreshTeaList, editMode, setEditMode } = useContext(ListContext);
+  const { currentList, setCurrentList, userProfile, list, refreshTeaList, editMode, setEditMode } = useContext(ListContext);
   const [ teaEdit, setTeaEdit ] = useState(false)
   const [ infoEdit, setInfoEdit ] = useState(false);
   const [flag, setFlag ] = useState(false);
-  // const [render, setRender] = useState(true);
-  // everything is working, except tea list isn't refreshing with delete
-  // moved deleteTea to ProfileList 
-  
-//   const deleteTea = async (teaID, selectedList) => {
-//     setFlag(false);
-//     const id = userProfile._id; 
-//     const url = `http://localhost:5100/users/${id}/tealists`; 
-//     const res = await fetch(url, {
-//         method: 'PATCH',
-//         headers: {
-//          'content-type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//          "action": "remove tea",
-//          "payload":{
-//             "listName": selectedList, 
-//             "tea": teaID
-//          }
-//         })
-//       })
-//     setListRender(list[selectedList]);
-//     const data = await res.json(); 
-//     console.log(data);
-//     refreshTeaList(userProfile._id);
-// }
 
 const deleteList = async (name) => {
   const id = userProfile._id; 
@@ -61,19 +35,17 @@ const deleteList = async (name) => {
   }
 }
 
-  // check on this, causes console error due to length 
-  // refreshTeaList(userProfile._id);
-
   const storeListTeas = (listName) => {
-    refreshTeaList(userProfile._id);
-    setListRender(list[listName]);
+    refreshTeaList(userProfile._id); 
     setFlag(true);
     setCurrentList(listName);
   }
   
   return (
-   <div className ='userProfileContainer container-fluid vh-100'>
-    <div className="userProfileHeader  h-25 d-flex align-items-end mx-5">
+   <div className ='userProfileContainer container-fluid' style = {{'minHeight': '100vh'}}>
+    <div className="userProfileHeader  h-25 d-flex align-items-end mx-5"
+         style = {{minHeight: '16em'}}>
+          {/* adjust this value for mobile responsiveness. take out inline style */}
       <div className="userProfileCard w-50 h-50 d-flex align-items-center">
         <div className="userProfileLogo">
           <FaUserCircle />
@@ -111,18 +83,18 @@ const deleteList = async (name) => {
           </div> 
             <hr></hr>
             { flag ? 
-             listRender?.map((tea, i) => {
-                return  <div id = {tea.name} key = {i}>
-                          {/* <span>{teaEdit ? <FaMinusCircle style = {{color : 'red'}} onClick = {() => {deleteTea(tea._id, currentList )}}/> : ''}</span> */}
-                          <ProfileList name={<Nav.Link href={`/teaPage/${tea._id}}`} style ={{color: 'black'}}>{tea.name}</Nav.Link>} brand={tea.brand} type={tea.type} rating={tea.rating} img={tea.imageURL} id={tea._id} key={i} edit = {teaEdit}/>
-                        </div>
-              })
+             list[currentList]?.map((tea, i) => {
+              return  <div id = {tea.name} key = {i}>
+                        <ProfileList name={<Nav.Link href={`/teaPage/${tea._id}}`} style ={{color: 'black'}}>{tea.name}</Nav.Link>} brand={tea.brand} type={tea.type} rating={tea.rating} img={tea.imageURL} id={tea._id} key={i} edit = {teaEdit}/>
+                      </div>
+             })
             : "Click on a tea list to display saved teas"
             }
             
         </div>
       </div>
-      <div className="userTeaListContainer col-4 my-4" style ={{'backgroundColor': 'rgba(250,246,246)'}}>
+      <div className="userTeaListContainer col-4 my-4" 
+           style ={{'backgroundColor': 'rgba(250,246,246)'}}>
         <div className="userProfileList p-0 m-4 h-75 h5">
           <div className="d-flex justify-content-between"> 
             <div style = {{'fontWeight': 'bold'}}> 
@@ -140,20 +112,12 @@ const deleteList = async (name) => {
         Object.keys(list).map((listName, i) => {
             return <div key = {i} className ='listNameContainer'>
                         <div className ='listName location d-flex justify-content-between' id={listName} onClick= {(e) => storeListTeas(e.target.id)}>
-                        {/* <div className="location d-flex justify-content-between"> */}
-                          {listName}
-                           
+                          {listName}                           
                           { editMode ? <><div className ='mx-2'> </div> <button className ='btn btn-danger p-2' onClick = {() => {deleteList(listName)}} style = {{'fontSize': '.5em'}}> Delete </button></> :  
                             <div className ='listLength my-1'>
                                 {`Saved Teas: ${list[listName].length}`}
                             </div>}
                         </div>
-                        {/* <span>{editMode ? <FaMinusCircle className ='mx-1' style = {{color : 'red'}} onClick = {() => {deleteList(listName)}}/> : ''}</span>
-                            {listName}
-                            <div className ='listLength my-1'>
-                                {`Saved Teas: ${list[listName].length}`}
-                            </div> */}
-                        {/* </div> */}
                    </div>         
         })
         : ''

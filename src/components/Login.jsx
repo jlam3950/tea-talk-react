@@ -17,7 +17,7 @@ import {
 from 'mdb-react-ui-kit';
 
 function Login() {
-  const { list, setList, userProfile, setUserProfile, setUserData, setLoggedIn, setAlertFlag, setAlertInfo } = useContext(ListContext);
+  const { setUserData, setAlertFlag, setAlertInfo } = useContext(ListContext);
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState(''); 
   const [logFlag, setLogFlag] = React.useState(false);
@@ -72,10 +72,10 @@ function Login() {
   }
  
   return (
-    <MDBContainer fluid>
+    <MDBContainer fluid className = 'login-container'>
 
-      <MDBRow className='d-flex justify-content-center align-items-center h-100'>
-        <MDBCol col='12'>
+      <MDBRow className='d-flex justify-content-center align-items-center vh-100'>
+        <MDBCol col='12' style = {{height: '100vh'}}>
 
           <MDBCard className='bg-white mx-auto' style={{borderRadius: '1rem', maxWidth: '500px', margin: '7em 0'}}>
             <MDBCardBody className='p-5 w-100 d-flex flex-column'>
@@ -86,7 +86,6 @@ function Login() {
               <MDBInput wrapperClass='mb-4 w-100' label='' placeholder = 'Enter username...' id='formControlLg' type='email' size="lg" onChange={(e) => setUser(e.target.value)}/>
               <MDBInput wrapperClass='mb-4 w-100' label='' placeholder = 'Enter password...'  type='password' size="lg" onChange={(e) => setPassword(e.target.value)}/>
 
-              {/* <MDBCheckbox name='flexCheck' id='flexCheckDefault' className='mb-4' label='Remember password' /> */}
               <div className = 'mx-0'>{logFlag ? setAlert('Logging in...') : ''}</div>
               <div className = 'mx-0' style = {{color: 'red'}}>{failedFlag ? 'Wrong user name or password': ''}</div>
               <div className = 'mx-0' style = {{color: 'red'}}>{emptyFlag ? 'Please input a username and password': ''}</div>

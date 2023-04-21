@@ -3,15 +3,12 @@ import { useState, useContext } from 'react';
 import TeaCard from './TeaCard';
 import { FaPlus } from 'react-icons/fa';
 import TeaForm from './TeaForm';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import { ListContext } from '../App';
 
 
 const Main = ( {teaArray} ) => {
   const { currentTeas, userProfile } = useContext(ListContext);
   const [modalShow, setModalShow] = useState(false);
-  const [listModal, setListModal] = useState(false);
   const [search, setSearch] = useState('');
   
   return (
@@ -24,12 +21,7 @@ const Main = ( {teaArray} ) => {
               <label className="form-label" htmlFor="form1"></label>
             </div>
             <div className="teaDropDown py-2 px-2">
-              <DropdownButton id="dropdown-basic-button" title="Tea Styles">
-                <Dropdown.Item href="#/action-1">Green</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Black</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">White</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Herbal</Dropdown.Item>
-              </DropdownButton>
+              {/* Put bootstrap pagination here */}
             </div>
           </div>
       <div className ='teaContainer vw-100'>
@@ -61,7 +53,7 @@ const Main = ( {teaArray} ) => {
                 return <TeaCard tea={tea} key ={i} />;
               })}  
           </div>
-      </div>
+        </div>
       </div>
     </div>
   )

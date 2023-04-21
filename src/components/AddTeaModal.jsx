@@ -60,8 +60,7 @@ function AddTeaModal(props)  {
     >
       <Modal.Header closeButton onClick = {closeModal}>
         <Modal.Title id="contained-modal-title-vcenter">
-        {createModalShow ? 'Create a List' : 'Select a List'}
-        {/* {createModalShow ? '' : <span className = 'mx-4 my-4' style = {{'font-size': '12px'}}>click a list to save your tea</span> } */}
+          {createModalShow ? 'Create a List' : 'Select a List'}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

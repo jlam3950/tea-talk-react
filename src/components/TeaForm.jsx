@@ -86,7 +86,6 @@ const TeaForm = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      {/* <h2 className="fw-bold mb-4 text-center">Add A Tea</h2> */}
         <form onSubmit={submitTea}>
           <div className ='d-flex flex-column justify-content-center align-items-center'>
           <input 

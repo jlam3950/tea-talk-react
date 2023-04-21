@@ -55,10 +55,10 @@ function Register() {
  }
 
   return (
-    <MDBContainer fluid>
+    <MDBContainer fluid className = 'login-container'>
 
-      <MDBRow className='d-flex justify-content-center align-items-center h-100'>
-        <MDBCol col='12'>
+      <MDBRow className='d-flex justify-content-center align-items-center'>
+        <MDBCol col='12' style = {{height: '100vh'}}>
 
           <MDBCard className='bg-white mx-auto' style={{borderRadius: '1rem', maxWidth: '500px', margin: '8.4em 0'}}>
             <MDBCardBody className='p-5 w-100 d-flex flex-column'>
