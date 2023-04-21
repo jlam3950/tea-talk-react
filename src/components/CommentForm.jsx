@@ -7,8 +7,8 @@ const CommentForm = () => {
         Humphrey says : "Yum, great tea"  ({Date().slice(0,21)})
     </div>
     <div>
-        <input className = 'm-3 '></input>
-        <button className = 'btn btn-success py-1 mb-1'>Tea Talk</button>
+        <input className = 'm-3'></input>
+        <button className = 'btn btn-success py-1 mb-1'>Comment</button>
     </div>
     </>
   )
