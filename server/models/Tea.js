@@ -1,5 +1,14 @@
 const mongoose = require("mongoose");
 
+const commentSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
+    content: String
+})
+
 const teaSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -26,6 +35,10 @@ const teaSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
+    comments:{
+        type: [commentSchema],
+        default: []
+    }
 })
 
 const Tea = mongoose.model("Tea", teaSchema)
