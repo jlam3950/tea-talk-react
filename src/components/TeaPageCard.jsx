@@ -56,13 +56,8 @@ const TeaCard = () => {
             <div className="" style = {{"fontSize": "1.25em", 'fontWeight': '500'}} onClick = {() => console.log(tea)}>
               { tea ? tea.brand : ''} <span className = 'mx-5'> { tea ? tea.type : ''} </span>
             </div>
-            {/* <div className="mx-4" style = {{"fontSize": "1.25em"}}>
-            { tea ? tea.type : ''}
-            </div> */}
           </div>
           <div className="">
-          {/* add rating when added to database */}
-            {/* {props.rating} */}
           </div>
           <div className="" style = {{"fontSize": "1.15em"}}>
             "Black tea is a kind of tea made from leaves of Camellia sinensis. Often, it is stronger in taste than other varieties of tea, like green tea or oolong."

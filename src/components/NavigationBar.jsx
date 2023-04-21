@@ -39,7 +39,7 @@ const NavigationBar = () => {
     <div className = 'd-flex flex-column'>
     <Navbar bg="light" expand="lg" className = 'py-0'>
       <Container fluid className = 'bg-success py-2'>
-        <Navbar.Brand href="/" className = 'text-white'><div className="teatalkLogo">
+        <Navbar.Brand href="/" className = 'text-white'><div className="teatalkLogo" style ={{'margin-left': '1rem'}}>
           Tea Talk
         </div></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -49,8 +49,6 @@ const NavigationBar = () => {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            {/* not sure if this link is redundant */}
-            {/* <Nav.Link href="#action1" style ={{color: 'white'}}>All Teas</Nav.Link> */}
             <Nav.Link href="#action2" style ={{color: 'white'}}>My Teas</Nav.Link>
             {userProfile.username ? <div className = 'me-auto my-2 navBarSignOut' style={{color: 'white', cursor: 'pointer'}} onClick ={()=>signOut()}>Sign out</div> : <Nav.Link href="/login" style ={{color: 'white'}}>Sign in</Nav.Link>}
           </Nav>
@@ -83,7 +81,6 @@ const NavigationBar = () => {
                                 <img className = 'search-img' src={tea.imageURL} alt="" />
                                 {tea.name.slice(0,21)}
                               </Nav.Link>
-                  // return <TeaCard name={tea.name} brand={tea.brand} type={tea.type} rating={tea.rating} img={tea.imageURL} id = {tea._id} key ={i} />;
                 })}
                 </div>
     </div>

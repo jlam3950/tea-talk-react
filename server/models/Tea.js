@@ -13,6 +13,7 @@ const teaSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    description: String,
     imageURL: {
         type: String,
         default: "https://res.cloudinary.com/dl3ncuzpg/image/upload/v1679962610/default_tea_yj99v2.png"
@@ -27,7 +28,8 @@ const teaSchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model("Tea", teaSchema)
+const Tea = mongoose.model("Tea", teaSchema)
+module.exports = Tea
 
 // Average Rating = ratingsTotal / numberOfRatings
 

@@ -14,17 +14,6 @@
   background-color: rgb(243, 240, 240);
 }
 
-/* fix alert bar positioning when user scrolls down */
-/* .alertBar{
-  position: absolute;
-  margin-top: 3em;
-  height: 3em;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.1em;
-} */
 .alertBar{
   position: absolute;
   margin-top: 2.8em;
@@ -49,9 +38,10 @@
   top: 4em;
 }
 
-/* .teaDropDown{
-  margin: 2rem;
-} */
+.rating_div{
+  padding: .175em;
+}
+
 
 .addTea{
   padding-right: 2rem;
@@ -149,9 +139,15 @@
 
 /* Login */
 
-.loginContainer{
-  width: 80%;
+.login-container{
+  background-image: url('../public/images/mike-kotsch-Ahw8RcpDCXI-unsplash.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
+
+/* .loginContainer{
+  width: 80%;
+} */
 
 /* Tea Card  */
 
