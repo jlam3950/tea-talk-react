@@ -11,20 +11,23 @@
 https://water-my-plants-buildweek.herokuapp.com/api -->
 
 # Endpoints
-| Request | URL                | Description |
-| ------- | -----------------  | ----------- |
-| POST    | /users             | register as a new user |
-| POST    | /users/login       | login as an existing user |
-| POST    | /teas              | adds a new Tea to the database |
-| GET     | /users/:id         | gets user info for user with given id |
-| GET     | /teas              | gets an array of all teas in the database |
-| GET     | /teas/:id          | gets info for Tea with given id |
-| PATCH   | /users/:id         | edits info for user with given id |
-| PATCH   | /users/:id/teaLists| edits the "teaLists" object for user with given id |
-| PATCH   | /users/:id/ratings | edits the "ratedTeas" object for user with given id |
-| PATCH   | /teas/:id          | edits info for Tea with given id |
-| DELETE  | /users/:id         | deletes user with given id |
-| DELETE  | /teas/:id          | deletes Tea with given id |
+| Request | URL                              | Description |
+| ------- | -------------------------------- | ----------- |
+| POST    | /users                           | register as a new user |
+| POST    | /users/login                     | login as an existing user |
+| POST    | /teas                            | adds a new Tea to the database |
+| POST    | /teas/:id/comments               | adds a new comment to the Tea with given ID |
+| GET     | /users/:id                       | gets user info for user with given ID |
+| GET     | /teas                            | gets an array of all teas in the database |
+| GET     | /teas/:id                        | gets info for Tea with given ID |
+| PATCH   | /users/:id                       | edits info for user with given ID |
+| PATCH   | /users/:id/teaLists              | edits the "teaLists" object for user with given ID |
+| PATCH   | /users/:id/ratings               | edits the "ratedTeas" object for user with given ID |
+| PATCH   | /teas/:id                        | edits info for Tea with given ID |
+| PATCH   | /teas/:teaID/comments/:commentID | edits info for comment with given commentID |
+| DELETE  | /users/:id                       | deletes user with given ID |
+| DELETE  | /teas/:id                        | deletes Tea with given ID |
+| DELETE  | /teas/:teaID/comments/:commentID | deletes comment with given commentID |
 
 <br />
 <br />
@@ -52,6 +55,7 @@ https://water-my-plants-buildweek.herokuapp.com/api -->
 | imgURL          | string  | no       | no     | URL to image of tea |
 | ratingsTotal    | number  | no       | no     | Total of all user ratings |
 | numberOfRatings | number  | no       | no     | Number of users who have rated |
+| comments        | Array   | no       | no     | Array of User comments |
 
 <br />
 <br />
@@ -131,9 +135,51 @@ Returns:
     "imageURL": "https://res.cloudinary.com/dl3ncuzpg/image/upload/v1679962610/default_tea_yj99v2.png",
     "ratingsTotal": 0,
     "numberOfRatings": 0,
-    "_id": "643acaee0f61da490686c505",
+    "_id": "64431e8fdcf442cb0a40c26c",
+    "comments": [],
     "__v": 0
   }
+```
+
+<br />
+<br />
+
+### POST /teas/:id/comments
+Request Body:
+```json
+  {
+    "userID":"643ac8ea0f61da490686c4ff",
+    "content": "Jasmine Tea is my favorite!"
+  }
+```
+Returns:
+```json
+  [
+    {
+      "user": {
+        "_id": "6431fc81ac2d4bc19f5d5ec1",
+        "username": "brian"
+      },
+      "content": "I really like this one!",
+      "_id": "64433199dcf442cb0a40c280"
+    },
+    {
+      "user": {
+        "_id": "6434002e9c3e21b02066854b",
+        "username": "Cat"
+      },
+      "content": "Very tasty",
+      "_id": "644331aedcf442cb0a40c288"
+    },
+    {
+      "user": {
+        "_id": "643ac8ea0f61da490686c4ff",
+        "username": "UncleIroh"
+      },
+      "content": "Jasmine Tea is my favorite!",
+      "_id": "644331cadcf442cb0a40c292"
+    }
+  ]
 ```
 
 <br />
@@ -162,44 +208,54 @@ Returns:
 ```json
   [
     {
-      "_id": "63f8f1b504965fb08f2bee80",
-      "name": "British Blend",
-      "brand": "Tetly",
-      "type": "Black",
-      "__v": 0,
-      "imageURL": "https://res.cloudinary.com/dl3ncuzpg/image/upload/v1679962610/default_tea_yj99v2.png",
-      "numberOfRatings": 1,
-      "ratingsTotal": 4
+        "_id": "63f8f1b504965fb08f2bee80",
+        "name": "British Blend",
+        "brand": "Tetly",
+        "type": "Black",
+        "__v": 0,
+        "imageURL": "https://res.cloudinary.com/dl3ncuzpg/image/upload/v1679962610/default_tea_yj99v2.png",
+        "numberOfRatings": 1,
+        "ratingsTotal": 4,
+        "comments": []
     },
     {
-      "_id": "63f8f4e80e1be62b7042d82b",
-      "name": "Original Blend",
-      "brand": "Red Rose",
-      "type": "Black",
-      "__v": 0,
-      "imageURL": "https://res.cloudinary.com/dl3ncuzpg/image/upload/v1679965692/IMG_3978_jkh5fe.jpg",
-      "numberOfRatings": 1,
-      "ratingsTotal": 5
+        "_id": "63f8f4e80e1be62b7042d82b",
+        "name": "Original Blend",
+        "brand": "Red Rose",
+        "type": "Black",
+        "__v": 10,
+        "imageURL": "https://res.cloudinary.com/dl3ncuzpg/image/upload/v1679965692/IMG_3978_jkh5fe.jpg",
+        "numberOfRatings": 1,
+        "ratingsTotal": 5,
+        "comments": [
+            {
+                "user": "640f629852c4d972f1b48616",
+                "content": "I REALLY love this tea!",
+                "_id": "644316e257bce188a04e6c12"
+            }
+        ]
     },
     {
-      "_id": "641e6a2ba27aad41448d599d",
-      "name": "Earl Grey",
-      "brand": "Bigelow",
-      "type": "Black",
-      "imageURL": "https://res.cloudinary.com/dl3ncuzpg/image/upload/v1680216616/BigelowEarlGrey_thbskp.jpg",
-      "ratingsTotal": 4,
-      "numberOfRatings": 1,
-      "__v": 0
+        "_id": "641e6a2ba27aad41448d599d",
+        "name": "Earl Grey",
+        "brand": "Bigelow",
+        "type": "Black",
+        "imageURL": "https://res.cloudinary.com/dl3ncuzpg/image/upload/v1680216616/BigelowEarlGrey_thbskp.jpg",
+        "ratingsTotal": 4,
+        "numberOfRatings": 1,
+        "__v": 0,
+        "comments": []
     },
     {
-      "_id": "6426130ef0721ad677db6e20",
-      "name": "Earl Grey Decaffeinated",
-      "brand": "Bigelow",
-      "type": "Black",
-      "imageURL": "https://res.cloudinary.com/dl3ncuzpg/image/upload/v1680216845/m6koufqb2lksencin69s.jpg",
-      "ratingsTotal": 0,
-      "numberOfRatings": 0,
-      "__v": 0
+        "_id": "6426130ef0721ad677db6e20",
+        "name": "Earl Grey Decaffeinated",
+        "brand": "Bigelow",
+        "type": "Black",
+        "imageURL": "https://res.cloudinary.com/dl3ncuzpg/image/upload/v1680216845/m6koufqb2lksencin69s.jpg",
+        "ratingsTotal": 3,
+        "numberOfRatings": 1,
+        "__v": 0,
+        "comments": []
     },
   ]
 ```
@@ -211,14 +267,15 @@ Returns:
 Returns:
 ```json
   {
-    "_id": "63f8f4e80e1be62b7042d82b",
-    "name": "Original Blend",
-    "brand": "Red Rose",
+    "_id": "63f8f1b504965fb08f2bee80",
+    "name": "British Blend",
+    "brand": "Tetly",
     "type": "Black",
     "__v": 0,
-    "imageURL": "https://res.cloudinary.com/dl3ncuzpg/image/upload/v1679965692/IMG_3978_jkh5fe.jpg",
+    "imageURL": "https://res.cloudinary.com/dl3ncuzpg/image/upload/v1679962610/default_tea_yj99v2.png",
     "numberOfRatings": 1,
-    "ratingsTotal": 5
+    "ratingsTotal": 4,
+    "comments": []
   }
 ```
 
@@ -326,6 +383,46 @@ Returns:
 <br />
 <br />
 
+### PATCH /teas/:teaID/comments/:comment:ID
+Request Body:
+```json
+{
+  "content": "Jasmine Tea is my favorite! It's great for every occasion."
+}
+```
+Returns:
+*Returns the new array of all the current comments*
+```json
+  [
+    {
+      "user": {
+        "_id": "6431fc81ac2d4bc19f5d5ec1",
+        "username": "brian"
+      },
+      "content": "I really like this one!",
+      "_id": "64433199dcf442cb0a40c280"
+    },
+    {
+      "user": {
+        "_id": "6434002e9c3e21b02066854b",
+        "username": "Cat"
+      },
+      "content": "Very tasty",
+      "_id": "644331aedcf442cb0a40c288"
+    },
+    {
+      "user": {
+        "_id": "643ac8ea0f61da490686c4ff",
+        "username": "UncleIroh"
+      },
+      "content": "Jasmine Tea is my favorite! It's great for every occasion.",
+      "_id": "644331cadcf442cb0a40c292"
+    }
+  ]
+```
+
+<br />
+<br />
 
 <!-- ### PATCH /teas/:id
 
@@ -342,6 +439,37 @@ Returns
 <br />
 <br />
 
+
+ -->
+
+### DELETE /teas/:teaID/comments/:commentID
+Returns:
+*Returns the new array of all the current comments (without the one that was deleted)*
+```json
+  [
+    {
+      "user": {
+        "_id": "6431fc81ac2d4bc19f5d5ec1",
+        "username": "brian"
+      },
+      "content": "I really like this one!",
+      "_id": "64433199dcf442cb0a40c280"
+    },
+    {
+      "user": {
+        "_id": "643ac8ea0f61da490686c4ff",
+        "username": "UncleIroh"
+      },
+      "content": "Jasmine Tea is my favorite! It's great for every occasion.",
+      "_id": "644331cadcf442cb0a40c292"
+    }
+  ]
+```
+
+<br />
+<br />
+
+<!-- 
 
 ### DELETE /users/:id
 
