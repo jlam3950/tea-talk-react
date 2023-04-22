@@ -1,15 +1,31 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { ListContext } from '../App';
 import { Rating } from 'react-simple-star-rating'
 
 export const TeaRating = (props) => {
   const {userProfile, setUserProfile} = useContext(ListContext)
   const { tea } = props
-  const [teaRating, setTeaRating] = useState(tea.rating)
-  const [averageTeaRating, setAverageTeaRating] = useState((tea.ratingsTotal/tea.numberOfRatings)||0)
+  const [teaRating, setTeaRating] = useState()
+  const [averageTeaRating, setAverageTeaRating] = useState(0)
   const [totalTeaRatings, setTotalTeaRatings] = useState(tea.numberOfRatings)
-  const [ratingFillColor, setRatingFillColor] = useState(tea.ratingColor)
+  const [ratingFillColor, setRatingFillColor] = useState("#000002")
+  const [count, setCount] = useState(0)
 
+  useEffect(()=>{
+    console.log(count)
+    setCount(count+1)
+    setRatingFillColor("#000002")
+    setAverageTeaRating((tea.ratingsTotal/tea.numberOfRatings) || 0)
+    setTotalTeaRatings(tea.numberOfRatings)
+    if (userProfile.username && userProfile.ratedTeas[tea._id]){
+      setTeaRating(userProfile.ratedTeas[tea._id])
+      setRatingFillColor("#ffd300")
+    } else if (tea.numberOfRatings === 0){
+      setTeaRating("0.0")
+    } else {
+      setTeaRating(tea.ratingsTotal/tea.numberOfRatings)
+    }
+  }, [tea, userProfile])
 
   const onPointerEnter = () => {
     if (ratingFillColor === "#000002"){
