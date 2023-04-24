@@ -37,7 +37,7 @@ const ProfileList = (props) => {
       <div className="col-3 d-flex justify-content-center align-items-center">
         <img className = 'profileTeaListImg' src={tea.imageURL} alt="" />
       </div>
-      <div className="col-8">
+      <div className="col-8 user-card-description">
         <div className="mr-2">
           <div className="my-0 py-0"> 
             {tea.name}

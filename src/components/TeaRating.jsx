@@ -66,8 +66,8 @@ export const TeaRating = (props) => {
   }
 
   return (
-    <div className = ' d-flex justify-content-center align-items-start py-1'>
-      <div className = 'border-top border-bottom border-right px-3 rating_div'>
+    <div className = 'tea-rating d-flex justify-content-center align-items-start py-1'>
+      <div className = 'tea-rating-container border-top border-bottom border-right rating_div'>
         Rating: <Rating
                   allowFraction={true}
                   onClick={handleRating}

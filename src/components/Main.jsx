@@ -1,18 +1,23 @@
 import React from 'react';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import TeaCard from './TeaCard';
 import { FaPlus } from 'react-icons/fa';
 import TeaForm from './TeaForm';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import Pagination from 'react-bootstrap/Pagination';
 import { ListContext } from '../App';
-
 
 const Main = ( {teaArray} ) => {
   const { currentTeas, userProfile } = useContext(ListContext);
   const [modalShow, setModalShow] = useState(false);
   const [search, setSearch] = useState('');
+  const [loadFlag, setLoadFlag] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadFlag(true);
+      console.log(loadFlag)
+    }, 1000)
+  }, [])
   
   return (
   
@@ -24,36 +29,65 @@ const Main = ( {teaArray} ) => {
               {/* <input type="search" id="form1" className="form-control" placeholder='Search Tea..' onChange={(e)=>setSearch(e.target.value)} /> */}
               <label className="form-label" htmlFor="form1"></label>
             </div>
+            
             <div className="teaDropDown py-2 px-2">
              <Pagination>  
-                <Pagination.Item>Popular</Pagination.Item>  
                 {/* <Pagination.Item active>Black</Pagination.Item>   */}
-                <Pagination.Item>Black</Pagination.Item>  
-                <Pagination.Item>Green</Pagination.Item>  
-                <Pagination.Item>Herbal</Pagination.Item>  
-                <Pagination.Item>Decaf</Pagination.Item>  
+                <Pagination.Item>
+                  <div style ={{color: 'black'}}>
+                    Popular
+                  </div>
+                </Pagination.Item>  
+                <Pagination.Item>
+                  <div style ={{color: 'black'}}>
+                    Black
+                  </div>
+                </Pagination.Item>  
+                <Pagination.Item>
+                  <div style ={{color: 'black'}}>
+                    Green
+                  </div>
+                </Pagination.Item>  
+                <Pagination.Item>
+                  <div style ={{color: 'black'}}>
+                    Herbal
+                  </div>
+                </Pagination.Item>  
+              <div className="addTea mx-4">
+                <button className="btn btn-success" style = {{zIndex : '1'}} onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
+                <TeaForm
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
+              </div>
               </Pagination>
+              <div className="add-tea-mobile">
+                <button className="btn btn-success" style = {{zIndex : '1'}} onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
+                <TeaForm
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
+              </div>
             </div>
+            
           </div>
       <div className ='teaContainer vw-100'>
-        <div className="addTeaBtnContainer">
-            <div className="addTea">
-              <button className="btn btn-success addTeaBtn" onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
-              <TeaForm
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-              />
-            </div>
-          </div>
-          <div className = 'teaCardContainer col-sm col-10'> 
-            {currentTeas.filter((input) => {
+          <div className = {loadFlag ? 'teaCardContainer col-sm col-10' : 'teaCardContainerLoading'} 
+               style = {{marginBottom: '5em'}}
+          > {
+            loadFlag ? 
+            currentTeas.filter((input) => {
               if(search === ''){
                 return input; 
               } else if (input.name.toLowerCase().includes(search.toLowerCase()) || input.brand.toLowerCase().includes(search.toLowerCase())){
                 return input; 
               }}).map((tea, i) => {
                 return <TeaCard tea={tea} key ={i} />;
-              })}  
+              })  : 
+              <div className = 'vh-100'>
+                <span className="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+              </div>
+          }
           </div>
         </div>
       </div>

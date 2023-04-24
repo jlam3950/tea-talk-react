@@ -14,9 +14,9 @@ const Footer = () => {
         <div className=''>
           <FaTwitter className = 'footerIcon'/>
         </div>
-      </div>
-      <div className="copyrightContainer">
-        © teatalk 2023
+        <div className="copyrightContainer my-3">
+          © teatalk 2023
+        </div>
       </div>
     </div>
   )
