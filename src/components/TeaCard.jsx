@@ -38,7 +38,7 @@ const TeaCard = (props) => {
         <div className="col-7">
           <div className="mr-2">
             <div className="cardTitle my-0 py-0"> 
-              <Nav.Link href={`/teaPage/${tea._id}}`} style ={{color: 'black'}}>{tea.name}</Nav.Link>
+              <Nav.Link href={`/teaPage/${tea._id}`} style ={{color: 'black'}}>{tea.name}</Nav.Link>
             </div>
             <div className="d-flex cardSubtitleAndType">
               <div className=" cardSubtitle col-4">
@@ -66,7 +66,9 @@ const TeaCard = (props) => {
           <FaPlusSquare onClick = {() => setAlert('Sign in to save tea...')}/> }
         </div>
       </div>
+      <div class="ratingBar" style = {{"fontSize": ".848em"}}>
       <TeaRating tea={tea}/>
+      </div>
     </div>
   );
 };

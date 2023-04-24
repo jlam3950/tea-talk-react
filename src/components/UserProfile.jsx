@@ -85,7 +85,7 @@ const deleteList = async (name) => {
             { flag ? 
              list[currentList]?.map((tea, i) => {
               return  <div id = {tea.name} key = {i}>
-                        <ProfileList name={<Nav.Link href={`/teaPage/${tea._id}}`} style ={{color: 'black'}}>{tea.name}</Nav.Link>} brand={tea.brand} type={tea.type} rating={tea.rating} img={tea.imageURL} id={tea._id} key={i} edit = {teaEdit}/>
+                        <ProfileList name={<Nav.Link href={`/teaPage/${tea._id}`} style ={{color: 'black'}}>{tea.name}</Nav.Link>} tea ={tea} key={i} edit = {teaEdit}/>
                       </div>
              })
             : "Click on a tea list to display saved teas"

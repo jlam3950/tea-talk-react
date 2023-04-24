@@ -4,6 +4,7 @@ import { ListContext } from '../App';
 import { useContext, useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import AddTeaModal from './AddTeaModal';
+import { TeaRating } from "./TeaRating";
 
 // need to create get request
 
@@ -22,7 +23,7 @@ const TeaCard = () => {
     }
     
     const getTea = async () => { 
-        const url = "http://localhost:5100/teas/" + id.slice(0,24);        
+        const url = "http://localhost:5100/teas/" + id;        
         const res = await fetch(url);
         const data = await res.json();
         setTea(data);
@@ -65,8 +66,8 @@ const TeaCard = () => {
             "Black tea is a kind of tea made from leaves of Camellia sinensis. Often, it is stronger in taste than other varieties of tea, like green tea or oolong."
           </div>
         </div>
-        <div style = {{"fontSize": "1.15em", 'fontWeight': '500'}}>
-            Tea Rating: <FaStar/><FaStar/><FaStar/><FaStar/>(4.6) | <span>200 ratings</span>
+        <div class="ratingBar" style = {{"fontSize": ".699em", "lineHeight": "1.7em"}}>
+            <TeaRating tea={tea}/>
         </div>
         <div className = 'my-4'>
           { userProfile.username ? 

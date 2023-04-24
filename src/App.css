@@ -31,8 +31,13 @@
 }
 
 .rating_div{
-  padding: .175em 1em;
+  padding: .165em 1em;
 }
+
+.ratingBar{
+  font-weight: bold;
+}
+
 
 .teaCardImg{
   height: 4em;

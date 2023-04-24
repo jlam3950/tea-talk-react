@@ -2,8 +2,10 @@ import React from "react";
 import { FaStar } from 'react-icons/fa';
 import { ListContext } from '../App';
 import { useContext, useState } from 'react';
+import { TeaRating } from "./TeaRating";
 
 const ProfileList = (props) => {
+  const { tea } = props
   const { currentList, setCurrentList,refreshTeaList, userProfile} = useContext(ListContext);
   const [flag, setFlag ] = useState(false);
 
@@ -33,28 +35,31 @@ const ProfileList = (props) => {
   return (
     <div className="teaCard d-flex my-3 py-2 px-2">
       <div className="col-3 d-flex justify-content-center align-items-center">
-        <img className = 'profileTeaListImg' src={props.img} alt="" />
+        <img className = 'profileTeaListImg' src={tea.imageURL} alt="" />
       </div>
       <div className="col-8 user-card-description">
         <div className="mr-2">
           <div className="my-0 py-0"> 
-            {props.name}
+            {tea.name}
           </div>
           <div className="d-flex">
             <div className="col-4">
-              {props.brand}
+              {tea.brand}
             </div>
             <div className="col-2">
-              {props.type}
+              {tea.type}
             </div>
           </div>
           <div className="">
-            {props.rating}
+            {tea.rating}
           </div>
         </div>
-        Tea Rating: <FaStar/><FaStar/><FaStar/><FaStar/>(4.6) | <span>200 ratings</span>
+        <div class="ratingBar" style = {{"fontSize": ".628em", "lineHeight": "1.5em"}}>
+        {/* Tea Rating: <FaStar/><FaStar/><FaStar/><FaStar/>(4.6) | <span>200 ratings</span> */}
+        <TeaRating tea={tea} />
+        </div>
       </div>
-      <div className = 'col-1' onClick = {() => {deleteTea(props.id, currentList )}}>{props.edit ? <button className ='btn btn-danger my-3 p-2' style = {{'fontSize': '.5em'}}> Delete </button> : ''}</div>
+      <div className = 'col-1' onClick = {() => {deleteTea(tea._id, currentList )}}>{props.edit ? <button className ='btn btn-danger my-3 p-2' style = {{'fontSize': '.5em'}}> Delete </button> : ''}</div>
     </div>
   );
 };
