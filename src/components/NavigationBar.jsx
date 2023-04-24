@@ -39,7 +39,7 @@ const NavigationBar = () => {
     <div className = 'd-flex flex-column'>
     <Navbar bg="light" expand="lg" className = 'py-0'>
       <Container fluid className = 'bg-success py-2'>
-        <Navbar.Brand href="/" className = 'text-white'><div className="teatalkLogo" style ={{'margin-left': '1rem'}}>
+        <Navbar.Brand href="/" className = 'text-white'><div className="teatalkLogo">
           Tea Talk
         </div></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />

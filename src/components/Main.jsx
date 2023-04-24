@@ -61,6 +61,13 @@ const Main = ( {teaArray} ) => {
                 />
               </div>
               </Pagination>
+              <div className="add-tea-mobile">
+                <button className="btn btn-success" style = {{zIndex : '1'}} onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
+                <TeaForm
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
+              </div>
             </div>
             
           </div>

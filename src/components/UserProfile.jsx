@@ -42,9 +42,9 @@ const deleteList = async (name) => {
   }
   
   return (
+    <div className = 'profile-root container-fluid'>
    <div className ='userProfileContainer container-fluid' style = {{'minHeight': '100vh'}}>
-    <div className="userProfileHeader  h-25 d-flex align-items-end mx-5"
-         style = {{minHeight: '16em'}}>
+    <div className="userProfileHeader d-flex align-items-end">
           {/* adjust this value for mobile responsiveness. take out inline style */}
       <div className="userProfileCard w-50 h-50 d-flex align-items-center">
         <div className="userProfileLogo">
@@ -56,9 +56,9 @@ const deleteList = async (name) => {
       </div>
     </div>
 
-    <div className="userProfileContainer d-flex justify-content-center mx-5">
+    <div className="userProfileContainer d-flex justify-content-center mx-sm-5">
       <div className="userDescriptionDisplayContainer col-8">
-        <div className="userProfileDescription p-4 my-4 h5" style ={{'backgroundColor': 'rgba(250,246,246)'}}>
+        <div className="userProfileDescription p-sm-4 my-sm-4 h5" style ={{'backgroundColor': 'rgba(250,246,246)'}}>
           <div className="d-flex justify-content-between"> 
             <div style = {{'fontWeight': 'bold'}}> 
               Profile Info
@@ -126,6 +126,7 @@ const deleteList = async (name) => {
       </div>
     </div>
 
+   </div>
    </div>
   
   )

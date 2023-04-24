@@ -9,7 +9,7 @@ const TeaPage = () => {
        <div className="d-flex flex-column">
           <div className ="input-group d-flex flex-row justify-content-center">
           </div>
-      <div className ='teaContainer vw-100'>
+      <div className ='teaContainer vw-100 my-5'>
           <div className = 'teaCardContainer'> 
             <TeaPageCard /> 
             <CommentForm />
