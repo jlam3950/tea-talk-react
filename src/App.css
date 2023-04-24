@@ -1,17 +1,7 @@
-
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
-
 .App{
-  background-color: rgb(243, 240, 240);
+  /* background-color: rgb(243, 240, 240); */
+  background-image: url('../public/images/mike-kotsch-Ahw8RcpDCXI-unsplash.jpg');
+  background-size: cover;  
 }
 
 .alertBar{
@@ -42,19 +32,18 @@
   padding: .175em;
 }
 
-
-.addTea{
-  padding-right: 2rem;
-}
-
 .teaCardImg{
   height: 4em;
 }
 
 /* UserProfile */
 
+.profile-root{
+  background-color: rgb(243, 240, 240);
+}
+
 .userProfileContainer{
-  max-width: 76rem;
+  max-width: 65rem;
 }
 
 .userProfileLogo{
@@ -69,6 +58,7 @@
 }
 
 .userProfileHeader{
+  margin-top: 1.5em;
   background-size: cover;
   background-position: bottom;
   background-image: url('../public/images/userprofile-background3.png');
@@ -121,7 +111,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  overflow-y: auto;;
+  overflow-y: auto;
   top: 6%;
   z-index: 3;
   display: flex;
@@ -215,9 +205,19 @@
 
 /* Footer */
 
+.footer{
+    /* background-color: rgb(243, 240, 240); */
+    background-color: rgb(66, 65, 65);
+}
+
 .footerIcon{
   font-size: 1.75em;
   margin: .5em;
+  color: white;
+}
+
+.copyrightContainer{
+  color: white;
 }
 
 /* fix responsiveness for userProfile */
@@ -287,6 +287,7 @@
   }
 
   .teaCardContainer{
+    overflow-y:auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -296,7 +297,20 @@
     /* maybe remove border radius? */
     background-color: rgb(249, 246, 246);
     margin: 0 2em;
-    margin-top: 1rem;
+    /* changed this from 90vh */
+    max-height: 82vh;
+    margin-top: 0rem;
+  }
+  
+  .teaCardContainerLoading{
+    overflow-y:auto;
+    max-height: 82vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 43em;
+    margin: 0 2em;
+    margin-top: 0rem;
   }
 
   .addTea{
