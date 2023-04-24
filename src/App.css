@@ -39,9 +39,13 @@
 }
 
 .rating_div{
-  padding: .175em;
+  padding: .195em;
 }
 
+.ratingBar{
+  font-family: monospace;
+  font-weight: bold;
+}
 
 .addTea{
   padding-right: 2rem;

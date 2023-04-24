@@ -64,7 +64,7 @@ const TeaCard = () => {
             "Black tea is a kind of tea made from leaves of Camellia sinensis. Often, it is stronger in taste than other varieties of tea, like green tea or oolong."
           </div>
         </div>
-        <div style = {{"fontSize": "1.15em", 'fontWeight': '500'}}>
+        <div class="ratingBar" style = {{"fontSize": ".565em", "lineHeight": "2.1em"}}>
             <TeaRating tea={tea}/>
         </div>
         <div className = 'my-4'>

@@ -54,8 +54,10 @@ const ProfileList = (props) => {
             {tea.rating}
           </div>
         </div>
+        <div class="ratingBar" style = {{"fontSize": ".416em", "lineHeight": "2.2em"}}>
         {/* Tea Rating: <FaStar/><FaStar/><FaStar/><FaStar/>(4.6) | <span>200 ratings</span> */}
         <TeaRating tea={tea} />
+        </div>
       </div>
       <div className = 'col-1' onClick = {() => {deleteTea(tea._id, currentList )}}>{props.edit ? <button className ='btn btn-danger my-3 p-2' style = {{'fontSize': '.5em'}}> Delete </button> : ''}</div>
     </div>

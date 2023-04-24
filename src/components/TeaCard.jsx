@@ -66,7 +66,9 @@ const TeaCard = (props) => {
           <FaPlusSquare onClick = {() => setAlert('Sign in to save tea...')}/> }
         </div>
       </div>
+      <div class="ratingBar" style = {{"fontSize": ".848em"}}>
       <TeaRating tea={tea}/>
+      </div>
     </div>
   );
 };
