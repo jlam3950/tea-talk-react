@@ -43,13 +43,15 @@ const TeaCard = () => {
 
   return (
     <div className = 'd-flex flex-column'>
-    <div className="d-flex my-3 py-2 px-2">
-      <div className="col-4 d-flex justify-content-center align-items-center">
-        <img className = 'm-2 mb-5' style = {{'height': '8.25rem', "width": '8.25rem'}} src={tea ? tea.imageURL : ''} alt="" />
+    <div className="tea-page-container d-flex my-3 py-2 px-2">
+   {/* changed from col-4 to col-sm-4 */}
+      <div className="col-sm-4 d-flex justify-content-center align-items-center">
+        <img className = 'm-2 mb-5 teaPageImg' style = {{'height': '8.25rem', "width": '8.25rem'}} src={tea ? tea.imageURL : ''} alt="" />
       </div>
-      <div className="col-8">
+      {/* changed from col-4 to col-sm-8 */}
+      <div className="col-sm-8">
         <div className="mr-2">
-          <div className="my-0 py-0" style = {{"fontSize": "1.65em", 'fontWeight': '600'}}> 
+          <div className="my-0 py-0" style = {{"fontSize": "1.65em", 'fontWeight': '500'}}> 
             { tea ? tea.name : ''}
           </div>
           <div className="d-flex flex-column">

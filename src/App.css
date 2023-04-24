@@ -1,17 +1,9 @@
-
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
+/* need to fix ratings when adjusting from desktop to mobile view */
 
 .App{
-  background-color: rgb(243, 240, 240);
+  /* background-color: rgb(243, 240, 240); */
+  background-image: url('../public/images/mike-kotsch-Ahw8RcpDCXI-unsplash.jpg');
+  background-size: cover;  
 }
 
 .alertBar{
@@ -39,12 +31,7 @@
 }
 
 .rating_div{
-  padding: .175em;
-}
-
-
-.addTea{
-  padding-right: 2rem;
+  padding: .175em 1em;
 }
 
 .teaCardImg{
@@ -53,8 +40,12 @@
 
 /* UserProfile */
 
+.profile-root{
+  background-color: rgb(243, 240, 240);
+}
+
 .userProfileContainer{
-  max-width: 76rem;
+  max-width: 65rem;
 }
 
 .userProfileLogo{
@@ -69,6 +60,10 @@
 }
 
 .userProfileHeader{
+  margin-left: 3em;
+  margin-right: 3em;
+  margin-top: 1.5em;
+  min-height: 14em;
   background-size: cover;
   background-position: bottom;
   background-image: url('../public/images/userprofile-background3.png');
@@ -121,7 +116,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  overflow-y: auto;;
+  overflow-y: auto;
   top: 6%;
   z-index: 3;
   display: flex;
@@ -215,9 +210,19 @@
 
 /* Footer */
 
+.footer{
+    /* background-color: rgb(243, 240, 240); */
+    background-color: rgb(66, 65, 65);
+}
+
 .footerIcon{
   font-size: 1.75em;
   margin: .5em;
+  color: white;
+}
+
+.copyrightContainer{
+  color: white;
 }
 
 /* fix responsiveness for userProfile */
@@ -233,13 +238,131 @@
 
 
 @media only screen and (max-width: 599px){
+  .App{
+  background-color: rgb(243, 240, 240);
+  background: none;
+  }
+
+  /* main bar */
+
+  .teatalkLogo{
+    margin: 0em;
+  }
+
+  .teaDropDown{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   .addTeaBtnContainer{
     display: flex;
     justify-content: center;
   }
+
+  .addTea{
+    display: none;
+  }
+
+  /* tea card container */
+
+  .teaCardContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 1.75em;
+  }
+  /* tea card */
+
+  .cardTitle{
+    font-size: 1.15em;
+  }
+  .cardDescription{
+    font-size: .75em;
+  }
+
+  .teaCardImg{
+    padding-right: 2em;
+    width: 6em;
+  }
+
+  .teaPlus{
+    padding-left: .5em;
+  }
+
+  .tea-rating{
+    font-size: .8em;
+  }
+
+  .tea-rating-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-size: .8em;
+  }
+
+  .rating_div{
+    padding: .385em;
+  }
+
+  /* tea page */
+  /* Tea Page */
+  .tea-page-container{
+    margin-right: 1em;
+  }
+  
+  .teaPageImg{
+    display: none; 
+  }
+
+  /* user profile */
+
+  .userProfileCard{
+    font-size: .75em
+  }
+  .userProfileHeader{
+    margin: 1.5em 0em;
+    min-height: 10em;
+  }
+
+  .userProfileContainer{
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .userProfileDescription{
+    min-width: 15em;
+    padding: 1em;
+  }
+
+  .userProfileDisplayTeas{
+    min-width: 15em;
+    padding: 1em;
+  }
+
+  .userTeaListContainer{
+    min-width: 20em;
+    padding: 1em;
+  }
+
+  .teaCard{
+    font-size: .75em;
+    margin: 1em;
+  }
+
+  .user-card-description{
+    margin-left: 1em;
+  }
 }
 
 @media only screen and (min-width: 600px){
+
+  /* Main Bar */
+.add-tea-mobile{
+    display: none;
+  }
 
   /* User Profile */
 
@@ -287,6 +410,7 @@
   }
 
   .teaCardContainer{
+    overflow-y:auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -296,7 +420,20 @@
     /* maybe remove border radius? */
     background-color: rgb(249, 246, 246);
     margin: 0 2em;
-    margin-top: 1rem;
+    /* changed this from 90vh */
+    max-height: 82vh;
+    margin-top: 0rem;
+  }
+  
+  .teaCardContainerLoading{
+    overflow-y:auto;
+    max-height: 82vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 43em;
+    margin: 0 2em;
+    margin-top: 0rem;
   }
 
   .addTea{
@@ -318,11 +455,14 @@
     flex-direction: row-reverse;
     justify-content: center;
   }
-
-  /* Navigation Bar */
 }
 
 @media only screen and (min-width: 991px){
+
+  /* Nav Bar */
+  .teatalkLogo{
+    margin-left: 1.15em;
+  }
 
   .mobileSearchBar{
     display: none;
