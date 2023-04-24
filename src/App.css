@@ -31,11 +31,10 @@
 }
 
 .rating_div{
-  padding: .195em 1em;
+  padding: .165em 1em;
 }
 
 .ratingBar{
-  font-family: monospace;
   font-weight: bold;
 }
 

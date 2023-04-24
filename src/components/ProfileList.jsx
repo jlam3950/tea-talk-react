@@ -54,7 +54,7 @@ const ProfileList = (props) => {
             {tea.rating}
           </div>
         </div>
-        <div class="ratingBar" style = {{"fontSize": ".416em", "lineHeight": "2.2em"}}>
+        <div class="ratingBar" style = {{"fontSize": ".628em", "lineHeight": "1.5em"}}>
         {/* Tea Rating: <FaStar/><FaStar/><FaStar/><FaStar/>(4.6) | <span>200 ratings</span> */}
         <TeaRating tea={tea} />
         </div>
