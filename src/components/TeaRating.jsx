@@ -3,8 +3,9 @@ import { ListContext } from '../App';
 import { Rating } from 'react-simple-star-rating'
 
 export const TeaRating = (props) => {
-  const {userProfile, setUserProfile} = useContext(ListContext)
+  const {userProfile, setUserProfile, currentTeas} = useContext(ListContext)
   const { tea } = props
+  const [teaInfo, setTeaInfo] = useState(tea)
   const [teaRating, setTeaRating] = useState()
   const [averageTeaRating, setAverageTeaRating] = useState(0)
   const [totalTeaRatings, setTotalTeaRatings] = useState(tea.numberOfRatings)
@@ -12,20 +13,24 @@ export const TeaRating = (props) => {
   const [count, setCount] = useState(0)
 
   useEffect(()=>{
+    const currentTea = (teaInfo===[] ? tea : teaInfo)
     console.log(count)
     setCount(count+1)
+    console.log("UseEffect Tea Data:\n",tea)
+    console.log("UseEffect Tea Info:\n",teaInfo)
+    console.log("UseEffect Current Tea:\n",currentTea)
     setRatingFillColor("#000002")
-    setAverageTeaRating((tea.ratingsTotal/tea.numberOfRatings) || 0)
-    setTotalTeaRatings(tea.numberOfRatings)
+    setAverageTeaRating((currentTea.ratingsTotal/currentTea.numberOfRatings) || 0)
+    setTotalTeaRatings(currentTea.numberOfRatings)
     if (userProfile.username && userProfile.ratedTeas[tea._id]){
       setTeaRating(userProfile.ratedTeas[tea._id])
       setRatingFillColor("#ffd300")
-    } else if (tea.numberOfRatings === 0){
+    } else if (currentTea.numberOfRatings === 0){
       setTeaRating("0.0")
     } else {
-      setTeaRating(tea.ratingsTotal/tea.numberOfRatings)
+      setTeaRating(currentTea.ratingsTotal/currentTea.numberOfRatings)
     }
-  }, [tea, userProfile])
+  }, [tea, teaInfo, userProfile])
 
   const onPointerEnter = () => {
     if (ratingFillColor === "#000002"){
@@ -55,14 +60,10 @@ export const TeaRating = (props) => {
       })
     })
     const data = await res.json()
-    console.log(data)
+    console.log("Fetched from API:\n",data)
     setAverageTeaRating(data.ratingsTotal/data.numberOfRatings)
     setTotalTeaRatings(data.numberOfRatings)
-    const newProfile = {
-      ...userProfile,
-      ratedTeas:{...(userProfile.ratedTeas), [teaID]: rating}
-    }
-    setUserProfile(newProfile)
+    setTeaInfo(data)
   }
 
   return (
@@ -79,10 +80,15 @@ export const TeaRating = (props) => {
                   readonly={userProfile.username ? false : true}
                 />
       </div>
-      <div className = 'border px-3 py-1'>
+      <div className = 'border px-3 py-1' style={props.compact ?{"display":"none"}: ''}>
         Average Rating: {averageTeaRating.toFixed(1)} 
       </div>
-      <div className = 'border-top border-bottom px-3 py-1'>
+      <div className = 'border-top border-bottom px-3 py-1' style={props.compact ?{"display":"none"}: {}}onClick={()=> console.log({
+        teaInfo: teaInfo,
+        averageTeaRating: averageTeaRating,
+        totalTeaRatings: totalTeaRatings,
+
+      })}>
         Total Ratings:  {totalTeaRatings}
       </div>
     </div>
