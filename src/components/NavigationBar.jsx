@@ -39,7 +39,8 @@ const NavigationBar = () => {
   return (
     <div className = 'd-flex flex-column'>
     <Navbar bg="light" expand="lg" className = 'py-0'>
-      <Container fluid className = 'bg-success py-2'>
+      <Container fluid className = { isDarkMode? 'bg-success py-2' : 'py-2' }
+      style = {isDarkMode? {}: {backgroundColor: 'rgb(51,51,51)'}}>
         <Navbar.Brand href="/" className = 'text-white'><div className="teatalkLogo">
           Tea Talk
         </div></Navbar.Brand>

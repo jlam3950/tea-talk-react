@@ -50,7 +50,15 @@ function App() {
 
   const toggleDarkMode = (checked) => {
     setDarkMode(checked);
+    window.localStorage.setItem('dark_mode_toggle', JSON.stringify(checked))
   };
+
+  useEffect(() => {
+    const data = JSON.parse(window.localStorage.getItem('dark_mode_toggle'));
+    if( data !== null) setDarkMode(data);
+  }, [isDarkMode])
+
+
 
   useEffect(() => { 
     const data = JSON.parse(window.localStorage.getItem('my_user'));

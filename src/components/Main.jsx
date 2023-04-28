@@ -21,7 +21,7 @@ const Main = ( {teaArray} ) => {
   
   return (
   
-    <div className = 'container-fluid py-2 d-flex' style = {isDarkMode? {}: {backgroundColor: 'black'}}>
+    <div className = 'container-fluid py-2 d-flex' style = {isDarkMode? {}: {backgroundColor: 'black', color: 'white'}}>
        <div className="d-flex flex-column">
           <div className ="input-group d-flex flex-row justify-content-center">
             <div className="form-outline py-2 mobileSearchBar">
@@ -34,7 +34,7 @@ const Main = ( {teaArray} ) => {
              <Pagination>  
                 {/* <Pagination.Item active>Black</Pagination.Item>   */}
                 <Pagination.Item>
-                  <div style ={{color: 'black'}}>
+                  <div style = {{color: 'black'}}>
                     Popular
                   </div>
                 </Pagination.Item>  
@@ -73,7 +73,7 @@ const Main = ( {teaArray} ) => {
           </div>
       <div className ='teaContainer vw-100'>
           <div className = {loadFlag ? 'teaCardContainer col-sm col-10' : 'teaCardContainerLoading'} 
-               style = {{marginBottom: '5em'}}
+               style = {isDarkMode? {marginBottom: '5em'}: {backgroundColor: 'rgb(51, 51, 51)', marginBottom: '5em', border: 'black'}}
           > {
             loadFlag ? 
             currentTeas.filter((input) => {
