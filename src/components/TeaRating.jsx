@@ -3,8 +3,9 @@ import { ListContext } from '../App';
 import { Rating } from 'react-simple-star-rating'
 
 export const TeaRating = (props) => {
-  const {userProfile, setUserProfile} = useContext(ListContext)
+  const {userProfile, setUserProfile, currentTeas} = useContext(ListContext)
   const { tea } = props
+  const [teaInfo, setTeaInfo] = useState([])
   const [teaRating, setTeaRating] = useState()
   const [averageTeaRating, setAverageTeaRating] = useState(0)
   const [totalTeaRatings, setTotalTeaRatings] = useState(tea.numberOfRatings)
@@ -12,20 +13,21 @@ export const TeaRating = (props) => {
   const [count, setCount] = useState(0)
 
   useEffect(()=>{
+    const currentTea = (Array.isArray(teaInfo) ? tea : teaInfo)
     console.log(count)
     setCount(count+1)
     setRatingFillColor("#000002")
-    setAverageTeaRating((tea.ratingsTotal/tea.numberOfRatings) || 0)
-    setTotalTeaRatings(tea.numberOfRatings)
+    setAverageTeaRating((currentTea.ratingsTotal/currentTea.numberOfRatings) || 0)
+    setTotalTeaRatings(currentTea.numberOfRatings)
     if (userProfile.username && userProfile.ratedTeas[tea._id]){
       setTeaRating(userProfile.ratedTeas[tea._id])
       setRatingFillColor("#ffd300")
-    } else if (tea.numberOfRatings === 0){
+    } else if (currentTea.numberOfRatings === 0){
       setTeaRating("0.0")
     } else {
-      setTeaRating(tea.ratingsTotal/tea.numberOfRatings)
+      setTeaRating(currentTea.ratingsTotal/currentTea.numberOfRatings)
     }
-  }, [tea, userProfile])
+  }, [tea, teaInfo, userProfile])
 
   const onPointerEnter = () => {
     if (ratingFillColor === "#000002"){
@@ -55,9 +57,9 @@ export const TeaRating = (props) => {
       })
     })
     const data = await res.json()
-    console.log(data)
     setAverageTeaRating(data.ratingsTotal/data.numberOfRatings)
     setTotalTeaRatings(data.numberOfRatings)
+    setTeaInfo(data)
     const newProfile = {
       ...userProfile,
       ratedTeas:{...(userProfile.ratedTeas), [teaID]: rating}
@@ -67,7 +69,9 @@ export const TeaRating = (props) => {
 
   return (
     <div className = 'tea-rating d-flex justify-content-center align-items-start py-1'>
-      <div className = 'tea-rating-container border-top border-bottom border-right rating_div'>
+      <div className =  { props.compact ? 'tea-rating-container' : 'tea-rating-container border-top border-bottom border-right rating_div'} 
+          style = { props.compact ? {fontSize: '1.5em', fontWeight : '500' } : {}}
+      >
         Rating: <Rating
                   allowFraction={true}
                   onClick={handleRating}
@@ -79,10 +83,12 @@ export const TeaRating = (props) => {
                   readonly={userProfile.username ? false : true}
                 />
       </div>
-      <div className = 'border px-3 py-1'>
+      <div 
+        className = 'border px-3 py-1' 
+        style={props.compact ? {"display":"none"} : {}}>
         Average Rating: {averageTeaRating.toFixed(1)} 
       </div>
-      <div className = 'border-top border-bottom px-3 py-1'>
+      <div className = 'border-top border-bottom px-3 py-1' style={props.compact ?{"display":"none"}: {}}>
         Total Ratings:  {totalTeaRatings}
       </div>
     </div>

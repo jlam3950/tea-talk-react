@@ -3,12 +3,20 @@ import React from 'react';
 const CommentForm = () => {
   return (
     <>
-    <div className="d-flex justify-content-center m-2 p-2 comment_container" style = {{'height': '20em', 'width': '90%'}}>
-        Humphrey says : "Yum, great tea"  ({Date().slice(0,21)})
+    <div className="d-flex m-2 p-2 comment_container flex-column">
+      <div className = 'p-2'>
+        Jan-1-23 Humphrey says : "Yum, great tea"  
+      </div>
+      <div className = 'p-2'>
+        Feb-10-23 Grumpy Duck says : "DISGUSTING, awful tea!"  
+      </div >
     </div>
-    <div>
-        <input className = 'm-3'></input>
-        <button className = 'btn btn-success py-1 mb-1'>Comment</button>
+    <div className = 'w-75 text-center'>
+      <div class="form-group d-flex py-2 align-items-center">
+        <textarea class="form-control" rows="1" id="comment"></textarea>
+      </div>
+          <button className = 'btn btn-success mt-2 mb-3 w-50'
+                  style = {{marginLeft: '2em'}}>Comment</button>
     </div>
     </>
   )

@@ -16,7 +16,7 @@
   justify-content: center;
   align-items: center;
   font-size: 1.1em;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 }
 
 #dropdown-basic-button{
@@ -31,7 +31,7 @@
 }
 
 .rating_div{
-  padding: .165em 1em;
+  padding: .206em 1em;
 }
 
 .ratingBar{
@@ -110,9 +110,9 @@
   width: 100vw;
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: start;
   position: absolute;
-  top: 50px;
+  top: 250px;
 }
 
 .search-results-box{
@@ -125,7 +125,7 @@
   top: 6%;
   z-index: 3;
   display: flex;
-  margin-left: 2em;
+  margin-left: .8em;
   width: 14.8em;
 }
   /* margin-left: 12em;
@@ -177,6 +177,8 @@
 .comment_container{
   background: white;
   border-radius: 10px;
+  width: 75%;
+  min-height: 20em;
 }
 
 /* FavoriteList */
@@ -309,7 +311,7 @@
   }
 
   .rating_div{
-    padding: .385em;
+    padding: .252em;
   }
 
   /* tea page */
@@ -357,8 +359,17 @@
     margin: 1em;
   }
 
+  .profile-list-name, .profile-list-brand, .profile-list-tea{
+    font-size: .8em;
+  }
+
   .user-card-description{
     margin-left: 1em;
+  }
+
+  /* tea page card */
+  .comment_container{
+    min-height: 5em;
   }
 }
 
@@ -475,5 +486,28 @@
 
   .navBarSignOut{
     margin-left: .5em;
+  }
+
+  .search-results-box{
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    overflow-y: auto;
+    top: 20%;
+    z-index: 3;
+    display: flex;
+    margin-left: 2em;
+    width: 14.8em;
+  }
+
+  .search-results-container{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    position: absolute;
+    top: 50px;
   }
 }
