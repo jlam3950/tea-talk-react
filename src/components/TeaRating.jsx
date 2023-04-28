@@ -5,7 +5,7 @@ import { Rating } from 'react-simple-star-rating'
 export const TeaRating = (props) => {
   const {userProfile, setUserProfile, currentTeas} = useContext(ListContext)
   const { tea } = props
-  const [teaInfo, setTeaInfo] = useState(tea)
+  const [teaInfo, setTeaInfo] = useState([])
   const [teaRating, setTeaRating] = useState()
   const [averageTeaRating, setAverageTeaRating] = useState(0)
   const [totalTeaRatings, setTotalTeaRatings] = useState(tea.numberOfRatings)
@@ -13,12 +13,9 @@ export const TeaRating = (props) => {
   const [count, setCount] = useState(0)
 
   useEffect(()=>{
-    const currentTea = (teaInfo===[] ? tea : teaInfo)
+    const currentTea = (Array.isArray(teaInfo) ? tea : teaInfo)
     console.log(count)
     setCount(count+1)
-    console.log("UseEffect Tea Data:\n",tea)
-    console.log("UseEffect Tea Info:\n",teaInfo)
-    console.log("UseEffect Current Tea:\n",currentTea)
     setRatingFillColor("#000002")
     setAverageTeaRating((currentTea.ratingsTotal/currentTea.numberOfRatings) || 0)
     setTotalTeaRatings(currentTea.numberOfRatings)
@@ -60,10 +57,14 @@ export const TeaRating = (props) => {
       })
     })
     const data = await res.json()
-    console.log("Fetched from API:\n",data)
     setAverageTeaRating(data.ratingsTotal/data.numberOfRatings)
     setTotalTeaRatings(data.numberOfRatings)
     setTeaInfo(data)
+    const newProfile = {
+      ...userProfile,
+      ratedTeas:{...(userProfile.ratedTeas), [teaID]: rating}
+    }
+    setUserProfile(newProfile)
   }
 
   return (
@@ -87,14 +88,7 @@ export const TeaRating = (props) => {
         style={props.compact ? {"display":"none"} : {}}>
         Average Rating: {averageTeaRating.toFixed(1)} 
       </div>
-      <div 
-        className = 'border-top border-bottom px-3 py-1'
-        style={props.compact ? {"display":"none"} : {}}
-        onClick={()=> console.log({
-          teaInfo: teaInfo,
-          averageTeaRating: averageTeaRating,
-          totalTeaRatings: totalTeaRatings,
-      })}>
+      <div className = 'border-top border-bottom px-3 py-1' style={props.compact ?{"display":"none"}: {}}>
         Total Ratings:  {totalTeaRatings}
       </div>
     </div>

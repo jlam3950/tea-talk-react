@@ -6,7 +6,7 @@ import { TeaRating } from "./TeaRating";
 
 const ProfileList = (props) => {
   const { tea } = props
-  const { currentList, setCurrentList,refreshTeaList, userProfile} = useContext(ListContext);
+  const { currentList, setCurrentList,refreshTeaList, userProfile, setUserProfile} = useContext(ListContext);
   const [flag, setFlag ] = useState(false);
 
   const deleteTea = async (teaID, selectedList) => {
@@ -27,7 +27,11 @@ const ProfileList = (props) => {
         })
       })
       const data = await res.json(); 
-      console.log(data);
+      const newProfile = {
+        ...userProfile,
+        teaLists: data.teaLists
+      }
+      setUserProfile(newProfile)
       refreshTeaList(userProfile._id);
       setCurrentList(selectedList);
 }
