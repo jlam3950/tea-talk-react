@@ -84,7 +84,7 @@ const Main = ( {teaArray} ) => {
               }}).map((tea, i) => {
                 return <TeaCard tea={tea} key ={i} />;
               })  : 
-              <div className = 'vh-100'>
+              <div className = 'vh-100 d-flex justify-content-center'>
                 <span className="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
               </div>
           }

@@ -39,14 +39,14 @@ const ProfileList = (props) => {
       </div>
       <div className="col-8 user-card-description">
         <div className="mr-2">
-          <div className="my-0 py-0"> 
+          <div className="my-0 py-0 profile-list-name"> 
             {tea.name}
           </div>
           <div className="d-flex">
-            <div className="col-4">
+            <div className="col-4 profile-list-brand">
               {tea.brand}
             </div>
-            <div className="col-2">
+            <div className="col-2 profile-list-tea">
               {tea.type}
             </div>
           </div>
@@ -54,9 +54,9 @@ const ProfileList = (props) => {
             {tea.rating}
           </div>
         </div>
-        <div class="ratingBar" style = {{"fontSize": ".628em", "lineHeight": "1.5em"}}>
+        <div className="ratingBar d-flex" style = {{"fontSize": ".628em", "lineHeight": "1.5em"}}>
         {/* Tea Rating: <FaStar/><FaStar/><FaStar/><FaStar/>(4.6) | <span>200 ratings</span> */}
-        <TeaRating tea={tea} compact={true} />
+        <TeaRating tea={tea} compact={true}  />
         </div>
       </div>
       <div className = 'col-1' onClick = {() => {deleteTea(tea._id, currentList )}}>{props.edit ? <button className ='btn btn-danger my-3 p-2' style = {{'fontSize': '.5em'}}> Delete </button> : ''}</div>

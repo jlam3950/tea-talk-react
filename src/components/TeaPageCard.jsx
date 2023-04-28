@@ -46,8 +46,8 @@ const TeaCard = () => {
     <div className = 'd-flex flex-column'>
     <div className="tea-page-container d-flex my-3 py-2 px-2">
    {/* changed from col-4 to col-sm-4 */}
-      <div className="col-sm-4 d-flex justify-content-center align-items-center">
-        <img className = 'm-2 mb-5 teaPageImg' style = {{'height': '8.25rem', "width": '8.25rem'}} src={tea ? tea.imageURL : ''} alt="" />
+      <div className="col-sm-4 d-flex justify-content-center mt-2">
+        <img className = 'mx-2 mb-5 teaPageImg' style = {{'height': '11rem', "width": '11rem'}} src={tea ? tea.imageURL : ''} alt="" />
       </div>
       {/* changed from col-4 to col-sm-8 */}
       <div className="col-sm-8">
@@ -71,14 +71,14 @@ const TeaCard = () => {
         </div>
         <div className = 'my-4'>
           { userProfile.username ? 
-          <>
-            <button className = 'btn btn-primary' style = {{"width": "90%"}} onClick={() => openModal()}> Save Tea</button>
+          <div className = 'd-flex'>
+            <button className = 'btn btn-primary' style = {{"width": "60%", marginRight: '1em'}} onClick={() => openModal()}> Save Tea</button>
                 <AddTeaModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 selectedtea = {tea}
                 /> 
-          </>
+          </div>
             :  
             <>
             <button className = 'btn btn-danger' style = {{"width": "90%"}} onClick={() => signInToSave()}> Sign In To Save Tea...</button>
@@ -86,6 +86,7 @@ const TeaCard = () => {
           }
         </div>
       </div>
+      
     </div>
         <div className = 'd-flex justify-content-center' style ={{"fontSize": "1.15em", 'fontWeight': 'bold'}}>
             { tea ? 'Comments' : ''}

@@ -68,7 +68,9 @@ export const TeaRating = (props) => {
 
   return (
     <div className = 'tea-rating d-flex justify-content-center align-items-start py-1'>
-      <div className = 'tea-rating-container border-top border-bottom border-right rating_div'>
+      <div className =  { props.compact ? 'tea-rating-container' : 'tea-rating-container border-top border-bottom border-right rating_div'} 
+          style = { props.compact ? {fontSize: '1.5em', fontWeight : '500' } : {}}
+      >
         Rating: <Rating
                   allowFraction={true}
                   onClick={handleRating}
@@ -80,14 +82,18 @@ export const TeaRating = (props) => {
                   readonly={userProfile.username ? false : true}
                 />
       </div>
-      <div className = 'border px-3 py-1' style={props.compact ?{"display":"none"}: ''}>
+      <div 
+        className = 'border px-3 py-1' 
+        style={props.compact ? {"display":"none"} : {}}>
         Average Rating: {averageTeaRating.toFixed(1)} 
       </div>
-      <div className = 'border-top border-bottom px-3 py-1' style={props.compact ?{"display":"none"}: {}}onClick={()=> console.log({
-        teaInfo: teaInfo,
-        averageTeaRating: averageTeaRating,
-        totalTeaRatings: totalTeaRatings,
-
+      <div 
+        className = 'border-top border-bottom px-3 py-1'
+        style={props.compact ? {"display":"none"} : {}}
+        onClick={()=> console.log({
+          teaInfo: teaInfo,
+          averageTeaRating: averageTeaRating,
+          totalTeaRatings: totalTeaRatings,
       })}>
         Total Ratings:  {totalTeaRatings}
       </div>
