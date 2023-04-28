@@ -13,7 +13,7 @@ const TeaCard = () => {
     const { id } = useParams();
     const [modalShow, setModalShow] = useState(false);
     const [selectedtea, setselectedtea] = useState({});  
-    const { refreshTeaList, userProfile, setAlertFlag, setAlertInfo } = useContext(ListContext);  
+    const { refreshTeaList, userProfile, setAlertFlag, setAlertInfo, isDarkMode } = useContext(ListContext);  
 
     const openModal = () => {
       setTea({...tea, id: tea._id });
@@ -43,7 +43,7 @@ const TeaCard = () => {
     }
 
   return (
-    <div className = 'd-flex flex-column'>
+    <div className = 'd-flex flex-column' style = {isDarkMode? {}: {backgroundColor: 'rgb(51,51,51)', color: 'white', border: 'black'}}>
     <div className="tea-page-container d-flex my-3 py-2 px-2">
    {/* changed from col-4 to col-sm-4 */}
       <div className="col-sm-4 d-flex justify-content-center mt-2">

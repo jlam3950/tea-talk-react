@@ -1,9 +1,13 @@
 import React from 'react';
+import { ListContext } from '../App';
+import { useContext } from 'react';
 
 const CommentForm = () => {
+  const { isDarkMode } = useContext(ListContext);  
+
   return (
     <>
-    <div className="d-flex m-2 p-2 comment_container flex-column border">
+    <div className="d-flex m-2 p-2 comment_container flex-column border" style = {isDarkMode? {}: {background: 'rgb(51,51,51)', color: 'white'}}>
       <div className = 'p-2'>
         Jan-1-23 Humphrey says : "Yum, great tea"  
       </div>

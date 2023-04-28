@@ -14,8 +14,12 @@
   background-color:rgb(242, 235, 235);
 }
 
-#dark{
+#dark-primary{
   background-color: rgb(51, 51, 51);
+}
+
+#dark-secondary{
+  background-color: rgb(22, 22, 22);
 }
 
 .alertBar{
@@ -448,8 +452,8 @@
     /* maybe remove border radius? */
     background-color: rgb(249, 246, 246);
     margin: 0 2em;
-    /* changed this from 90vh */
-    max-height: 82vh;
+    /* changed from max-height to height */
+    height: 82vh;
     margin-top: 0rem;
   }
 

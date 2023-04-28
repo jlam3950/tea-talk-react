@@ -7,7 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 import { TeaRating } from "./TeaRating";
 
 const TeaCard = (props) => {
-  const { refreshTeaList, userProfile, setAlertFlag, setAlertInfo } = useContext(ListContext);
+  const { refreshTeaList, userProfile, setAlertFlag, setAlertInfo, isDarkMode } = useContext(ListContext);
   const { tea } = props
   const [modalShow, setModalShow] = useState(false);
   const [selectedtea, setselectedtea] = useState({});
@@ -38,7 +38,7 @@ const TeaCard = (props) => {
         <div className="col-7">
           <div className="mr-2">
             <div className="cardTitle my-0 py-0"> 
-              <Nav.Link href={`/teaPage/${tea._id}`} style ={{color: 'black'}}>{tea.name}</Nav.Link>
+              <Nav.Link href={`/teaPage/${tea._id}`} style = {isDarkMode? {color: 'black'}: {color: 'white'}}>{tea.name}</Nav.Link>
             </div>
             <div className="d-flex cardSubtitleAndType">
               <div className=" cardSubtitle col-4">

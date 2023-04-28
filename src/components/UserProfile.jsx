@@ -6,7 +6,7 @@ import ProfileList from './ProfileList';
 import Nav from 'react-bootstrap/Nav';
 
 const UserProfile = () => {
-  const { currentList, setCurrentList, userProfile, list, refreshTeaList, editMode, setEditMode } = useContext(ListContext);
+  const { currentList, setCurrentList, userProfile, list, refreshTeaList, editMode, setEditMode, isDarkMode } = useContext(ListContext);
   const [ teaEdit, setTeaEdit ] = useState(false)
   const [ infoEdit, setInfoEdit ] = useState(false);
   const [flag, setFlag ] = useState(false);
@@ -42,7 +42,7 @@ const deleteList = async (name) => {
   }
   
   return (
-    <div className = 'profile-root container-fluid'>
+    <div className = 'profile-root container-fluid' style = {isDarkMode? {}: {'background-color': 'black'}}>
    <div className ='userProfileContainer container-fluid' style = {{'minHeight': '100vh'}}>
     <div className="userProfileHeader d-flex align-items-end">
           {/* adjust this value for mobile responsiveness. take out inline style */}
@@ -58,7 +58,9 @@ const deleteList = async (name) => {
 
     <div className="userProfileContainer d-flex justify-content-center mx-sm-5">
       <div className="userDescriptionDisplayContainer col-8">
-        <div className="userProfileDescription p-sm-4 my-sm-4 h5" style ={{'backgroundColor': 'rgba(250,246,246)'}}>
+        <div className="userProfileDescription p-sm-4 my-sm-4 h5" 
+        style = {isDarkMode? {'backgroundColor': 'rgba(250,246,246)'}: {backgroundColor: 'rgb(51,51,51)', color: 'white'}}
+        >
           <div className="d-flex justify-content-between"> 
             <div style = {{'fontWeight': 'bold'}}> 
               Profile Info
@@ -72,7 +74,9 @@ const deleteList = async (name) => {
             { infoEdit ? <><div className ='mx-2'> Location: Bloomington, IN  </div> <button className ='btn btn-danger p-2' style = {{'fontSize': '.5em'}}> Delete </button></> : 'Location: Bloomington, IN' }
           </div>
         </div>
-        <div className="userProfileDisplayTeas p-4 my-4 h5" style ={{'backgroundColor': 'rgba(250,246,246)'}}>
+        <div className="userProfileDisplayTeas p-4 my-4 h5" 
+             style = {isDarkMode? {'backgroundColor': 'rgba(250,246,246)'}: {backgroundColor: 'rgb(51,51,51)', color: 'white'}}
+             >
           <div className="d-flex justify-content-between" > 
             <div style = {{'fontWeight': 'bold'}}> 
               Tea Info
@@ -94,7 +98,7 @@ const deleteList = async (name) => {
         </div>
       </div>
       <div className="userTeaListContainer col-4 my-4" 
-           style ={{'backgroundColor': 'rgba(250,246,246)'}}>
+            style = {isDarkMode? {'backgroundColor': 'rgba(250,246,246)'}: {backgroundColor: 'rgb(51,51,51)', color: 'white'}}>
         <div className="userProfileList p-0 m-4 h-75 h5">
           <div className="d-flex justify-content-between"> 
             <div style = {{'fontWeight': 'bold'}}> 
