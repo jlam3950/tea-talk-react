@@ -84,7 +84,8 @@ const Main = ( {teaArray} ) => {
               }}).map((tea, i) => {
                 return <TeaCard tea={tea} key ={i} />;
               })  : 
-              <div className = 'vh-100 d-flex justify-content-center'>
+              <div className = 'vh-100 d-flex justify-content-center'
+                style = {isDarkMode? {}: {backgroundColor: 'black'}}>
                 <span className="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
               </div>
           }
