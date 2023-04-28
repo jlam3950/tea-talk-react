@@ -81,7 +81,7 @@ const TeaCard = () => {
           </div>
             :  
             <>
-            <button className = 'btn btn-danger' style = {{"width": "90%"}} onClick={() => signInToSave()}> Sign In To Save Tea...</button>
+            <button className = 'btn btn-danger' style = {{"width": "60%"}} onClick={() => signInToSave()}> Sign In To Save Tea...</button>
             </>
           }
         </div>

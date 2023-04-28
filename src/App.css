@@ -6,6 +6,18 @@
   background-size: cover;  
 }
 
+.darkModeSwitch{
+  display: none;
+}
+
+#light{
+  background-color:rgb(242, 235, 235);
+}
+
+#dark{
+  background-color: rgb(51, 51, 51);
+}
+
 .alertBar{
   position: absolute;
   margin-top: 2.8em;
@@ -440,6 +452,18 @@
     max-height: 82vh;
     margin-top: 0rem;
   }
+
+  .teaCardContainer-teaPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 43em;
+    border: 1px solid rgb(248, 246, 246);
+    border-radius: .5em; 
+    background-color: rgb(249, 246, 246);
+    margin: 0 2em;
+    margin-top: 0rem;
+  }
   
   .teaCardContainerLoading{
     overflow-y:auto;
@@ -474,6 +498,10 @@
 }
 
 @media only screen and (min-width: 991px){
+
+  .darkModeSwitch{
+    display: block;
+  }
 
   /* Nav Bar */
   .teatalkLogo{

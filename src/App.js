@@ -13,7 +13,7 @@ import TeaForm from "./components/TeaForm"
 import TeaPage from "./components/TeaPage"
 import AlertBar from './components/AlertBar';
 export const ListContext = createContext();
-
+export const ThemeContext = createContext(null);
 
 function App() {
   
@@ -38,14 +38,19 @@ function App() {
     ]
   }
 
-  const [list, setList ] = useState(teaList);
-  const [editMode, setEditMode ] = useState(false);
+  const [list, setList] = useState(teaList);
+  const [editMode, setEditMode] = useState(false);
   const [currentTeas, setCurrentTeas] = useState([]);
   const [userProfile, setUserProfile] = useState([]);
-  const [loggedIn, setLoggedIn ] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [alertFlag, setAlertFlag] = useState(false);
   const [alertInfo, setAlertInfo] = useState('');
-  const [ currentList, setCurrentList ] = useState([]);
+  const [ currentList, setCurrentList] = useState([]);
+  const [isDarkMode, setDarkMode] = useState(true);
+
+  const toggleDarkMode = (checked) => {
+    setDarkMode(checked);
+  };
 
   useEffect(() => { 
     const data = JSON.parse(window.localStorage.getItem('my_user'));
@@ -116,10 +121,10 @@ function App() {
     <div className="App d-flex flex-column min-vh-100">
       <ListContext.Provider value = {{alertInfo, currentList, currentTeas, 
                                       loggedIn, list, userProfile, 
-                                      editMode, alertFlag, 
+                                      editMode, alertFlag, isDarkMode,
                                       setCurrentList, setAlertInfo, setAlertFlag, 
                                       refreshTeaList, setEditMode, setUserProfile, 
-                                      setList, setUserData}}>
+                                      setList, setUserData, setDarkMode, toggleDarkMode}}>
           <NavigationBar />
             <AlertBar/>
               <Routes>

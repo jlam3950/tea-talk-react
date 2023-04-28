@@ -7,7 +7,7 @@ import Pagination from 'react-bootstrap/Pagination';
 import { ListContext } from '../App';
 
 const Main = ( {teaArray} ) => {
-  const { currentTeas, userProfile } = useContext(ListContext);
+  const { currentTeas, userProfile, isDarkMode, setDarkMode, toggleDarkMode } = useContext(ListContext);
   const [modalShow, setModalShow] = useState(false);
   const [search, setSearch] = useState('');
   const [loadFlag, setLoadFlag] = useState(false);
@@ -21,7 +21,7 @@ const Main = ( {teaArray} ) => {
   
   return (
   
-    <div className = 'container-fluid py-2 d-flex'>
+    <div className = 'container-fluid py-2 d-flex' style = {isDarkMode? {}: {backgroundColor: 'black'}}>
        <div className="d-flex flex-column">
           <div className ="input-group d-flex flex-row justify-content-center">
             <div className="form-outline py-2 mobileSearchBar">

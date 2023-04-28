@@ -4,12 +4,13 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { FaUserCircle } from 'react-icons/fa';
 import { ListContext } from '../App';
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
 const NavigationBar = () => {
-  const { currentTeas, userProfile, setUserProfile, refreshTeaList, setAlertFlag, setAlertInfo } = useContext(ListContext);
+  const { currentTeas, userProfile, setUserProfile, refreshTeaList, setAlertFlag, setAlertInfo, isDarkMode, 
+  setDarkMode, toggleDarkMode} = useContext(ListContext);
   const history = useNavigate();
   const [search, setSearch] = useState('');
 
@@ -57,6 +58,12 @@ const NavigationBar = () => {
           <Nav.Link className= 'mx-3 fs-3 text-white' href="/userProfile" onClick={() => refresh()}><FaUserCircle/></Nav.Link> : 
           <Nav.Link className= 'mx-3 fs-3 text-white' onClick = {() => setAlert('Please, sign in...')}><FaUserCircle/></Nav.Link>
           }
+          <DarkModeSwitch
+            checked={isDarkMode}
+            onChange={toggleDarkMode}
+            className = 'darkModeSwitch'
+            style = {{marginTop: '3px', marginRight: '1em'}}
+          />
           <Form className="d-flex">
             <Form.Control
               type="search"
