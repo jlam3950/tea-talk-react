@@ -11,14 +11,90 @@ const Main = ( {teaArray} ) => {
   const [modalShow, setModalShow] = useState(false);
   const [search, setSearch] = useState('');
   const [loadFlag, setLoadFlag] = useState(false);
+  const [tea, setTea] = useState('default');
+  const [teaFlag, setTeaFlag] = useState(false);
+
+  const setType = (teaType) => {
+    setTea(teaType); 
+    setLoadFlag(false)
+        setTimeout(() => {
+          setLoadFlag(true);
+          displayTeas(tea)
+        }, 1000)
+  }
+
+  // const teaFilter = (type) => {
+  //   return currentTeas.filter((tea) => {
+  //     console.log(tea.type)
+  //     if(tea.type === type){
+  //       return tea;
+  //     }}).map((tea,i) => {
+  //       console.log(tea)
+  //       return <TeaCard tea = {tea} key = {i} />
+  //     })
+  // }
+
+  const displayTeas = (tea) => {
+    switch(tea){
+      case 'Black':
+        return currentTeas.filter((tea) => {
+          if(tea.type === 'Black'){
+            return tea;
+          }}).map((tea,i) => {
+            return <TeaCard tea = {tea} key = {i} />
+          })
+      case 'Green':
+        return currentTeas.filter((tea) => {
+          if(tea.type === 'Green'){
+            return tea;
+          }}).map((tea,i) => {
+            return <TeaCard tea = {tea} key = {i} />
+          })
+      case 'Top Rated':
+        return currentTeas.filter((tea) => {
+          if((tea.ratingsTotal/tea.numberOfRatings) >= 4){
+           return tea;
+          }}).map((tea,i) => {
+            return <TeaCard tea = {tea} key = {i} />
+          })
+      case 'Popular':
+        return currentTeas.filter((tea) => {
+          // rework this to rank order number of ratings. reduce()
+          if((tea.numberOfRatings) >= 3){
+           return tea;
+          }}).map((tea,i) => {
+            return <TeaCard tea = {tea} key = {i} />
+          })
+      case 'Herbal':
+        return currentTeas.filter((tea) => {
+          if((tea.type === 'Herbal')){
+            // currently empty
+           return tea;
+          }}).map((tea,i) => {
+            return <TeaCard tea = {tea} key = {i} />
+          })
+      default: 
+        return currentTeas.map((tea, i) => {
+        if( i >= 19){
+          return;
+        }
+        return <TeaCard tea={tea} key ={i} />
+    })
+  }}
 
   useEffect(() => {
     setTimeout(() => {
       setLoadFlag(true);
-      console.log(loadFlag)
     }, 1000)
   }, [])
   
+  // filter((input) => {
+  //   if(search === ''){
+  //     return input; 
+  //   } else if (input.name.toLowerCase().includes(search.toLowerCase()) || input.brand.toLowerCase().includes(search.toLowerCase())){
+  //     return input; 
+  //   }})
+
   return (
   
     <div className = 'container-fluid py-2 d-flex' style = {isDarkMode? {}: {backgroundColor: 'black', color: 'white'}}>
@@ -34,25 +110,30 @@ const Main = ( {teaArray} ) => {
              <Pagination>  
                 {/* <Pagination.Item active>Black</Pagination.Item>   */}
                 <Pagination.Item>
-                  <div style = {{color: 'black'}}>
+                  <div className = 'pagination-link' style = {{color: 'black'}} onClick = {() => setType('Top Rated')}>
+                    Top Rated
+                  </div>
+                </Pagination.Item> 
+                <Pagination.Item>
+                  <div className = 'pagination-link' style = {{color: 'black'}} onClick = {() => setType('Popular')}>
                     Popular
                   </div>
-                </Pagination.Item>  
+                </Pagination.Item> 
                 <Pagination.Item>
-                  <div style ={{color: 'black'}}>
+                  <div className = 'pagination-link' style ={{color: 'black'}} onClick = {() => setType('Black')}>
                     Black
                   </div>
                 </Pagination.Item>  
                 <Pagination.Item>
-                  <div style ={{color: 'black'}}>
+                  <div className = 'pagination-link' style ={{color: 'black'}} onClick = {() => setType('Green')}>
                     Green
                   </div>
-                </Pagination.Item>  
+                </Pagination.Item>
                 <Pagination.Item>
-                  <div style ={{color: 'black'}}>
+                  <div className = 'pagination-link' style ={{color: 'black'}} onClick = {() => setType('Herbal')}>
                     Herbal
                   </div>
-                </Pagination.Item>  
+                </Pagination.Item>     
               <div className="addTea mx-4">
                 <button className="btn btn-success" style = {{zIndex : '1'}} onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
                 <TeaForm
@@ -75,15 +156,7 @@ const Main = ( {teaArray} ) => {
           <div className = {loadFlag ? 'teaCardContainer col-sm col-10' : 'teaCardContainerLoading'} 
                style = {isDarkMode? {marginBottom: '5em'}: {backgroundColor: 'rgb(51, 51, 51)', marginBottom: '5em', border: 'black'}}
           > {
-            loadFlag ? 
-            currentTeas.filter((input) => {
-              if(search === ''){
-                return input; 
-              } else if (input.name.toLowerCase().includes(search.toLowerCase()) || input.brand.toLowerCase().includes(search.toLowerCase())){
-                return input; 
-              }}).map((tea, i) => {
-                return <TeaCard tea={tea} key ={i} />;
-              })  : 
+            loadFlag ? displayTeas(tea) : 
               <div className = 'vh-100 d-flex justify-content-center'
                 style = {isDarkMode? {}: {backgroundColor: 'black'}}>
                 <span className="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
