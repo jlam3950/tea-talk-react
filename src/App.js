@@ -12,6 +12,7 @@ import UserProfile from './components/UserProfile';
 import TeaForm from "./components/TeaForm"
 import TeaPage from "./components/TeaPage"
 import AlertBar from './components/AlertBar';
+import { FaUserCircle } from 'react-icons/fa';
 export const ListContext = createContext();
 export const ThemeContext = createContext(null);
 
@@ -47,6 +48,8 @@ function App() {
   const [alertInfo, setAlertInfo] = useState('');
   const [ currentList, setCurrentList] = useState([]);
   const [isDarkMode, setDarkMode] = useState(true);
+  const [profilePic, setProfilePic ] = useState(<FaUserCircle/>);
+  const [backgroundPic, setBackgroundPic ] = useState('');
 
   const toggleDarkMode = (checked) => {
     setDarkMode(checked);
@@ -91,7 +94,6 @@ function App() {
     }
   }, [userProfile])
 
-  // limit requests 
   useEffect(() => {
     getTeas();
   }, []); 
@@ -107,7 +109,6 @@ function App() {
 
     if(list){
       if(list.length < 0){
-        console.log(list.length)
         setEditMode(false);
       }
     }
@@ -129,7 +130,8 @@ function App() {
     <div className="App d-flex flex-column min-vh-100">
       <ListContext.Provider value = {{alertInfo, currentList, currentTeas, 
                                       loggedIn, list, userProfile, 
-                                      editMode, alertFlag, isDarkMode,
+                                      editMode, alertFlag, isDarkMode, profilePic, backgroundPic, 
+                                      setProfilePic, setBackgroundPic,
                                       setCurrentList, setAlertInfo, setAlertFlag, 
                                       refreshTeaList, setEditMode, setUserProfile, 
                                       setList, setUserData, setDarkMode, toggleDarkMode}}>
