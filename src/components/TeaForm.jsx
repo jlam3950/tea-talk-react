@@ -17,9 +17,9 @@ const TeaForm = (props) => {
   const [submitting, setSubmitting] = React.useState(false);
   const {getTeas} = useContext(ListContext);
 
-  const hideFavShowCreate = () => {
-    setCreateModalShow(true);
-  }
+  // const hideFavShowCreate = () => {
+  //   setCreateModalShow(true);
+  // }
 
   const closeModal = () => {
     setTimeout(() => {
