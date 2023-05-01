@@ -14,7 +14,6 @@ export const TeaRating = (props) => {
 
   useEffect(()=>{
     const currentTea = (Array.isArray(teaInfo) ? tea : teaInfo)
-    console.log(count)
     setCount(count+1)
     setRatingFillColor("#000002")
     setAverageTeaRating((currentTea.ratingsTotal/currentTea.numberOfRatings) || 0)
