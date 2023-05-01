@@ -1,15 +1,18 @@
 import React from 'react';
 import { useContext, useState } from 'react';
 import { ListContext } from '../App';
-import { FaUserCircle, FaPen } from 'react-icons/fa';
+import { FaPen } from 'react-icons/fa';
 import ProfileList from './ProfileList';
 import Nav from 'react-bootstrap/Nav';
+import ProfilePicModal from './ProfilePicModal';
+import TeaForm from './TeaForm';
 
 const UserProfile = () => {
-  const { currentList, setCurrentList, userProfile, list, refreshTeaList, editMode, setEditMode, isDarkMode } = useContext(ListContext);
+  const { currentList, setCurrentList, userProfile, list, refreshTeaList, editMode, setEditMode, isDarkMode, backgroundPic, setBackgroundPic, profilePic, setProfilePic } = useContext(ListContext);
   const [ teaEdit, setTeaEdit ] = useState(false)
   const [ infoEdit, setInfoEdit ] = useState(false);
   const [flag, setFlag ] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
 const deleteList = async (name) => {
   const id = userProfile._id; 
@@ -47,9 +50,13 @@ const deleteList = async (name) => {
     <div className="userProfileHeader d-flex align-items-end">
           {/* adjust this value for mobile responsiveness. take out inline style */}
       <div className="userProfileCard w-50 h-50 d-flex align-items-center">
-        <div className="userProfileLogo">
-          <FaUserCircle />
+        <div className="userProfileLogo" onClick = {() => setModalShow(true)} style = {{cursor : 'pointer'}}>
+          {profilePic}
         </div>
+            <ProfilePicModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            /> 
         <div className="userProfileName"> 
           {userProfile.username ? userProfile.username : ''}
         </div>
