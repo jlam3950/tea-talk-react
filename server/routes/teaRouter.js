@@ -25,12 +25,19 @@ router.get("/", async (req, res) => {
 
 // Get One Tea from the Database
 router.get("/:id", findTeaByID, async (req, res) => {
-    const tea = await Tea.findById(req.params.id)
+    
+    try {
+        const tea = await Tea.findById(req.params.id)
         .populate({
             path: "comments.user", 
-            select: "username _id"
+            select: "username _id userImageURL"
         })
-    res.status(200).json(tea)
+        res.status(200).json(tea)
+    } catch (err) {
+        console.log(err)
+        res.status(400).json(err)
+    }
+    
 })
 
 
@@ -65,7 +72,9 @@ router.post("/:id/comments", findTeaByID, async (req, res) => {
             content: req.body.content
         }
         res.tea.comments.push(newComment)
-        await res.tea.save()
+        console.log("Before save")
+        const added = await res.tea.save()
+        console.log("After save")
         const updatedTea = await Tea.findById(req.params.id)
             .populate({
                 path: "comments.user", 

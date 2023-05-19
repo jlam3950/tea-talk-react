@@ -8,12 +8,11 @@ import { TeaRating } from "./TeaRating";
 
 // need to create get request
 
-const TeaCard = () => {
-    const [tea, setTea] = useState([])
+const TeaPageCard = () => {
+    const { refreshTeaList, userProfile, setAlertFlag, setAlertInfo, isDarkMode, selectedTea } = useContext(ListContext);
+    const [tea, setTea] = useState(selectedTea)
     const { id } = useParams();
-    const [modalShow, setModalShow] = useState(false);
-    const [selectedtea, setselectedtea] = useState({});  
-    const { refreshTeaList, userProfile, setAlertFlag, setAlertInfo, isDarkMode } = useContext(ListContext);  
+    const [modalShow, setModalShow] = useState(false);  
 
     const openModal = () => {
       setTea({...tea, id: tea._id });
@@ -21,17 +20,6 @@ const TeaCard = () => {
       refreshTeaList(userProfile._id)
       setModalShow(true);
     }
-    
-    const getTea = async () => { 
-        const url = "http://localhost:5100/teas/" + id;        
-        const res = await fetch(url);
-        const data = await res.json();
-        setTea(data);
-      }
-    
-    useEffect(() => {
-        getTea() 
-    }, []);
 
     const signInToSave = () => {
       setAlertFlag(true);
@@ -45,29 +33,27 @@ const TeaCard = () => {
   return (
     <div className = 'd-flex flex-column' style = {isDarkMode? {}: {backgroundColor: 'rgb(51,51,51)', color: 'white', border: 'black'}}>
     <div className="tea-page-container d-flex my-3 py-2 px-2">
-   {/* changed from col-4 to col-sm-4 */}
       <div className="col-sm-4 d-flex justify-content-center mt-2">
-        <img className = 'mx-2 mb-5 teaPageImg' style = {{'height': '11rem', "width": '11rem'}} src={tea ? tea.imageURL : ''} alt="" />
+        <img className = 'mx-2 mb-5 teaPageImg' style = {{'height': '11rem', "width": '11rem'}} src={selectedTea ? selectedTea.imageURL : ''} alt="" />
       </div>
-      {/* changed from col-4 to col-sm-8 */}
       <div className="col-sm-8">
         <div className="mr-2">
           <div className="my-0 py-0" style = {{"fontSize": "1.65em", 'fontWeight': '500'}}> 
-            { tea ? tea.name : ''}
+            { selectedTea ? selectedTea.name : ''}
           </div>
           <div className="d-flex flex-column">
             <div className="" style = {{"fontSize": "1.25em", 'fontWeight': '500'}} onClick = {() => console.log(tea)}>
-              { tea ? tea.brand : ''} <span className = 'mx-5'> { tea ? tea.type : ''} </span>
+              { selectedTea ? selectedTea.brand : ''} <span className = 'mx-5'> { tea ? tea.type : ''} </span>
             </div>
           </div>
           <div className="">
           </div>
           <div className="" style = {{"fontSize": "1.15em"}}>
-            "Black tea is a kind of tea made from leaves of Camellia sinensis. Often, it is stronger in taste than other varieties of tea, like green tea or oolong."
+            {selectedTea ? selectedTea.description : ""}
           </div>
         </div>
         <div className="ratingBar" style = {{"fontSize": ".699em", "lineHeight": "1.7em"}}>
-            <TeaRating tea={tea}/>
+            <TeaRating tea={selectedTea}/>
         </div>
         <div className = 'my-4'>
           { userProfile.username ? 
@@ -76,7 +62,7 @@ const TeaCard = () => {
                 <AddTeaModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-                selectedtea = {tea}
+                selectedtea = {selectedTea}
                 /> 
           </div>
             :  
@@ -89,10 +75,10 @@ const TeaCard = () => {
       
     </div>
         <div className = 'd-flex justify-content-center' style ={{"fontSize": "1.15em", 'fontWeight': 'bold'}}>
-            { tea ? 'Comments' : ''}
+            { selectedTea ? 'Comments' : ''}
         </div>
     </div>
   );
 };
 
-export default TeaCard;
+export default TeaPageCard;

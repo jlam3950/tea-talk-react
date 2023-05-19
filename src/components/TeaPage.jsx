@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TeaPageCard from './TeaPageCard';
 import CommentForm from './CommentForm';
 import { ListContext } from '../App';
 import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 
 const TeaPage = () => {
-const { isDarkMode } = useContext(ListContext);  
+  const { isDarkMode, getTea } = useContext(ListContext);
+  const { id } = useParams()
+
+  useEffect(()=>{
+    getTea(id)
+  }, [])
   
   return (
     <div className = 'container-fluid py-2 d-flex vh-120' style = {isDarkMode? {}: {background: 'black'}}>
