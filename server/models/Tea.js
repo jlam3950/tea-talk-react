@@ -6,7 +6,11 @@ const commentSchema = new mongoose.Schema({
         ref: "User",
         required: true
     },
-    content: String
+    content: String,
+    date: {
+        type: Date,
+        default: Date.now()
+    }
 })
 
 const teaSchema = new mongoose.Schema({
@@ -22,7 +26,10 @@ const teaSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    description: String,
+    description: {
+        type: String,
+        default: "An aromatic beverage prepared by pouring hot water over cured or fresh leaves of Camellia sinensis, an evergreen shrub native to East Asia."
+    },
     imageURL: {
         type: String,
         default: "https://res.cloudinary.com/dl3ncuzpg/image/upload/v1679962610/default_tea_yj99v2.png"

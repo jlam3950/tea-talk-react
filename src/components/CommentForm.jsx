@@ -1,19 +1,18 @@
 import React from 'react';
 import { ListContext } from '../App';
 import { useContext } from 'react';
+import CommentCard from './CommentCard';
 
 const CommentForm = () => {
-  const { isDarkMode } = useContext(ListContext);  
+  const { isDarkMode, selectedTea } = useContext(ListContext);  
 
   return (
     <>
     <div className="d-flex m-2 p-2 comment_container flex-column border" style = {isDarkMode? {}: {background: 'rgb(51,51,51)', color: 'white'}}>
-      <div className = 'p-2'>
-        Jan-1-23 Humphrey says : "Yum, great tea"  
-      </div>
-      <div className = 'p-2'>
-        Feb-10-23 Grumpy_Duck says : "DISGUSTING, awful tea!"  
-      </div>
+      {selectedTea.comments ?
+        selectedTea.comments.map(comment => <CommentCard key={comment._id} comment={comment} />)
+        : "No Comments Yet"
+      }
     </div>
     <div className = 'w-75 text-center'>
       <div className="form-group d-flex py-2 align-items-center">

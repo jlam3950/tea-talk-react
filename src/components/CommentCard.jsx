@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CommentCard = () => {
+const CommentCard = (props) => {
     const {comment} = props
 
 
@@ -10,6 +10,7 @@ const CommentCard = () => {
         <div>
             <h3>{comment.user.username}</h3>
             <p>{comment.content}</p>
+            <p>{comment.date}</p>
         </div>
     </div>
   )

@@ -42,6 +42,7 @@ function App() {
   const [list, setList] = useState(teaList);
   const [editMode, setEditMode] = useState(false);
   const [currentTeas, setCurrentTeas] = useState([]);
+  const [selectedTea, setSelectedTea] = useState({});
   const [userProfile, setUserProfile] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [alertFlag, setAlertFlag] = useState(false);
@@ -119,11 +120,19 @@ function App() {
     setList(userTeaList);
     };
 
+  // Get All Teas
   const getTeas = async () => { 
     const url = ('http://localhost:5100/teas');
     const res = await fetch(url);
     const data = await res.json();
     setCurrentTeas(data);
+  }
+  // Get One Individual Tea
+  const getTea = async (id) => { 
+    const url = "http://localhost:5100/teas/" + id;        
+    const res = await fetch(url);
+    const data = await res.json();
+    setSelectedTea(data);
   }
 
   return (
@@ -134,7 +143,7 @@ function App() {
                                       setProfilePic, setBackgroundPic,
                                       setCurrentList, setAlertInfo, setAlertFlag, 
                                       refreshTeaList, setEditMode, setUserProfile, 
-                                      setList, setUserData, setDarkMode, toggleDarkMode}}>
+                                      setList, setUserData, setDarkMode, toggleDarkMode, getTea, selectedTea, setSelectedTea}}>
           <NavigationBar />
             <AlertBar/>
               <Routes>
