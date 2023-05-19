@@ -72,9 +72,7 @@ router.post("/:id/comments", findTeaByID, async (req, res) => {
             content: req.body.content
         }
         res.tea.comments.push(newComment)
-        console.log("Before save")
         const added = await res.tea.save()
-        console.log("After save")
         const updatedTea = await Tea.findById(req.params.id)
             .populate({
                 path: "comments.user", 
