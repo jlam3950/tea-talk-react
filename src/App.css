@@ -439,12 +439,14 @@
 }
   .teaCard{
     /* width: 90%; */
-    min-height: 5em;
+    /* min-height: 5em; */
     margin-bottom: .5em;
   }
 
   .cardDescription{
     font-size: .9em;
+    /* min-width: 390px;
+    min-height: 64px; */
   }
 
   .teaCardContainer{

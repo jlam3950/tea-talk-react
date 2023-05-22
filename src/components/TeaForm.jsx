@@ -8,7 +8,8 @@ const blankForm = {
   name: '',
   brand: '',
   type: '',
-  image: ''
+  image: '',
+  description: ''
 }
 
 const TeaForm = (props) => {
@@ -28,6 +29,7 @@ const TeaForm = (props) => {
   }
 
   const inputChange = e =>{
+    console.log(e.target.name, e.target.value);
     setFormValues({...formValues, [e.target.name]: e.target.value})
   }
   
@@ -49,21 +51,42 @@ const TeaForm = (props) => {
     const picture = e.target.files[0]
     const base64 = await convertToBase64(picture)
     setFormValues({...formValues, image: base64})
-    console.log(formValues)
   };
   
   const submitTea = async e => {
     e.preventDefault()
     setSubmitting(true)
-    console.log(formValues)
-    console.log("CLICKED!!")
+    let teaInfo = {...formValues}
+    if(formValues.description === ''){
+      switch(formValues.type){
+        case 'Green':
+          teaInfo = ({...teaInfo, description : 'Green tea is a type of tea that is made from Camellia sinensis leaves. Green tea originated in China, the production/manufacture has spread to East Asia.'});
+          break;
+        case 'Black':
+          teaInfo = ({...teaInfo, description : 'Black tea, is a type of tea that is more oxidized than oolong, yellow, white and green teas. Black tea is generally stronger in flavor than other teas.'});
+          break;
+        case 'Herbal':
+          teaInfo = ({...teaInfo, description : 'Herbal teas, also known as herbal infusions and less commonly called tisanes, are beverages made from the infusion or decoction of herbs, spices, or plant material.'});
+          break;
+        case 'Oolong':
+          teaInfo = ({...teaInfo, description : 'Oolong tea is made from the Camellia sinensis plant. Its dried leaves and leaf buds are used to make several different teas, including black and green teas.'});
+          break;
+        case 'White':
+          teaInfo = ({...teaInfo, description : 'White tea may refer to one of several styles of tea which generally feature young or minimally processed leaves of the Camellia sinensis plant. '});
+          break;
+        default:
+          teaInfo = ({...teaInfo, description : 'An aromatic beverage prepared by pouring hot water over cured or fresh leaves of Camellia sinensis, an evergreen shrub native to East Asia.'});
+          break; 
+        }
+      }
+    console.log(teaInfo)
     const url = `http://localhost:5100/teas`; 
     const res = await fetch(url, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
         },
-        body: JSON.stringify(formValues)
+        body: JSON.stringify(teaInfo)
     })
     const data = await res.json();
     setFormValues({...formValues, image:""})
@@ -111,19 +134,34 @@ const TeaForm = (props) => {
             onChange={inputChange}
           />
           <label className ='w-100 m-0 p-0'>Type</label>
-                <input 
-                  className='mb-3 w-100' 
-                  label='' 
-                  name='type' 
-                  placeholder = '' 
-                  id='formControlLg' 
-                  type='text' size="lg" 
-                  onChange={inputChange}
-                />
+          <select className ='w-100 mb-3 py-1'
+            id='formControlLg' 
+            type='text'
+            name ='type' 
+            size="lg" 
+            value = "Black"
+            onChange={inputChange}>
+              <option value=""></option>
+              <option value="Black">Black</option>
+              <option value="Green">Green</option>
+              <option value="Herbal">Herbal</option>
+              <option value="Oolong">Oolong</option>
+              <option value="White">White</option>
+          </select>
+          <label className ='w-100 m-0 p-0'>Description</label>
+          <input 
+            className='mb-3 w-100' 
+            label='' 
+            name='description' 
+            placeholder = '' 
+            id='formControlLg' 
+            type='text' size="lg" 
+            onChange={inputChange}
+          />
 
                 <br />
 
-                <p style = {{'font-weight': 'bold'}} 
+                <p style = {{'fontWeight': 'bold'}} 
                   >Add an Image:
                 </p>
                 <p>(Images can only be JPEG or PNG format)</p>
