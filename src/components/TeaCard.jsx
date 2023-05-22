@@ -30,8 +30,8 @@ const TeaCard = (props) => {
 
   <Nav.Link href="#action2" style ={{color: 'white'}}>My Teas</Nav.Link>
   return (
-    <div className="my-3">
-      <div className="teaCard d-flex py-1 px-2">
+    <div className="teaCard">
+      <div className="teaCard d-flex py-1 px-2 my-3">
         <div className="col-3 d-flex justify-content-center align-items-center">
           <img className = 'teaCardImg' src={tea.imageURL} alt="" />
         </div>
@@ -49,7 +49,7 @@ const TeaCard = (props) => {
               </div>
             </div>
             <div className="cardDescription">
-              "Black tea is a kind of tea made from leaves of Camellia sinensis. Often, it is stronger in taste than other varieties of tea, like green tea or oolong."
+              {tea.description}
             </div>
           </div>
         </div>
