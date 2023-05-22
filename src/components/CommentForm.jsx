@@ -43,7 +43,7 @@ const CommentForm = () => {
     </div>
     <form className = 'w-75 text-center' onSubmit={submitComment}>
       <div className="form-group d-flex py-2 align-items-center">
-        <textarea className="form-control" rows="1" id="comment" value={comment} onChange={commentChange}></textarea>
+        <textarea className="form-control" rows="1" id="comment" value={comment} onChange={commentChange} style = {isDarkMode? {}: {background: 'rgb(38, 38, 38)', color: 'white'}}></textarea>
       </div>
           <input type="submit" value="Comment" className = 'btn btn-success mt-2 mb-3 w-50'
                   style = {{marginLeft: '2em'}} />
