@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 
 const CommentCard = (props) => {
     const {comment} = props
-    const { userProfile, selectedTea, setSelectedTea } = useContext(ListContext);
+    const { userProfile, selectedTea, setSelectedTea, isDarkMode } = useContext(ListContext);
     const { id } = useParams()
 
     const deleteComment = async () => {
@@ -23,7 +23,7 @@ const CommentCard = (props) => {
 
 
   return (
-    <div className='commentCard'>
+    <div className='commentCard' style = {isDarkMode? {}: {background: 'rgb(66, 51, 22)', color: 'white'}}>
         <img src={comment.user.imageURL} alt="" />
         <div>
             <h5>{comment.user.username}</h5>
