@@ -195,6 +195,35 @@
   border-radius: 10px;
   width: 75%;
   min-height: 20em;
+  max-height: 50vh;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.commentCard {
+  background-color: #fbf6eb;
+  border: 2px solid #c48714;
+  border-radius: 2%;
+  padding: 0px 15px;
+  margin-bottom: 5px;
+}
+
+.commentCard h5 {
+  font-weight: bold;
+}
+
+.commentCard p {
+  margin-left: 20px;
+}
+
+.commentCard .commentDate {
+  font-size: small;
+}
+
+.commentCard button {
+  position: relative;
+  left: 30%;
+  margin-bottom: 3px;
 }
 
 /* FavoriteList */
