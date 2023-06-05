@@ -23,13 +23,24 @@ const CommentCard = (props) => {
 
 
   return (
-    <div className='commentCard' style = {isDarkMode? {}: {background: 'rgb(66, 51, 22)', color: 'white'}}>
+    <div className='commentCard mx-1' style = {isDarkMode? {}: {background: 'rgb(66, 51, 22)', color: 'white'}}>
         <img src={comment.user.imageURL} alt="" />
         <div>
-            <h5>{comment.user.username}</h5>
-            <p>{comment.content}</p>
-            <span className='commentDate'>{comment.date}</span>
-            {comment.user._id === userProfile._id && <button onClick = {deleteComment} className= 'btn btn-danger mx-2'>Delete</button>}
+            <h6>"{comment.content}"</h6>
+            <div className = 'd-flex justify-content-end author_div'> 
+                <div className="d-flex flex-column">
+                    <div className='d-flex justify-content-end'>
+                        - {comment.user.username}
+                    </div>
+                    <div className = 'comment_date'>
+                        {comment.date.slice(0,10)}
+                    </div>
+                    <div className = 'my-1 d-flex justify-content-end'>
+                        {comment.user._id === userProfile._id && <button onClick = {deleteComment} className= 'btn btn-danger'>Delete</button>}
+                    </div>
+                </div>
+                
+            </div>  
         </div>
     </div>
   )

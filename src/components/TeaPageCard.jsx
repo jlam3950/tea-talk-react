@@ -42,7 +42,7 @@ const TeaPageCard = () => {
             { selectedTea ? selectedTea.name : ''}
           </div>
           <div className="d-flex flex-column">
-            <div className="" style = {{"fontSize": "1.25em", 'fontWeight': '500'}} onClick = {() => console.log(tea)}>
+            <div className="" style = {{"fontSize": "1.25em", 'fontWeight': '500'}}>
               { selectedTea ? selectedTea.brand : ''} <span className = 'mx-5'> { tea ? tea.type : ''} </span>
             </div>
           </div>
@@ -52,7 +52,7 @@ const TeaPageCard = () => {
             {selectedTea ? selectedTea.description : ""}
           </div>
         </div>
-        <div className="ratingBar" style = {{"fontSize": ".699em", "lineHeight": "1.7em"}}>
+        <div className="ratingBar" style = {{"fontSize": ".696em", "lineHeight": "1.7em"}}>
             <TeaRating tea={selectedTea}/>
         </div>
         <div className = 'my-4'>

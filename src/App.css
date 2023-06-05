@@ -202,18 +202,24 @@
 
 .commentCard {
   background-color: #fbf6eb;
-  border: 2px solid #c48714;
+  border: .5px solid #c48714;
   border-radius: 2%;
   padding: 0px 15px;
   margin-bottom: 5px;
 }
 
-.commentCard h5 {
+.author_div{
+  justify-content: end;
   font-weight: bold;
 }
 
-.commentCard p {
-  margin-left: 20px;
+.commentCard h6{
+  display: flex;  
+  margin-left: 1em; 
+}
+
+.comment_date{
+  font-weight: normal; 
 }
 
 .commentCard .commentDate {
@@ -222,8 +228,7 @@
 
 .commentCard button {
   position: relative;
-  left: 30%;
-  margin-bottom: 3px;
+  margin-bottom: 10px;
 }
 
 /* FavoriteList */
