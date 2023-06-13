@@ -51,7 +51,7 @@ const NavigationBar = () => {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#action2" style ={{color: 'white'}}>My Teas</Nav.Link>
+            {/* <Nav.Link href="#action2" style ={{color: 'white'}}>My Teas</Nav.Link> */}
             {userProfile.username ? <div className = 'me-auto my-2 navBarSignOut' style={{color: 'white', cursor: 'pointer'}} onClick ={()=>signOut()}>Sign out</div> : <Nav.Link href="/login" style ={{color: 'white'}}>Sign in</Nav.Link>}
           </Nav>
           <div className="" style ={{color: 'white'}}>{userProfile.username ? userProfile.username : ''}</div>
