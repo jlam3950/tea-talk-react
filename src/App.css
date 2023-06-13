@@ -86,8 +86,8 @@
   margin-top: 1.5em;
   min-height: 14em;
   background-size: cover;
-  background-position: bottom;
-  background-image: url('../public/images/userprofile-background3.png');
+  background-position: center;
+  background-image: url('../public/images/userprofile-background5.png');
 }
 
 .userProfileDescription{
