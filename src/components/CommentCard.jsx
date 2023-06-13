@@ -36,7 +36,7 @@ const CommentCard = (props) => {
                         {comment.date.slice(0,10)}
                     </div>
                     <div className = 'my-1 d-flex justify-content-end'>
-                        {comment.user._id === userProfile._id && <button onClick = {deleteComment} className= 'btn btn-danger'>Delete</button>}
+                        {comment.user._id === userProfile._id && <button onClick = {deleteComment} className= 'btn btn-danger btn-sm'>Delete</button>}
                     </div>
                 </div>
                 
