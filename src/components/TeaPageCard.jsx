@@ -51,7 +51,7 @@ const TeaPageCard = () => {
           </div>
           <div className="">
           </div>
-          <div className="mb-3 mx-2" style = {{"fontSize": "1.15em"}}>
+          <div className="mb-3 mx-2 px-3" style = {{"fontSize": "1.15em"}}>
             {selectedTea ? selectedTea.description : ""}
           </div>
         </div>
