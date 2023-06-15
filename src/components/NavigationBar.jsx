@@ -46,6 +46,7 @@ const NavigationBar = () => {
         </div></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
+        <Nav.Link className = 'mx-2' href="/about" style ={{color: 'white'}}>About</Nav.Link>
           <Nav
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: '100px' }}

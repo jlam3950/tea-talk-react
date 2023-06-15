@@ -12,6 +12,7 @@ import UserProfile from './components/UserProfile';
 import TeaForm from "./components/TeaForm"
 import TeaPage from "./components/TeaPage"
 import AlertBar from './components/AlertBar';
+import About from './components/About';
 import { FaUserCircle } from 'react-icons/fa';
 export const ListContext = createContext();
 export const ThemeContext = createContext(null);
@@ -150,6 +151,7 @@ function App() {
               <Routes>
                 <Route path = '/' element = {<Main teaArray = {currentTeas} />}></Route>
                 <Route path = 'login' element = {<Login />}></Route>
+                <Route path = 'about' element = {<About />}></Route>
                 <Route path = 'register' element = {<Register />}></Route>
                 <Route path = 'userProfile' element = {<UserProfile />}></Route>
                 <Route path = 'teaForm' element = {<TeaForm />}></Route>
