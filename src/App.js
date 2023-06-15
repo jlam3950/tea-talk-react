@@ -40,6 +40,7 @@ function App() {
   }
 
   const [list, setList] = useState(teaList);
+  const [renderDelete, setRenderDelete] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [currentTeas, setCurrentTeas] = useState([]);
   const [selectedTea, setSelectedTea] = useState({});
@@ -138,12 +139,12 @@ function App() {
   return (
     <div className="App d-flex flex-column min-vh-100">
       <ListContext.Provider value = {{alertInfo, currentList, currentTeas, 
-                                      loggedIn, list, userProfile, 
-                                      editMode, alertFlag, isDarkMode, profilePic, backgroundPic, 
-                                      setProfilePic, setBackgroundPic,
+                                      loggedIn, list, userProfile, selectedTea,
+                                      editMode, alertFlag, isDarkMode, profilePic, backgroundPic,renderDelete, 
+                                      setProfilePic, setBackgroundPic,setRenderDelete,
                                       setCurrentList, setAlertInfo, setAlertFlag, 
                                       refreshTeaList, setEditMode, setUserProfile, 
-                                      setList, setUserData, setDarkMode, toggleDarkMode, getTea, selectedTea, setSelectedTea}}>
+                                      setList, setUserData, setDarkMode, toggleDarkMode, getTea, setSelectedTea}}>
           <NavigationBar />
             <AlertBar/>
               <Routes>
