@@ -78,7 +78,7 @@ const deleteList = async (name) => {
           </div> 
           <hr></hr>
           <div className="location d-flex justify-content-between">
-            { infoEdit ? <><div className ='mx-2'> Location: Bloomington, IN  </div> <button className ='btn btn-danger p-2' style = {{'fontSize': '.5em'}}> Delete </button></> : 'Location: Bloomington, IN' }
+            { infoEdit ? <><div className ='mx-2'> Location: Tea, South Dakota  </div> <button className ='btn btn-danger p-2' style = {{'fontSize': '.5em'}}> Delete </button></> : 'Location: Tea, South Dakota' }
           </div>
         </div>
         <div className="userProfileDisplayTeas p-4 my-4 h5" 

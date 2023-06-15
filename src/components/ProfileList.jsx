@@ -1,8 +1,8 @@
 import React from "react";
-import { FaStar } from 'react-icons/fa';
 import { ListContext } from '../App';
 import { useContext, useState } from 'react';
 import { TeaRating } from "./TeaRating";
+import Nav from 'react-bootstrap/Nav';
 
 const ProfileList = (props) => {
   const { tea } = props
@@ -44,7 +44,7 @@ const ProfileList = (props) => {
       <div className="col-8 user-card-description">
         <div className="mr-2">
           <div className="my-0 py-0 profile-list-name"> 
-            {tea.name}
+          <Nav.Link href={`/teaPage/${tea._id}`}>{tea.name}</Nav.Link>
           </div>
           <div className="d-flex">
             <div className="col-4 profile-list-brand">
@@ -59,7 +59,6 @@ const ProfileList = (props) => {
           </div>
         </div>
         <div className="ratingBar d-flex" style = {{"fontSize": ".628em", "lineHeight": "1.5em"}}>
-        {/* Tea Rating: <FaStar/><FaStar/><FaStar/><FaStar/>(4.6) | <span>200 ratings</span> */}
         <TeaRating tea={tea} compact={true}  />
         </div>
       </div>
