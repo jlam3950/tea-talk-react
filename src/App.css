@@ -70,7 +70,7 @@
 
 .about-root{
   background-color: rgb(243, 240, 240);
-  min-height: 155vh;
+  min-height: 170vh;
 }
 
 .about-rate-cont{
@@ -273,7 +273,7 @@
   background: white;
   border-radius: 10px;
   width: 75%;
-  min-height: 20em;
+  min-height: 25em;
   max-height: 50vh;
   overflow: hidden;
   overflow-y: auto;
