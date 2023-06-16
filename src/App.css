@@ -46,6 +46,13 @@
   top: 4em;
 }
 
+.add-tea-img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 33%;
+}
+
 .rating_div{
   padding: .206em 1em;
 }
