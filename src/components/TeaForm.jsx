@@ -30,6 +30,7 @@ const TeaForm = (props) => {
 
   const inputChange = e =>{
     console.log(e.target.name, e.target.value);
+    console.log(formValues)
     setFormValues({...formValues, [e.target.name]: e.target.value})
   }
   
@@ -133,21 +134,20 @@ const TeaForm = (props) => {
             size="lg" 
             onChange={inputChange}
           />
-          <label className ='w-100 m-0 p-0'>Type</label>
+          <label className ='w-100 m-0 p-0'>Type
           <select className ='w-100 mb-3 py-1'
             id='formControlLg' 
             type='text'
             name ='type' 
             size="lg" 
-            value = "Black"
             onChange={inputChange}>
-              <option value=""></option>
               <option value="Black">Black</option>
               <option value="Green">Green</option>
               <option value="Herbal">Herbal</option>
               <option value="Oolong">Oolong</option>
               <option value="White">White</option>
           </select>
+          </label>
           <label className ='w-100 m-0 p-0'>Description</label>
           <input 
             className='mb-3 w-100' 
@@ -190,7 +190,7 @@ const TeaForm = (props) => {
       </form>
       </Modal.Body>
 
-      {formValues.image && <img src={formValues.image}/>}
+      {formValues.image && <img src={formValues.image} className='add-tea-img'/>}
 
       <Modal.Footer onClick = {closeModal}>
         <Button onClick={props.onHide}>Close</Button>

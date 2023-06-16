@@ -7,7 +7,7 @@ import Pagination from 'react-bootstrap/Pagination';
 import { ListContext } from '../App';
 
 const Main = ( {teaArray} ) => {
-  const { currentTeas, userProfile, isDarkMode, setDarkMode, toggleDarkMode } = useContext(ListContext);
+  const { currentTeas, userProfile, isDarkMode, setDarkMode, toggleDarkMode, setAlertFlag, setAlertInfo } = useContext(ListContext);
   const [modalShow, setModalShow] = useState(false);
   const [search, setSearch] = useState('');
   const [loadFlag, setLoadFlag] = useState(false);
@@ -87,6 +87,15 @@ const Main = ( {teaArray} ) => {
       setLoadFlag(true);
     }, 1000)
   }, [])
+
+  const setAlert = (alert) => {
+    setAlertFlag(true);
+    setAlertInfo(alert);
+    setTimeout(() => {
+      setAlertFlag(false);
+      setAlertInfo('');
+    }, 2000)
+  }
   
   // filter((input) => {
   //   if(search === ''){
@@ -135,19 +144,57 @@ const Main = ( {teaArray} ) => {
                   </div>
                 </Pagination.Item>     
               <div className="addTea mx-4">
-                <button className="btn btn-success" style = {{zIndex : '1'}} onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
-                <TeaForm
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                />
+                {userProfile.length !== 0 ?
+                <>
+                  <button 
+                    className="btn btn-success" 
+                    style = {{zIndex : '1'}} 
+                    onClick={() => setModalShow(true)}
+                  >
+                    <FaPlus/> Add Tea
+                  </button>
+                  <TeaForm
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                  />
+                </>
+                :
+                <button 
+                  className="btn btn-success" 
+                  style = {{zIndex : '1'}} 
+                  onClick={() => setAlert('Sign in to Add Tea...')}
+                >
+                    <FaPlus/> Add Tea
+                </button>}
               </div>
               </Pagination>
               <div className="add-tea-mobile">
-                <button className="btn btn-success" style = {{zIndex : '1'}} onClick={() => setModalShow(true)}><FaPlus/> Add Tea</button>
-                <TeaForm
+                {userProfile.length !== 0 ?
+                <>
+                  <button 
+                    className="btn btn-success" 
+                    style = {{zIndex : '1'}} 
+                    onClick={() => setModalShow(true)}
+                  >
+                    <FaPlus/> Add Tea
+                  </button>
+                  <TeaForm
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                  />
+                </>
+                :
+                <button 
+                  className="btn btn-success" 
+                  style = {{zIndex : '1'}} 
+                  onClick={() => setAlert('Sign in to Add Tea...')}
+                >
+                    <FaPlus/> Add Tea
+                </button>}
+                {/* <TeaForm
                   show={modalShow}
                   onHide={() => setModalShow(false)}
-                />
+                /> */}
               </div>
             </div>
             
