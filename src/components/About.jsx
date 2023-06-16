@@ -38,10 +38,10 @@ const { currentList, setCurrentList, userProfile, list, refreshTeaList, editMode
                     <img className ='about-rate-img' src='/images/chat-about1.png' alt ='redrose'/>
                 </div>
                 <div className="about-img-text mt-3">
-                    Talk about tea
+                    Talk About Tea
                 </div>
                 <div className="about-img-subtext text-center px-5">
-                    Browse through a wide variety of teas, and find your favorite.
+                    Leave your thoughts on a tea. Read other user's comments.
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@ const { currentList, setCurrentList, userProfile, list, refreshTeaList, editMode
             </div>
             <div className = 'mb-2'>
                 <Nav.Link className = 'mx-2' href="/" style ={{color: 'white'}}>
-                    <button className = 'px-5 btn btn-dark btn-lg mt-2 border border-white'>Search</button>
+                    <button className = 'px-5 btn btn-dark btn-lg mt-2 border border-white'>Browse Teas</button>
                 </Nav.Link>
             </div>
         </div>

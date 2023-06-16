@@ -72,8 +72,7 @@ return (
                                     {`Saved Teas: ${list[listName].length}`}
                                 </div>
                             </div>
-                            { editMode ? <><div className ='mx-2'></div> <button className ='btn btn-danger' style = {{'fontSize': '.5em'}}> Delete </button></> : '' }
-                            {/* {editMode ? <FaMinusCircle style = {{color : 'red'}} onClick = {() => deleteList(listName)}/> : ''} {listName} */}
+                            { editMode ? <><div className ='mx-2'></div> <button className ='btn btn-danger' onClick = {() => deleteList(listName)} style = {{'fontSize': '.5em'}}> Delete </button></> : '' }
                        </div>
                    </div>
                         
